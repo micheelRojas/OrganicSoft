@@ -141,7 +141,7 @@ namespace OrganicSoft.Test.Procutos
             var respuesta = producto.AplicarDescuento(descuento:decuento);
             #endregion
             #region ENTONCES  el sistema Cambiara el precio por el tiempo correspondiente y mostrarara el mensaje "El nuevo precio de Jabon de sandia, es de: $ 8.000,00"
-            Assert.AreEqual("Precio de Jabon de sandia, es de: $ 8.000,00", respuesta);
+            Assert.AreEqual("Precio de Jabon de sandia, es de: 8000", respuesta);
             #endregion
 
         }
@@ -162,7 +162,7 @@ namespace OrganicSoft.Test.Procutos
             var respuesta = producto.AplicarDescuento(descuento: decuento);
             #endregion
             #region ENTONCES  el sistema no Cambiara el precio por el tiempo correspondiente y mostrarara el mensaje "El nuevo precio de Jabon de sandia, es de: $ 8.000,00"
-            Assert.AreEqual("Precio de Jabon de sandia, es de: $ 10.000,00", respuesta);
+            Assert.AreEqual("Precio de Jabon de sandia, es de: 10000", respuesta);
             #endregion
 
         }
@@ -185,7 +185,7 @@ namespace OrganicSoft.Test.Procutos
             var respuesta = producto.RetirarDescuento();
             #endregion
             #region ENTONCES  el sistema Cambiara el precio por el tiempo correspondiente y mostrarara el mensaje "El nuevo precio de Jabon de sandia, es de: $ 8.000,00"
-            Assert.AreEqual("El nuevo precio de Jabon de sandia, es de: $ 10.000,00", respuesta);
+            Assert.AreEqual("El nuevo precio de Jabon de sandia, es de: 10000", respuesta);
             #endregion
 
         }
@@ -279,7 +279,7 @@ namespace OrganicSoft.Test.Procutos
                 PrecioConDescuento = Precio - (Precio * descuento.PorcentajeDescuento);
                 
             }
-            return $"Precio de {Nombre}, es de: {PrecioConDescuento:c2}";
+            return $"Precio de {Nombre}, es de: {PrecioConDescuento}";
             
             
         }
@@ -288,7 +288,7 @@ namespace OrganicSoft.Test.Procutos
         {
             if (Descuento != null) {
                 PrecioConDescuento = Precio + (Precio * Descuento.PorcentajeDescuento);
-                return $"El nuevo precio de {Nombre}, es de: {Precio:c2}";
+                return $"El nuevo precio de {Nombre}, es de: {Precio}";
             }
             throw new NotImplementedException();
         }
