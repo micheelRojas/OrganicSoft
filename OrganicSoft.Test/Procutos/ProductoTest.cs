@@ -70,8 +70,8 @@ namespace OrganicSoft.Test.Procutos
             int cantidad = 8;
             string respuesta = producto.SalidaProductos(cantidad: cantidad);
             #endregion
-            #region ENTONCES  el sistema registrara el producto y adicionara la cantidad del mismo y mostrara el mensaje "La cantidad de Jabon de sandia es 9"
-            Assert.AreEqual("La cantidad de Jabon de sandia es: 7", respuesta);
+            #region ENTONCES  el sistema registrara el producto y adicionara la cantidad del mismo y mostrara el mensaje "La cantidad de Jabon de sandia es 2, considere unidades de este producto"
+            Assert.AreEqual("La cantidad de Jabon de sandia es: 2, considere unidades de este producto", respuesta);
             #endregion
 
         }
@@ -127,8 +127,14 @@ namespace OrganicSoft.Test.Procutos
                     {
                         _productos[i].DisminuirCantidad(cantidad);
                     }
-                } 
-                return $"La cantidad de {Nombre} es: {CantidadExitente}";
+                }
+                if (CantidadExitente >= MinimoStock) {
+                    return $"La cantidad de {Nombre} es: {CantidadExitente}";
+                }
+                else if (CantidadExitente<MinimoStock) {
+                    return $"La cantidad de {Nombre} es: {CantidadExitente}, considere unidades de este producto";
+                }
+                
             }
             throw new NotImplementedException();
         }
