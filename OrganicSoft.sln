@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.Test", "OrganicSoft.Test\OrganicSoft.Test.csproj", "{AE984374-5AE8-4CB8-B4D3-EFCDC180AADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.Dominio", "OrganicSoft.Dominio\OrganicSoft.Dominio.csproj", "{6EF61C68-B4DD-47CC-A287-5B435C72303B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE984374-5AE8-4CB8-B4D3-EFCDC180AADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE984374-5AE8-4CB8-B4D3-EFCDC180AADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE984374-5AE8-4CB8-B4D3-EFCDC180AADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE984374-5AE8-4CB8-B4D3-EFCDC180AADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF61C68-B4DD-47CC-A287-5B435C72303B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF61C68-B4DD-47CC-A287-5B435C72303B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF61C68-B4DD-47CC-A287-5B435C72303B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF61C68-B4DD-47CC-A287-5B435C72303B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07A11925-84BA-44CB-8BB5-54608D4FA3D6}
+	EndGlobalSection
+EndGlobal
