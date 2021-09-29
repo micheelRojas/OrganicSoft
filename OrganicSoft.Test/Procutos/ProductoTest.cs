@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using OrganicSoft.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -191,106 +192,5 @@ namespace OrganicSoft.Test.Procutos
         }
     }
 
-    internal class Descuento
-    {
-        public int CodigoDescuento { get; private set; }
-        public DateTime FechaInicio { get; private set; }
-        public DateTime FechaFin { get; private set; }
-        public double PorcentajeDescuento { get; private set; }
-
-        public Descuento(int codigoDescuento, DateTime fechaInicio, DateTime fechaFin, double porcentajeDescuento)
-        {
-            CodigoDescuento = codigoDescuento;
-            FechaInicio = fechaInicio;
-            FechaFin = fechaFin;
-            PorcentajeDescuento = porcentajeDescuento;
-        }
-    }
-
-    internal class Producto
-    {
-        public int CodigoProducto { get; private set; }
-        public string Nombre { get; private set; }
-        public string Decripcion { get; private set; }
-        public double Costo { get; private set; }
-        public double Precio { get; private set; }
-        public string Categoria { get; private set; }
-        public string Presentacion { get; private set; }
-        public int MinimoStock { get; private set; }
-        public int CantidadExitente { get; private set; }
-        public Descuento Descuento { get; private set; }
-        public double PrecioConDescuento { get; private set; }
-        private List<Producto> _productos = new List<Producto>();
-        public Producto(int codigo, string nombre, string decripcion, double costo, double precio, string categoria, string presentacion, int minimoStock)
-        {
-            CodigoProducto = codigo;
-            Nombre = nombre;
-            Decripcion = decripcion;
-            Costo = costo;
-            Precio = precio;
-            PrecioConDescuento = precio;
-            Categoria = categoria;
-            Presentacion = presentacion;
-            MinimoStock = minimoStock;
-        }
-        public IReadOnlyCollection<Producto> Productos => _productos.AsReadOnly();
-        internal string EntradaProductos(int cantidad)
-        {
-            if (cantidad > 0)
-            {
-                CantidadExitente += cantidad;
-                _productos.Add(this);
-                return $"La cantidad de {Nombre} es: {CantidadExitente}";
-            }
-            else {
-                return $"La cantidad debe ser mayor a cero";
-            }
-
-        }
-
-        internal string SalidaProductos(int cantidad)
-        {
-            
-            if (cantidad > 0 && CantidadExitente >= cantidad)
-            {
-                CantidadExitente -= cantidad;
-                if (CantidadExitente >= MinimoStock) {
-                  
-                    return $"La cantidad de {Nombre} es: {CantidadExitente}";
-                }
-                else if (CantidadExitente<MinimoStock) {
-                    return $"La cantidad de {Nombre} es: {CantidadExitente}, considere unidades de este producto";
-                }
-                
-            }
-            if (cantidad <=0)
-            {
-            return $"La cantidad pedida debe ser mayor a cero";
-            }
-            
-            throw new NotImplementedException();
-        }
-
-        internal string AplicarDescuento(Descuento descuento)
-        {
-            Descuento = descuento;
-            if (descuento.FechaInicio <= DateTime.Now && descuento.FechaFin >= DateTime.Now)
-            {
-                PrecioConDescuento = Precio - (Precio * descuento.PorcentajeDescuento);
-                
-            }
-            return $"Precio de {Nombre}, es de: {PrecioConDescuento}";
-            
-            
-        }
-
-        internal string RetirarDescuento()
-        {
-            if (Descuento != null) {
-                PrecioConDescuento = Precio + (Precio * Descuento.PorcentajeDescuento);
-                return $"El nuevo precio de {Nombre}, es de: {Precio}";
-            }
-            throw new NotImplementedException();
-        }
-    }
+    
 }

@@ -17,4 +17,8 @@
     <Folder Include="Facturas\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OrganicSoft.Dominio\OrganicSoft.Dominio.csproj" />
+  </ItemGroup>
+
 </Project>
