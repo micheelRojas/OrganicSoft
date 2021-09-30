@@ -35,7 +35,7 @@ namespace OrganicSoft.Dominio
         public int CantidadExitente { get; private set; }
         public Descuento Descuento { get; private set; }
         public double PrecioConDescuento { get; private set; }
-        private List<Producto> _productos = new List<Producto>();
+        private static List<Producto> _productos = new List<Producto>();
         public Producto(int codigo, string nombre, string decripcion, double costo, double precio, string categoria, string presentacion, int minimoStock)
         {
             CodigoProducto = codigo;
@@ -48,7 +48,7 @@ namespace OrganicSoft.Dominio
             Presentacion = presentacion;
             MinimoStock = minimoStock;
         }
-        public IReadOnlyCollection<Producto> Productos => _productos.AsReadOnly();
+        public static IReadOnlyCollection<Producto> Productos => _productos.AsReadOnly();
         public string EntradaProductos(int cantidad)
         {
             if (cantidad > 0)
