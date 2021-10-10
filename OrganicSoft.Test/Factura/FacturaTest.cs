@@ -75,7 +75,7 @@ namespace OrganicSoft.Test.Facturacion
             var respuesta2 = factura.CalcularTotal(Pedido: pedido);
             #endregion
             #region ENTONCES  el sistema generará la factura con su total a pagar, cambiará el estado del pedido a CONFIRMADO y mostrara el mensaje "El total a pagar es de 20.000 pesos"
-            Assert.AreEqual("El total a pagar es de 20.000 pesos", respuesta2);
+            Assert.AreEqual("El total a pagar es de 40000 pesos", respuesta2);
             Assert.AreEqual("El nuevo estado del pedido es CONFIRMADO", respuesta);
             #endregion
 
@@ -88,18 +88,31 @@ namespace OrganicSoft.Test.Facturacion
         public DateTime FechaCreacion { get; private set; }
         public String CedulaCliente { get; private set; }
         public decimal TotalPagar { get; private set; }
-        protected List<Factura> _facturas;
+        protected List<Factura> _facturas = new List<Factura>();
 
         public Factura(int codigo, DateTime fechaCreacion, string cedulaCliente)
         {
             Codigo = codigo;
             FechaCreacion = fechaCreacion;
             CedulaCliente = cedulaCliente;
-            _facturas = new List<Factura>();
+            
         }
+        public IReadOnlyCollection<Factura> Facturas => _facturas.AsReadOnly();
 
         internal object CalcularTotal(Pedido Pedido)
         {
+            double totalPagar = 0;
+            foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductosVenta)
+            {
+                foreach (Producto producto in Producto.Productos)
+                {
+                    if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
+                    {
+                        totalPagar = totalPagar + (producto.Precio * productoVenta.CantidadVenta);
+                    }
+                }
+            }
+            return $"El total a pagar es de {totalPagar} pesos";
             throw new NotImplementedException();
         }
     }
@@ -109,11 +122,11 @@ namespace OrganicSoft.Test.Facturacion
         public int Codigo { get; private set; }
         public String Estado { get; private set; }
         public CarritoCompra Carrito { get; private set; }
-        protected List<Pedido> _pedidos;
+        protected List<Pedido> _pedidos = new List<Pedido>();
 
         public Pedido()
         {
-            _pedidos = new List<Pedido>();
+            
         }
 
         public IReadOnlyCollection<Pedido> Pedidos => _pedidos.AsReadOnly();
