@@ -95,5 +95,14 @@ namespace OrganicSoft.Dominio
             }
             throw new NotImplementedException();
         }
+
+        public void DisminuirCantidadProductoStock(int cantidad)
+        {
+            if (cantidad > 0 && MinimoStock <= (CantidadExitente - cantidad))
+            {
+                CantidadExitente -= cantidad;
+            }
+            
+        }
     }
 }

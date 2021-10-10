@@ -74,7 +74,7 @@ namespace OrganicSoft.Test.Facturacion
             Factura factura = new Factura(codigo: 1, fechaCreacion: DateTime.Now, cedulaCliente: carrito.CedulaCliente);
             var respuesta2 = factura.CalcularTotal(Pedido: pedido);
             #endregion
-            #region ENTONCES  el sistema generará la factura con su total a pagar, cambiará el estado del pedido a CONFIRMADO y mostrara el mensaje "El total a pagar es de 20.000 pesos"
+            #region ENTONCES  el sistema generará la factura con su total a pagar, cambiará el estado del pedido a CONFIRMADO y mostrara el mensaje "El total a pagar es de 40000 pesos"
             Assert.AreEqual("El total a pagar es de 40000 pesos", respuesta2);
             Assert.AreEqual("El nuevo estado del pedido es CONFIRMADO", respuesta);
             #endregion
@@ -102,13 +102,16 @@ namespace OrganicSoft.Test.Facturacion
         internal object CalcularTotal(Pedido Pedido)
         {
             double totalPagar = 0;
+            //int num = 0;
             foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductosVenta)
             {
                 foreach (Producto producto in Producto.Productos)
                 {
                     if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
                     {
-                        totalPagar = totalPagar + (producto.Precio * productoVenta.CantidadVenta);
+                        totalPagar = totalPagar + (producto.PrecioConDescuento * productoVenta.CantidadVenta);
+                        producto.DisminuirCantidadProductoStock(productoVenta.CantidadVenta);
+                        //num += producto.CantidadExitente;
                     }
                 }
             }
