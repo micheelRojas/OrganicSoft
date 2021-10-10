@@ -138,7 +138,7 @@ namespace OrganicSoft.Test.Procutos
             producto.EntradaProductos(cantidad: 10);
             #endregion
             #region CUANDO se desee registrar el un descuente de este del 20% durante tres dias
-            var decuento = new Descuento(codigoDescuento:1, fechaInicio: new DateTime(2021, 09, 28), fechaFin: new DateTime(2021, 10, 1),porcentajeDescuento:0.2);
+            var decuento = new Descuento(codigoDescuento:1, fechaInicio: new DateTime(2021, 09, 28), fechaFin: new DateTime(2021, 10, 20),porcentajeDescuento:0.2);
             var respuesta = producto.AplicarDescuento(descuento:decuento);
             #endregion
             #region ENTONCES  el sistema Cambiara el precio por el tiempo correspondiente y mostrarara el mensaje "El nuevo precio de Jabon de sandia, es de: $ 8.000,00"

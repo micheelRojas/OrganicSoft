@@ -28,7 +28,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
 
             #endregion
@@ -57,7 +57,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 3, cantidadVenta: 2);
 
             #endregion
@@ -87,7 +87,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 3, cantidadVenta: -1);
 
             #endregion
@@ -115,7 +115,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
 
@@ -144,7 +144,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
 
@@ -173,7 +173,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
 
@@ -203,7 +203,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
 
@@ -233,7 +233,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
 
@@ -263,7 +263,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
 
@@ -292,7 +292,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
 
@@ -321,7 +321,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
 
@@ -350,7 +350,7 @@ namespace OrganicSoft.Test.Facturas
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
-            CarritoCompra carrito = new CarritoCompra(cedulaCliente: "1002353645");
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
 

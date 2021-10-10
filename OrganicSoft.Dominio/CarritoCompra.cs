@@ -8,11 +8,13 @@ namespace OrganicSoft.Dominio
 {
    public class CarritoCompra
     {
+        public int Codigo { get; private set; }
         public string CedulaCliente { get; private set; }
         protected List<ProductoVenta> _productoVentas;
 
-        public CarritoCompra(string cedulaCliente)
+        public CarritoCompra(int codigo, string cedulaCliente)
         {
+            Codigo = codigo;
             CedulaCliente = cedulaCliente;
             _productoVentas = new List<ProductoVenta>();
         }
