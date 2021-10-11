@@ -35,6 +35,7 @@ namespace OrganicSoft.Dominio
         public static IReadOnlyCollection<Producto> Productos => _productos.AsReadOnly();
         public string EntradaProductos(int cantidad)
         {
+
             if (cantidad > 0)
             {
                 CantidadExitente += cantidad;

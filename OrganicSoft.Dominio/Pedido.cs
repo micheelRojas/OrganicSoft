@@ -8,7 +8,7 @@ namespace OrganicSoft.Dominio
 {
     public class Pedido
     {
-        public int Codigo { get; private set; }
+        public int CodigoPedido { get; private set; }
         public String Estado { get; private set; }
         public CarritoCompra Carrito { get; private set; }
         protected List<Pedido> _pedidos = new List<Pedido>();
@@ -24,7 +24,7 @@ namespace OrganicSoft.Dominio
         {
             if (CarritoCompra != null)
             {
-                Codigo = codigo;
+                CodigoPedido = codigo;
                 Estado = "NO CONFIRMADO";
                 Carrito = CarritoCompra;
                 _pedidos.Add(this);
