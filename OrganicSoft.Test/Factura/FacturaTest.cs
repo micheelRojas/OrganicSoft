@@ -113,12 +113,15 @@ namespace OrganicSoft.Test.Facturacion
             var respuesta = pedido.ConfirmarPedido(carrito.Codigo);
             Factura factura = new Factura(codigo: 1, fechaCreacion: DateTime.Now, cedulaCliente: carrito.CedulaCliente);
             var respuesta2 = factura.CalcularTotal(Pedido: pedido);
+            var respuesta3 = "La cantidad de detalles de la factura es "+ factura.Detalles.Count();
             #endregion
-            #region ENTONCES  el sistema generará la factura con su total a pagar, disminuirá los productos correspondientes en stock, cambiará el estado del pedido a CONFIRMADO y mostrará el mensaje "El total a pagar es de 40000 pesos"
-            Assert.AreEqual("El total a pagar es de 40000 pesos", respuesta2);
+            #region ENTONCES  el sistema generará la factura con su total a pagar, disminuirá los productos correspondientes en stock, registrará los detalles, cambiará el estado del pedido a CONFIRMADO y mostrará el mensaje "El total a pagar es de 40000 pesos"
+            Assert.AreEqual("El total a pagar es de 40000 pesos. La suma de subtotales de detalles es 40000", respuesta2);
             Assert.AreEqual("El nuevo estado del pedido es CONFIRMADO", respuesta);
+            Assert.AreEqual("La cantidad de detalles de la factura es 2", respuesta3);
             #endregion
 
         }
+
     }
 }

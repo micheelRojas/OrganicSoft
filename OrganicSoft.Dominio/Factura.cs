@@ -12,6 +12,7 @@ namespace OrganicSoft.Dominio
         public DateTime FechaCreacion { get; private set; }
         public String CedulaCliente { get; private set; }
         public decimal TotalPagar { get; private set; }
+        public List<Detalle> Detalles { get; private set; }
         protected List<Factura> _facturas = new List<Factura>();
 
         public Factura(int codigo, DateTime fechaCreacion, string cedulaCliente)
@@ -19,7 +20,7 @@ namespace OrganicSoft.Dominio
             Codigo = codigo;
             FechaCreacion = fechaCreacion;
             CedulaCliente = cedulaCliente;
-
+            Detalles = new List<Detalle>();
         }
         public IReadOnlyCollection<Factura> Facturas => _facturas.AsReadOnly();
 
@@ -27,6 +28,7 @@ namespace OrganicSoft.Dominio
         {
             double totalPagar = 0;
             //int num = 0;
+            double sumaSubtotalesDetalles = 0;
             foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductosVenta)
             {
                 foreach (Producto producto in Producto.Productos)
@@ -35,12 +37,15 @@ namespace OrganicSoft.Dominio
                     {
                         totalPagar = totalPagar + (producto.PrecioConDescuento * productoVenta.CantidadVenta);
                         producto.DisminuirCantidadProductoStock(productoVenta.CantidadVenta);
+                        Detalle detalle = new Detalle(codigoFactura: this.Codigo, cantidadVendida: productoVenta.CantidadVenta, subtotal: productoVenta.CantidadVenta * producto.Precio);
+                        sumaSubtotalesDetalles += detalle.Subtotal;
+                        this.Detalles.Add(detalle);
                         _facturas.Add(this);
                         //num += producto.CantidadExitente;
                     }
                 }
             }
-            return $"El total a pagar es de {totalPagar} pesos";
+            return $"El total a pagar es de {totalPagar} pesos. La suma de subtotales de detalles es {sumaSubtotalesDetalles}";
             throw new NotImplementedException();
         }
     }
