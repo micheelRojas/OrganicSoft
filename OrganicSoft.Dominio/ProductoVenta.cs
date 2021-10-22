@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganicSoft.Dominio.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OrganicSoft.Dominio
 {
-    public class ProductoVenta
+    public class ProductoVenta : Entity<int>, IAggregateRoot
     {
         public int CodigoProducto { get; private set; }
         public int CantidadVenta { get; private set; }

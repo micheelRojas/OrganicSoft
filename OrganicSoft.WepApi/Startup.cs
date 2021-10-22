@@ -30,14 +30,15 @@ namespace OrganicSoft.WepApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();//Configuracion de la inyeccion de dependencias
+            var connectionString = Configuration.GetConnectionString("OrganicSoftContext");//obtiene la configuracion del appsettitgs
 
-            //services.AddDbContext<BancoContext>(opt => opt.UseInMemoryDatabase("BancoContextInMemory")
-            //.ConfigureWarnings(x => x.Ignore(InMemoryEventId.TransactionIgnoredWarning))
-            //);
-
-            var connectionString = Configuration.GetConnectionString("OrganicSoftContext");
             services.AddDbContext<OrganicSoftContext>(opt => opt.UseSqlServer(connectionString));
+
+            ///Inyección de dependencia Especifica
+            //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0#register-additional-services-with-extension-methods
+            services.AddScoped<IUnitOfWork, UnitOfWork>(); //Crear Instancia por peticion
+            services.AddScoped<IProductoRepository, ProductoRepository>(); //Crear Instancia por peticion
+            services.AddScoped<IDbContext,OrganicSoftContext>(); //Crear Instancia por peticion
 
 
             services.AddControllers();

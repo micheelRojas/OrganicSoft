@@ -22,6 +22,7 @@ namespace OrganicSoft.Dominio
         public Descuento Descuento { get; private set; }
         public double PrecioConDescuento { get; private set; }
         private static List<Producto> _productos = new List<Producto>();
+        public Producto() { }
         public Producto(int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock)
         {
             CodigoProducto = codigo;

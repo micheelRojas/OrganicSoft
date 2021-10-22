@@ -18,6 +18,7 @@ namespace OrganicSoft.Infraestructura
         public DbSet<Producto> Producto { get; set; }//equivale a Repositorios
         public DbSet<ProductoSimple> ProductoSimple { get; set; }
         public DbSet<ProductoCombo> ProductoCombo { get; set; }
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

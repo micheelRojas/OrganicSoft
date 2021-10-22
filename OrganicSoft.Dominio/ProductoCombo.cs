@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrganicSoft.Dominio.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace OrganicSoft.Dominio
         {
            
             Componetes = componentes;
+        }
+        ProductoCombo() { 
         }
         private static double calcularCostos(List<Componente> componentes)
         {
@@ -97,10 +100,11 @@ namespace OrganicSoft.Dominio
             }
         }
     }
-    public class Componente
+    public class Componente 
     {
         public Producto Producto { get; private set; }
         public int Cantidad { get; private set; }
+        public Componente() { }
         public Componente(Producto producto, int cantidad)
         {
             Producto = producto;
