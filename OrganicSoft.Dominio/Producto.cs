@@ -21,12 +21,11 @@ namespace OrganicSoft.Dominio
         public Descuento Descuento { get; private set; }
         public double PrecioConDescuento { get; private set; }
         private static List<Producto> _productos = new List<Producto>();
-        public Producto(int codigo, string nombre, string decripcion, double costo, double precio, string categoria, string presentacion, int minimoStock)
+        public Producto(int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock)
         {
             CodigoProducto = codigo;
             Nombre = nombre;
             Decripcion = decripcion;
-            Costo = costo;
             Precio = precio;
             PrecioConDescuento = precio;
             Categoria = categoria;
@@ -87,6 +86,9 @@ namespace OrganicSoft.Dominio
         public virtual void AumentarCantidadProducto(int cantidad)
         {
             CantidadExistente += cantidad;
+        }
+        public virtual double AsignarCosto(double costo) {
+            return Costo = costo;
         }
 
         public virtual void DisminuirCantidadProducto(int cantidad)
