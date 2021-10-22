@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrganicSoft.Dominio
 {
-    public class Producto
+    public abstract class Producto
     {
         public int CodigoProducto { get; private set; }
         public string Nombre { get; private set; }
@@ -16,7 +16,8 @@ namespace OrganicSoft.Dominio
         public string Categoria { get; private set; }
         public string Presentacion { get; private set; }
         public int MinimoStock { get; private set; }
-        public int CantidadExitente { get; private set; }
+        public int CantidadExistente { get; private set; }
+        public int CantidadVendidad { get; private set; }
         public Descuento Descuento { get; private set; }
         public double PrecioConDescuento { get; private set; }
         private static List<Producto> _productos = new List<Producto>();
@@ -33,14 +34,14 @@ namespace OrganicSoft.Dominio
             MinimoStock = minimoStock;
         }
         public static IReadOnlyCollection<Producto> Productos => _productos.AsReadOnly();
-        public string EntradaProductos(int cantidad)
+        public virtual string EntradaProductos(int cantidad)
         {
 
             if (cantidad > 0)
             {
-                CantidadExitente += cantidad;
+                CantidadExistente += cantidad;
                 _productos.Add(this);
-                return $"La cantidad de {Nombre} es: {CantidadExitente}";
+                return $"La cantidad de {Nombre} es: {CantidadExistente}";
             }
             else
             {
@@ -49,30 +50,8 @@ namespace OrganicSoft.Dominio
 
         }
 
-        public string SalidaProductos(int cantidad)
-        {
-
-            if (cantidad > 0 && CantidadExitente >= cantidad)
-            {
-                CantidadExitente -= cantidad;
-                if (CantidadExitente >= MinimoStock)
-                {
-
-                    return $"La cantidad de {Nombre} es: {CantidadExitente}";
-                }
-                else if (CantidadExitente < MinimoStock)
-                {
-                    return $"La cantidad de {Nombre} es: {CantidadExitente}, considere unidades de este producto";
-                }
-
-            }
-            if (cantidad <= 0)
-            {
-                return $"La cantidad pedida debe ser mayor a cero";
-            }
-
-            throw new NotImplementedException();
-        }
+        public abstract string SalidaProductos(int cantidad);
+       
 
         public string AplicarDescuento(Descuento descuento)
         {
@@ -99,11 +78,31 @@ namespace OrganicSoft.Dominio
 
         public void DisminuirCantidadProductoStock(int cantidad)
         {
-            if (cantidad > 0 && MinimoStock <= (CantidadExitente - cantidad))
+            if (cantidad > 0 && MinimoStock <= (CantidadExistente - cantidad))
             {
-                CantidadExitente -= cantidad;
+                CantidadExistente -= cantidad;
             }
             
+        }
+        public virtual void AumentarCantidadProducto(int cantidad)
+        {
+            CantidadExistente += cantidad;
+        }
+
+        public virtual void DisminuirCantidadProducto(int cantidad)
+        {
+            if (cantidad > 0)
+            {
+
+                if (CantidadExistente >= cantidad)
+                {
+                    CantidadExistente -= cantidad;
+                    CantidadVendidad += cantidad;
+                }
+
+            }
+
+
         }
     }
 }
