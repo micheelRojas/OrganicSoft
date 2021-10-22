@@ -1,6 +1,7 @@
 ﻿using OrganicSoft.Dominio.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace OrganicSoft.Dominio
 {
     public class Descuento : Entity<int>, IAggregateRoot
     {
+        [Key]
+        public int ID { get; set; }
         public int CodigoDescuento { get; private set; }
         public DateTime FechaInicio { get; private set; }
         public DateTime FechaFin { get; private set; }

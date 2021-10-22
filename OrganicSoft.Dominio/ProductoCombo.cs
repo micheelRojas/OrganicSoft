@@ -1,6 +1,7 @@
 ﻿using OrganicSoft.Dominio.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,8 +101,10 @@ namespace OrganicSoft.Dominio
             }
         }
     }
-    public class Componente 
+    public class Componente : Entity<int>, IAggregateRoot
     {
+        [Key]
+        public int ID { get; set; }
         public Producto Producto { get; private set; }
         public int Cantidad { get; private set; }
         public Componente() { }
