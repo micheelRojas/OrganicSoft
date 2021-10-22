@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.Test", "OrganicSoft.Test\OrganicSoft.Test.csproj", "{AE984374-5AE8-4CB8-B4D3-EFCDC180AADA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.Test", "OrganicSoft.Test\OrganicSoft.Test.csproj", "{AE984374-5AE8-4CB8-B4D3-EFCDC180AADA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.Dominio", "OrganicSoft.Dominio\OrganicSoft.Dominio.csproj", "{6EF61C68-B4DD-47CC-A287-5B435C72303B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.Dominio", "OrganicSoft.Dominio\OrganicSoft.Dominio.csproj", "{6EF61C68-B4DD-47CC-A287-5B435C72303B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.Aplicacion", "OrganicSoft.Aplicacion\OrganicSoft.Aplicacion.csproj", "{3FAF6C30-B16E-4DB4-9289-72DDF622FDAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.Infraestructura", "OrganicSoft.Infraestructura\OrganicSoft.Infraestructura.csproj", "{97EC204C-D47C-421D-9872-CA87445B02E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.WepApi", "OrganicSoft.WepApi\OrganicSoft.WepApi.csproj", "{23BC5B93-D771-4C11-B379-881F0CD63A0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{6EF61C68-B4DD-47CC-A287-5B435C72303B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EF61C68-B4DD-47CC-A287-5B435C72303B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EF61C68-B4DD-47CC-A287-5B435C72303B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FAF6C30-B16E-4DB4-9289-72DDF622FDAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FAF6C30-B16E-4DB4-9289-72DDF622FDAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FAF6C30-B16E-4DB4-9289-72DDF622FDAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FAF6C30-B16E-4DB4-9289-72DDF622FDAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97EC204C-D47C-421D-9872-CA87445B02E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97EC204C-D47C-421D-9872-CA87445B02E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97EC204C-D47C-421D-9872-CA87445B02E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97EC204C-D47C-421D-9872-CA87445B02E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23BC5B93-D771-4C11-B379-881F0CD63A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23BC5B93-D771-4C11-B379-881F0CD63A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23BC5B93-D771-4C11-B379-881F0CD63A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23BC5B93-D771-4C11-B379-881F0CD63A0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
