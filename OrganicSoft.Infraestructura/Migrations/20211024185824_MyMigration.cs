@@ -11,7 +11,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                 name: "Descuento",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CodigoDescuento = table.Column<int>(type: "int", nullable: false),
                     FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -20,7 +20,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Descuento", x => x.ID);
+                    table.PrimaryKey("PK_Descuento", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,7 +39,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                     MinimoStock = table.Column<int>(type: "int", nullable: false),
                     CantidadExistente = table.Column<int>(type: "int", nullable: false),
                     CantidadVendidad = table.Column<int>(type: "int", nullable: false),
-                    DescuentoID = table.Column<int>(type: "int", nullable: true),
+                    DescuentoId = table.Column<int>(type: "int", nullable: true),
                     PrecioConDescuento = table.Column<double>(type: "float", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Utilidad = table.Column<double>(type: "float", nullable: true)
@@ -48,10 +48,10 @@ namespace OrganicSoft.Infraestructura.Migrations
                 {
                     table.PrimaryKey("PK_Producto", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Producto_Descuento_DescuentoID",
-                        column: x => x.DescuentoID,
+                        name: "FK_Producto_Descuento_DescuentoId",
+                        column: x => x.DescuentoId,
                         principalTable: "Descuento",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -59,7 +59,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                 name: "Componente",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductoId = table.Column<int>(type: "int", nullable: true),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
@@ -67,7 +67,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Componente", x => x.ID);
+                    table.PrimaryKey("PK_Componente", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Componente_Producto_ProductoComboId",
                         column: x => x.ProductoComboId,
@@ -93,9 +93,9 @@ namespace OrganicSoft.Infraestructura.Migrations
                 column: "ProductoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Producto_DescuentoID",
+                name: "IX_Producto_DescuentoId",
                 table: "Producto",
-                column: "DescuentoID");
+                column: "DescuentoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

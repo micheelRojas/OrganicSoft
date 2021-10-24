@@ -23,7 +23,8 @@ namespace OrganicSoft.Infraestructura
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Producto>().HasKey(c => c.Id);
-           
+            modelBuilder.Entity<Descuento>().HasKey(c => c.Id);
+            modelBuilder.Entity<Componente>().HasKey(c => c.Id);
         }
     }
 }

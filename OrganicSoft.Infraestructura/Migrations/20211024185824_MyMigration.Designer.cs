@@ -10,7 +10,7 @@ using OrganicSoft.Infraestructura;
 namespace OrganicSoft.Infraestructura.Migrations
 {
     [DbContext(typeof(OrganicSoftContext))]
-    [Migration("20211022185810_MyMigration")]
+    [Migration("20211024185824_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace OrganicSoft.Infraestructura.Migrations
 
             modelBuilder.Entity("OrganicSoft.Dominio.Componente", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -37,7 +37,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Property<int?>("ProductoId")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("ProductoComboId");
 
@@ -48,7 +48,7 @@ namespace OrganicSoft.Infraestructura.Migrations
 
             modelBuilder.Entity("OrganicSoft.Dominio.Descuento", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -65,7 +65,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Property<double>("PorcentajeDescuento")
                         .HasColumnType("float");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Descuento");
                 });
@@ -95,7 +95,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Property<string>("Decripcion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DescuentoID")
+                    b.Property<int?>("DescuentoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Discriminator")
@@ -119,7 +119,7 @@ namespace OrganicSoft.Infraestructura.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DescuentoID");
+                    b.HasIndex("DescuentoId");
 
                     b.ToTable("Producto");
 
@@ -160,7 +160,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                 {
                     b.HasOne("OrganicSoft.Dominio.Descuento", "Descuento")
                         .WithMany()
-                        .HasForeignKey("DescuentoID");
+                        .HasForeignKey("DescuentoId");
 
                     b.Navigation("Descuento");
                 });

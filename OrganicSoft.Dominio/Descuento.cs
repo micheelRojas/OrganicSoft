@@ -10,8 +10,7 @@ namespace OrganicSoft.Dominio
 {
     public class Descuento : Entity<int>, IAggregateRoot
     {
-        [Key]
-        public int ID { get; set; }
+        
         public int CodigoDescuento { get; private set; }
         public DateTime FechaInicio { get; private set; }
         public DateTime FechaFin { get; private set; }
