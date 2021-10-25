@@ -12,12 +12,14 @@ namespace OrganicSoft.Dominio
         public int CodigoFactura { get; private set; }
         public int CantidadVendida { get; private set; }
         public double Subtotal { get; private set; }
+        public int CodigoProducto { get; private set; }
 
-        public Detalle(int codigoFactura, int cantidadVendida, double subtotal)
+        public Detalle(int codigoFactura, int cantidadVendida, double subtotal, int codigoProducto)
         {
             CodigoFactura = codigoFactura;
             CantidadVendida = cantidadVendida;
             Subtotal = subtotal;
+            CodigoProducto = codigoProducto;
         }
     }
 }

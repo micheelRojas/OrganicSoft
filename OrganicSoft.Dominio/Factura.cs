@@ -38,7 +38,8 @@ namespace OrganicSoft.Dominio
                     {
                         TotalPagar = TotalPagar + (producto.PrecioConDescuento * productoVenta.CantidadVenta);
                         producto.DisminuirCantidadProductoStock(productoVenta.CantidadVenta);
-                        Detalle detalle = new Detalle(codigoFactura: this.Codigo, cantidadVendida: productoVenta.CantidadVenta, subtotal: productoVenta.CantidadVenta * producto.Precio);
+                        Detalle detalle = new Detalle(codigoFactura: this.Codigo, cantidadVendida: productoVenta.CantidadVenta, 
+                            subtotal: productoVenta.CantidadVenta * producto.Precio, codigoProducto: producto.CodigoProducto);
                         sumaSubtotalesDetalles += detalle.Subtotal;
                         this.Detalles.Add(detalle);
                         _facturas.Add(this);
