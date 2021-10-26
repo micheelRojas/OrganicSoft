@@ -23,13 +23,13 @@ namespace OrganicSoft.Dominio
         private static double calcularCostos(List<Componente> componentes)
         {
             double sumaCostos = 0;
-            for (int i = 0; i < Productos.Count; i++)
+            for (int i = 0; i < Productos.ToList().LongCount(); i++)
             {
                 for (int j = 0; j < componentes.LongCount(); j++)
                 {
                     if (Productos.ToList()[i].Nombre.Equals(componentes[j].Producto.Nombre))
                     {
-                        sumaCostos = sumaCostos + (Productos.ToList()[i].Costo * componentes[i].Cantidad);
+                        sumaCostos = sumaCostos + (Productos.ToList()[i].Costo * componentes[j].Cantidad);
                     }
                 }
 

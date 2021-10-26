@@ -15,15 +15,15 @@ namespace OrganicSoft.Test.Productos
         {
             #region Dado que laly Organis tiene multiples productos, como jabon de sandia, avena y frutos rojos que se venden en combo de 3 unidades cada uno
 
-            var jabonSandia = new ProductoSimple(codigo: 1, nombre: "Jabon de sandia",
+            var jabonSandia = new ProductoSimple(codigo: 5, nombre: "Jabon de sandia Pequeño",
             decripcion: " Ea hidrante facial y corporal 🍉.", 
             costo: 1000.00, precio: 40000.00, categoria: "Jabon", presentacion: "mini, 30 gr", minimoStock: 3);
 
-            var jabonAvena = new ProductoSimple(codigo: 2, nombre: "Jabon de avena",
+            var jabonAvena = new ProductoSimple(codigo: 6, nombre: "Jabon de avena Pequeño",
             decripcion: " Ea hidrante facial y corporal Avena.",
             costo: 1000.00, precio: 40000.00, categoria: "Jabon", presentacion: "mini, 30 gr", minimoStock: 3);
 
-            var javonFrutosRojos = new ProductoSimple(codigo: 3, nombre: "Jabon de frutos rojos",
+            var javonFrutosRojos = new ProductoSimple(codigo: 7, nombre: "Jabon de frutos rojos Pequeño",
             decripcion: " Ea hidrante facial y corporal Frutos.",
             costo: 1000.00, precio: 40000.00, categoria: "Jabon", presentacion: "mini, 30 gr", minimoStock: 3);
 
@@ -51,6 +51,8 @@ namespace OrganicSoft.Test.Productos
             #endregion
 
         }
+
+        
         [Test]
         public void PuedoRegistrarProductosdeSalidaddeComboIncorrecta()
         {
