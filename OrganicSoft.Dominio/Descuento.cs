@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrganicSoft.Dominio
 {
-    public class Descuento : Entity<int>, IAggregateRoot
+    public class Descuento : Entity<int>
     {
         
         public int CodigoDescuento { get; private set; }

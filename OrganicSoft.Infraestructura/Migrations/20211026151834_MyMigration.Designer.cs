@@ -10,7 +10,7 @@ using OrganicSoft.Infraestructura;
 namespace OrganicSoft.Infraestructura.Migrations
 {
     [DbContext(typeof(OrganicSoftContext))]
-    [Migration("20211024185824_MyMigration")]
+    [Migration("20211026151834_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

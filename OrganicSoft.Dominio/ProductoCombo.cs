@@ -101,7 +101,7 @@ namespace OrganicSoft.Dominio
             }
         }
     }
-    public class Componente : Entity<int>, IAggregateRoot
+    public class Componente : Entity<int>
     {
 
         public Producto Producto { get; private set; }
