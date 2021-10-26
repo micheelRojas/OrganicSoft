@@ -7,7 +7,8 @@ namespace OrganicSoft.Dominio
         public ProductoSimple(int codigo, string nombre, string decripcion, double costo, double precio, string categoria, string presentacion, int minimoStock) : base(codigo, nombre, decripcion,  precio, categoria,  presentacion,  minimoStock) {
             AsignarCosto(costo);
         }
-        public ProductoSimple() { }
+        public ProductoSimple(int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock) : base(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock) { }
+        ProductoSimple() { }
         public override string SalidaProductos(int cantidad)
         {
 

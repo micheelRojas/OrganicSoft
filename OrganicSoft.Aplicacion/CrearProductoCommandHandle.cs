@@ -1,4 +1,5 @@
-﻿using OrganicSoft.Dominio;
+﻿using OrganicSoft.Aplicacion.ProductoFactory;
+using OrganicSoft.Dominio;
 using OrganicSoft.Dominio.Contracts;
 using System;
 using System.Collections.Generic;
@@ -34,10 +35,10 @@ namespace OrganicSoft.Aplicacion
                                                  request.Precio,
                                                  request.Categoria,
                                                 request.Presentacion,
-                                                request.MinimoStock,
-                                                request.Costo,
-                                                request.Componetes
+                                                request.MinimoStock 
                                                 );
+                
+                
                 _productoRepository.Add(productoNuevo);
                 _unitOfWork.Commit();
                 return $"Se creó con exito el producto {productoNuevo.Nombre}.";
@@ -47,34 +48,37 @@ namespace OrganicSoft.Aplicacion
                 return $"El producto ya exite";
             }
         }
-        public class ProductoRequest
-        {
+        public class ProductoRequest {
             public int Id { get; private set; }
             public string TipoProducto { get; set; }
             public int CodigoProducto { get; private set; }
             public string Nombre { get; private set; }
             public string Decripcion { get; private set; }
-            public double Costo { get; private set; }
             public double Precio { get; private set; }
             public string Categoria { get; private set; }
             public string Presentacion { get; private set; }
             public int MinimoStock { get; private set; }
+           
+        }
+        public class ProductoComboRequest : ProductoRequest{
             public List<Componente> Componetes { get; private set; }
+        }
+        public class ProductoSimpleRequest: ProductoRequest
+        {
+            public double Costo { get; private set; }
 
 
         }
         public static class TipoProducto
         {
             //mejorarar la creacion de productos
-            public static Producto CrearProducto(string tipoProducto, int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, double costo, List<Componente> componentes)
+            public static Producto CrearProducto(string tipoProducto, int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock)
             {
-                if (tipoProducto.Equals("Simple"))
-                {
-                    return new ProductoSimple(codigo, nombre, decripcion, costo, precio, categoria, presentacion, minimoStock);
-
-                }
-                return new ProductoCombo(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock, componentes);
+                Producto producto = (Producto)new FabricadeProductos().metodoFabrica(tipoProducto, codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock);
+                return producto;
             }
+            
         }
+        
     }
 }

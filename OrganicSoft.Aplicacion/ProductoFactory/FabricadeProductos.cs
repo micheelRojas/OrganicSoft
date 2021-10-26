@@ -9,16 +9,16 @@ namespace OrganicSoft.Aplicacion.ProductoFactory
 {
     public class FabricadeProductos : IFabrica
     {
-        public object metodoFabrica(string tipo)
+        public object metodoFabrica(string tipo, int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock)
         {
             Producto producto;
             switch (tipo.ToUpper())
             {
                 case "SIMPLE":
-                    producto = new ProductoSimple();
+                    producto = new ProductoSimple(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock);
                     break;
                 case "COMBO":
-                    producto = new ProductoCombo();
+                    producto = new ProductoCombo(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock);
                     break;
                 
                 default:
