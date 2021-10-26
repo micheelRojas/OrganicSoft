@@ -9,7 +9,7 @@ namespace OrganicSoft.Aplicacion.ProductoFactory
 {
     public class FabricadeProductos : IFabrica
     {
-        public object metodoFabrica(string tipo, int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock)
+        public object metodoFabrica(string tipo, int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, List<Componente> componetes, double costo)
         {
             Producto producto;
             switch (tipo.ToUpper())
@@ -27,5 +27,7 @@ namespace OrganicSoft.Aplicacion.ProductoFactory
             }
             return producto;
         }
+
+        
     }
 }

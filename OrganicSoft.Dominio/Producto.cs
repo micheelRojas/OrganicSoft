@@ -72,6 +72,7 @@ namespace OrganicSoft.Dominio
             if (Descuento != null)
             {
                 PrecioConDescuento = Precio + (Precio * Descuento.PorcentajeDescuento);
+                Descuento = null;
                 return $"El nuevo precio de {Nombre}, es de: {Precio}";
             }
             throw new NotImplementedException();

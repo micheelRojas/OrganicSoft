@@ -35,7 +35,9 @@ namespace OrganicSoft.Aplicacion
                                                  request.Precio,
                                                  request.Categoria,
                                                 request.Presentacion,
-                                                request.MinimoStock 
+                                                request.MinimoStock,
+                                                request.Componetes,
+                                                request.Costo
                                                 );
                 
                 
@@ -58,23 +60,24 @@ namespace OrganicSoft.Aplicacion
             public string Categoria { get; private set; }
             public string Presentacion { get; private set; }
             public int MinimoStock { get; private set; }
-           
-        }
-        public class ProductoComboRequest : ProductoRequest{
             public List<Componente> Componetes { get; private set; }
-        }
-        public class ProductoSimpleRequest: ProductoRequest
-        {
             public double Costo { get; private set; }
-
-
         }
+        //public class ProductoComboRequest : ProductoRequest
+        //{
+        //    public List<Componente> Componetes { get; private set; }
+        //}
+        //public class ProductoSimpleRequest : ProductoRequest
+        //{
+        //    public double Costo { get; private set; }
+        //}
         public static class TipoProducto
         {
             //mejorarar la creacion de productos
-            public static Producto CrearProducto(string tipoProducto, int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock)
+            public static Producto CrearProducto(string tipoProducto, int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, List<Componente> componetes, double costo)
             {
-                Producto producto = (Producto)new FabricadeProductos().metodoFabrica(tipoProducto, codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock);
+                Producto producto = (Producto)new FabricadeProductos().metodoFabrica(tipoProducto, codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock, componetes, costo);
+                
                 return producto;
             }
             
