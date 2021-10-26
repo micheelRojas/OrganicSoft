@@ -18,7 +18,7 @@ namespace OrganicSoft.Dominio
            
             Componetes = componentes;
         }
-        ProductoCombo() { 
+       public ProductoCombo() { 
         }
         private static double calcularCostos(List<Componente> componentes)
         {
