@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -20,10 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OrganicSoft.Dominio\OrganicSoft.Dominio.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ProductoFactory\" />
   </ItemGroup>
 
 </Project>
