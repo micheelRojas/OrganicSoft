@@ -10,7 +10,7 @@ namespace OrganicSoft.Dominio
 {
    public class ProductoCombo : Producto
     {
-       
+        static Inventario inventario = Inventario.getInventario();
         public double Utilidad { get; private set; }
         public List<Componente> Componetes { get; private set; }
         public ProductoCombo(int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, List<Componente> componentes) : base(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock)
@@ -23,13 +23,13 @@ namespace OrganicSoft.Dominio
         private static double calcularCostos(List<Componente> componentes)
         {
             double sumaCostos = 0;
-            for (int i = 0; i < Productos.ToList().LongCount(); i++)
+            for (int i = 0; i < inventario.productos.ToList().LongCount(); i++)
             {
                 for (int j = 0; j < componentes.LongCount(); j++)
                 {
-                    if (Productos.ToList()[i].Nombre.Equals(componentes[j].Producto.Nombre))
+                    if (inventario.productos.ToList()[i].Nombre.Equals(componentes[j].Producto.Nombre))
                     {
-                        sumaCostos = sumaCostos + (Productos.ToList()[i].Costo * componentes[j].Cantidad);
+                        sumaCostos = sumaCostos + (inventario.productos.ToList()[i].Costo * componentes[j].Cantidad);
                     }
                 }
 
@@ -59,14 +59,14 @@ namespace OrganicSoft.Dominio
         }
        private void SalidadeProductosdelProductoCompuesto(List<Componente> componentes, int cantidad)
         {
-            for (int i = 0; i < Productos.Count; i++)
+            for (int i = 0; i < inventario.productos.Count; i++)
             {
                 for (int j = 0; j < componentes.Count(); j++)
                 {
 
-                    if (Productos.ToList()[i].Nombre.Equals(componentes[j].Producto.Nombre))
+                    if (inventario.productos.ToList()[i].Nombre.Equals(componentes[j].Producto.Nombre))
                     {
-                        Productos.ToList()[i].DisminuirCantidadProducto(componentes[j].Cantidad * cantidad);
+                        inventario.productos.ToList()[i].DisminuirCantidadProducto(componentes[j].Cantidad * cantidad);
 
                     }
 
@@ -77,13 +77,13 @@ namespace OrganicSoft.Dominio
         private bool ValidarExistencia(ProductoCombo producto, int cantidad)
         {
             int validador = 0;
-            for (int i = 0; i < Productos.Count(); i++)
+            for (int i = 0; i < inventario.productos.Count(); i++)
             {
                 for (int j = 0; j < producto.Componetes.Count(); j++)
                 {
-                    if (Productos.ToList()[i].Nombre.Equals(producto.Componetes[j].Producto.Nombre))
+                    if (inventario.productos.ToList()[i].Nombre.Equals(producto.Componetes[j].Producto.Nombre))
                     {
-                        if (Productos.ToList()[i].CantidadExistente >= producto.Componetes[j].Cantidad * cantidad)
+                        if (inventario.productos.ToList()[i].CantidadExistente >= producto.Componetes[j].Cantidad * cantidad)
                         {
                             validador++;
                         }

@@ -13,6 +13,8 @@ namespace OrganicSoft.Dominio
         public string CedulaCliente { get; private set; }
         protected List<ProductoVenta> _productoVentas;
 
+         Inventario inventario = Inventario.getInventario();
+
         public CarritoCompra(int codigo, string cedulaCliente)
         {
             Codigo = codigo;
@@ -29,7 +31,7 @@ namespace OrganicSoft.Dominio
                 respuesta = "La cantidad del producto debe ser mayor a cero";
                 return respuesta;
             }
-            foreach (var producto in Producto.Productos)
+            foreach (var producto in inventario.productos)
             {
                 if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
                 {
@@ -71,7 +73,7 @@ namespace OrganicSoft.Dominio
                     if (productoVenta.CantidadVenta > cantidad)
                     {
                         productoVenta.DisminuirCantidadProductoVenta(cantidad);
-                        foreach (var producto in Producto.Productos)
+                        foreach (var producto in inventario.productos)
                         {
                             if (codigoProductoVenta.Equals(producto.CodigoProducto))
                             {
@@ -105,7 +107,7 @@ namespace OrganicSoft.Dominio
                 if (codigoProductoVenta.Equals(productoVenta.CodigoProducto))
                 {
                     productoVenta.AumentarCantidadProductoVenta(cantidad);
-                    foreach (var producto in Producto.Productos)
+                    foreach (var producto in inventario.productos)
                     {
                         if (codigoProductoVenta.Equals(producto.CodigoProducto))
                         {

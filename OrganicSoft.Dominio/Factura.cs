@@ -16,6 +16,8 @@ namespace OrganicSoft.Dominio
         public List<Detalle> Detalles { get; private set; }
         protected List<Factura> _facturas = new List<Factura>();
 
+        Inventario inventario = Inventario.getInventario();
+
         public Factura(int codigo, DateTime fechaCreacion, string cedulaCliente, Pedido Pedido)
         {
             Codigo = codigo;
@@ -32,7 +34,7 @@ namespace OrganicSoft.Dominio
             double sumaSubtotalesDetalles = 0;
             foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductosVenta)
             {
-                foreach (Producto producto in Producto.Productos)
+                foreach (Producto producto in inventario.productos)
                 {
                     if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
                     {
