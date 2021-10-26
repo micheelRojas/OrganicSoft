@@ -1,11 +1,7 @@
 ﻿using OrganicSoft.Aplicacion.ProductoFactory;
 using OrganicSoft.Dominio;
 using OrganicSoft.Dominio.Contracts;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrganicSoft.Aplicacion
 {
@@ -20,68 +16,76 @@ namespace OrganicSoft.Aplicacion
         {
             _unitOfWork = unitOfWork;
             _productoRepository = productoRepository;
-           
+
         }
-        public string CrearProducto(ProductoRequest request)
+        public CrearProductosResponse Handle(CrearProductosCommand command)
         {
-            Producto producto = _productoRepository.FindFirstOrDefault(t => t.Id == request.Id);
+            Producto producto = _productoRepository.FindFirstOrDefault(t => t.Id == command.Id);
             if (producto == null)
             {
                 Producto productoNuevo = TipoProducto.CrearProducto(
-                                                request.TipoProducto,
-                                                request.CodigoProducto,
-                                                request.Nombre,
-                                                request.Decripcion,
-                                                 request.Precio,
-                                                 request.Categoria,
-                                                request.Presentacion,
-                                                request.MinimoStock,
-                                                request.Componetes,
-                                                request.Costo
+                                                command.TipoProducto,
+                                                command.CodigoProducto,
+                                                command.Nombre,
+                                                command.Decripcion,
+                                                command.Precio,
+                                                command.Categoria,
+                                                command.Presentacion,
+                                                command.MinimoStock,
+                                                command.Componetes,
+                                                command.Costo
                                                 );
-                
-                
+
+
                 _productoRepository.Add(productoNuevo);
                 _unitOfWork.Commit();
-                return $"Se creó con exito el producto {productoNuevo.Nombre}.";
+                return new CrearProductosResponse($"Se creó con exito el producto {productoNuevo.Nombre}.");
             }
             else
             {
-                return $"El producto ya exite";
+                return new CrearProductosResponse($"El producto ya exite");
             }
         }
-        public class ProductoRequest {
-            public int Id { get; private set; }
+        public class CrearProductosCommand
+        {
+            public int Id { get;  set; }
             public string TipoProducto { get; set; }
-            public int CodigoProducto { get; private set; }
-            public string Nombre { get; private set; }
-            public string Decripcion { get; private set; }
-            public double Precio { get; private set; }
-            public string Categoria { get; private set; }
-            public string Presentacion { get; private set; }
-            public int MinimoStock { get; private set; }
-            public List<Componente> Componetes { get; private set; }
-            public double Costo { get; private set; }
+            public int CodigoProducto { get; set; }
+            public string Nombre { get; set; }
+            public string Decripcion { get; set; }
+            public double Precio { get; set; }
+            public string Categoria { get; set; }
+            public string Presentacion { get; set; }
+            public int MinimoStock { get; set; }
+            public List<Componente> Componetes { get; set; }
+            public double Costo { get; set; }
+           
         }
-        //public class ProductoComboRequest : ProductoRequest
-        //{
-        //    public List<Componente> Componetes { get; private set; }
-        //}
-        //public class ProductoSimpleRequest : ProductoRequest
-        //{
-        //    public double Costo { get; private set; }
-        //}
+
         public static class TipoProducto
         {
             //mejorarar la creacion de productos
             public static Producto CrearProducto(string tipoProducto, int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, List<Componente> componetes, double costo)
             {
                 Producto producto = (Producto)new FabricadeProductos().metodoFabrica(tipoProducto, codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock, componetes, costo);
-                
+
                 return producto;
             }
-            
+
         }
-        
+        public record CrearProductosResponse
+        {
+            public CrearProductosResponse()
+            {
+
+            }
+
+            public CrearProductosResponse(string mensaje)
+            {
+                Mensaje = mensaje;
+            }
+
+            public string Mensaje { get; set; }
+        }
     }
 }

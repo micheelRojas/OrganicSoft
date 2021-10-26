@@ -33,6 +33,7 @@ namespace OrganicSoft.Dominio
             Categoria = categoria;
             Presentacion = presentacion;
             MinimoStock = minimoStock;
+            CantidadExistente = 0;
         }
         
         public virtual string EntradaProductos(int cantidad)

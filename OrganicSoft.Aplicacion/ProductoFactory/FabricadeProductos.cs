@@ -15,10 +15,10 @@ namespace OrganicSoft.Aplicacion.ProductoFactory
             switch (tipo.ToUpper())
             {
                 case "SIMPLE":
-                    producto = new ProductoSimple(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock);
+                    producto = new ProductoSimple(codigo, nombre, decripcion,costo, precio, categoria, presentacion, minimoStock);
                     break;
                 case "COMBO":
-                    producto = new ProductoCombo(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock);
+                    producto = new ProductoCombo(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock,componetes);
                     break;
                 
                 default:
