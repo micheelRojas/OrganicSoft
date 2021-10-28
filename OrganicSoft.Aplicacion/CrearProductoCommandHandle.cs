@@ -67,7 +67,7 @@ namespace OrganicSoft.Aplicacion
             //mejorarar la creacion de productos
             public static Producto CrearProducto(string tipoProducto, int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, List<Componente> componetes, double costo)
             {
-                Producto producto = (Producto)new FabricadeProductos().metodoFabrica(tipoProducto, codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock, componetes, costo);
+                Producto producto = (Producto)new FabricadeProductos().MetodoFabrica(tipoProducto, codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock, componetes, costo);
 
                 return producto;
             }
