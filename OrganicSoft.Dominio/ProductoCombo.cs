@@ -15,13 +15,12 @@ namespace OrganicSoft.Dominio
         public List<Componente> Componetes { get; private set; }
         public ProductoCombo(int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, List<Componente> componentes) : base(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock)
         {
-           
             Componetes = componentes;
         }
       
         ProductoCombo() { 
         }
-        private static double calcularCostos(List<Componente> componentes)
+        private static double CalcularCostos(List<Componente> componentes)
         {
             double sumaCostos = 0;
             for (int i = 0; i < inventario.productos.ToList().LongCount(); i++)
@@ -46,7 +45,7 @@ namespace OrganicSoft.Dominio
                 {
                     AumentarCantidadProducto(cantidad);
                     SalidadeProductosdelProductoCompuesto(Componetes, cantidad);
-                   var v=  AsignarCosto( calcularCostos(Componetes));
+                   var v=  AsignarCosto( CalcularCostos(Componetes));
                     Utilidad= cantidad * ( PrecioConDescuento- Costo);
                     return $"La utilidad de {Nombre} es de: {Utilidad}";
                 }
@@ -58,7 +57,7 @@ namespace OrganicSoft.Dominio
             }
             throw new NotImplementedException();
         }
-       private void SalidadeProductosdelProductoCompuesto(List<Componente> componentes, int cantidad)
+        private void SalidadeProductosdelProductoCompuesto(List<Componente> componentes, int cantidad)
         {
             for (int i = 0; i < inventario.productos.Count; i++)
             {
@@ -100,6 +99,11 @@ namespace OrganicSoft.Dominio
             {
                 return false;
             }
+        }
+
+        public void AddComponente(Producto producto, int cantidad) 
+        {
+            Componetes.Add(new Componente(producto, cantidad));
         }
     }
     public class Componente : Entity<int>

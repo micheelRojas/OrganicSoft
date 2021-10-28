@@ -27,6 +27,7 @@ namespace OrganicSoft.Infraestructura
             modelBuilder.Entity<Componente>().HasKey(c => c.Id);
 
             //control de concurrencia
+            //Campo adicional de version 
             //modelBuilder.Entity<Producto>().Property(p => p.CantidadExistente).IsRowVersion();
         }
        

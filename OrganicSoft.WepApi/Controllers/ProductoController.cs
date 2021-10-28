@@ -7,6 +7,8 @@ using static OrganicSoft.Aplicacion.CrearProductoCommandHandle;
 using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
 using System.Linq;
 using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
+using System.Collections.Generic;
+using OrganicSoft.Aplicacion.Productos;
 
 namespace OrganicSoft.WepApi.Controllers
 {
@@ -28,21 +30,11 @@ namespace OrganicSoft.WepApi.Controllers
 
         }
         [HttpGet]
-        public object GetProductos()
+        public ActionResult<List<ProductoViewModel>> GetProductos()
         {
-            var result = (from p in _context.Set<Producto>()
-                          select new
-                          {
-                              Id = p.Id,
-                              CodigoProducto = p.CodigoProducto,
-                              Nombre = p.Nombre,
-                              Descripcion = p.Decripcion,
-                              Costo = p.Costo,
-                              Precio = p.PrecioConDescuento,
-                              CantidadExitente= p.CantidadExistente,
-                              CantidadVendida = p.CantidadVendidad
-                          }).ToList();
-            return result;
+            var result = new ConsultarProductosQueryHandle(_productoRepository).Handle();
+                        
+            return Ok(result.Productos);
         }
 
         [HttpPut]
