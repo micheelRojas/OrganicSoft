@@ -6,6 +6,8 @@ using OrganicSoft.Infraestructura;
 using static OrganicSoft.Aplicacion.CrearProductoCommandHandle;
 using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
 using System.Linq;
+using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
+
 namespace OrganicSoft.WepApi.Controllers
 {
     [ApiController]
@@ -50,6 +52,15 @@ namespace OrganicSoft.WepApi.Controllers
             var response = service.Handle(command);
             return response;
         }
+
+        [HttpPut("{id}")]
+        public SalidaProductosResponse PutSalidaProducto([FromRoute] int id, SalidaProductosCommand command)
+        {
+            var service = new SalidaProductoCommandHandle(_unitOfWork, _productoRepository);
+            var response = service.Handle(command);
+            return response;
+        }
+
         [HttpPost]
         public CrearProductosResponse Post(CrearProductosCommand command)
         {
