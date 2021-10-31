@@ -14,6 +14,7 @@ export class ProductoComponent implements OnInit {
 
 }
 export interface IProductoCrear {
+  tipoProducto: string,
   id: number,
   codigoProducto: number,
   nombre: string,

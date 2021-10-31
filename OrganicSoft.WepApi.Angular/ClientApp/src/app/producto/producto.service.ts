@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductoService {
-  apiURL = this.baseUrl + "api/Cuenta";
+  apiURL = this.baseUrl + "api/Producto";
   private _refresh$ = new Subject<void>();
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
   get refresh$() {
