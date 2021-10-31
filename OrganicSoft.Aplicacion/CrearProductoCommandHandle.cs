@@ -23,6 +23,17 @@ namespace OrganicSoft.Aplicacion
             Producto producto = _productoRepository.FindFirstOrDefault(t => t.Id == command.Id);
             if (producto == null)
             {
+                List<Componente> componentesdelProducto = new List<Componente>();
+                if (command.TipoProducto.ToUpper().Equals("COMBO"))
+                {
+                   
+                    for (int i = 0; i < command.Componetes.Count; i++)
+                    {
+                        componentesdelProducto.Add(new Componente(command.Componetes[i].Producto, command.Componetes[i].Cantidad));
+
+                    }
+
+                }
                 Producto productoNuevo = TipoProducto.CrearProducto(
                                                 command.TipoProducto,
                                                 command.CodigoProducto,
@@ -32,7 +43,7 @@ namespace OrganicSoft.Aplicacion
                                                 command.Categoria,
                                                 command.Presentacion,
                                                 command.MinimoStock,
-                                                command.Componetes,
+                                                componentesdelProducto,
                                                 command.Costo
                                                 );
 
