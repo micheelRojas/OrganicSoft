@@ -50,7 +50,7 @@ namespace OrganicSoft.Aplicacion
 
                 _productoRepository.Add(productoNuevo);
                 _unitOfWork.Commit();
-                return new CrearProductosResponse($"Se creó con exito el producto {productoNuevo.Nombre}.");
+                return new CrearProductosResponse($"Se creó con exito el producto.");
             }
             else
             {
@@ -97,6 +97,10 @@ namespace OrganicSoft.Aplicacion
             }
 
             public string Mensaje { get; set; }
+            public bool isOk()
+            {
+                return this.Mensaje.Equals("Se creó con exito el producto.");
+            }
         }
     }
 }

@@ -17,12 +17,8 @@ export class ProductoService {
     return this.http.get<IProducto[]>(this.apiURL);
   }
   createProducto(producto: IProductoCrear): Observable<IProductoCrear> {
-    return this.http.post<IProductoCrear>(this.apiURL, producto)
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.post<IProductoCrear>(this.apiURL, producto);
   }
+
 }
 

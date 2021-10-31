@@ -14,8 +14,8 @@ export class ProductoComponent implements OnInit {
 
 }
 export interface IProductoCrear {
-  tipoProducto: string,
   id: number,
+  tipoProducto: string,
   codigoProducto: number,
   nombre: string,
   descripcion: string,
@@ -25,7 +25,6 @@ export interface IProductoCrear {
   minimoStock: number,
   componentes: IComponete[],
   costo: number
-
 }
 export interface IComponete {
   producto: IProducto,
@@ -41,5 +40,13 @@ export interface IProducto {
   presentacion: string,
   minimoStock: number,
   costo: number
-
+  descuento: IDescuento
 }
+export interface IDescuento {
+  id: number,
+  codigoDescuento: number,
+  fechaInicio: string,
+  fechaFin: string,
+  porcentajeDescuento: number
+}
+

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrganicSoft.Aplicacion;
 using OrganicSoft.Aplicacion.Productos;
+using OrganicSoft.Dominio;
 using OrganicSoft.Dominio.Contracts;
 using OrganicSoft.Infraestructura;
 using System;
@@ -13,9 +15,8 @@ using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
 
 namespace OrganicSoft.WepApi.Angular.Controllers
 {
-
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class ProductoController : ControllerBase
     {
 
@@ -54,13 +55,29 @@ namespace OrganicSoft.WepApi.Angular.Controllers
             var response = service.Handle(command);
             return response;
         }
-
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProducto([FromRoute] int id)
+        {
+            Producto producto = await _context.Producto.SingleOrDefaultAsync(t => t.Id == id);
+            if (producto == null)
+                return NotFound();
+            return Ok(producto);
+        }
         [HttpPost]
-        public CrearProductosResponse Post(CrearProductosCommand command)
+        public async Task<IActionResult> CreateProducto([FromBody] CrearProductosCommand command)
         {
             var service = new CrearProductoCommandHandle(_unitOfWork, _productoRepository);
             var response = service.Handle(command);
-            return response;
+
+            if (response.isOk())
+            {
+                await _context.SaveChangesAsync();
+                return Ok(response);
+               
+                //return CreatedAtAction("GetProducto", new { id = command.Id }, command);
+            }
+            return BadRequest(response.Mensaje);
+          
         }
 
     }

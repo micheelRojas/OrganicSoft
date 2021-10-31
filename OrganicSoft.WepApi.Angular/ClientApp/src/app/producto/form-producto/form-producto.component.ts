@@ -37,14 +37,14 @@ export class FormProductoComponent implements OnInit {
     console.table(producto); //ver grado por consola
     if (this.formGroup.valid) {
       this.productoService.createProducto(producto)
-        .subscribe(cliente => this.goBack(),
-          error => console.log('Error'));
+        .subscribe(producto => this.goBack(),
+          error => console.log('Error al crear el producto'));
     } else {
       console.log('Error 2');
     }
   }
   goBack(): void { 
-    console.log('Guardado')
+    console.log('Guardado');
   }
   get tipoProducto() {
     return this.formGroup.get('tipoProducto');
