@@ -25,8 +25,8 @@ namespace OrganicSoft.WepApi.Angular
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("OrganicSoftContext");
-            services.AddDbContext<OrganicSoftContext>(options => options.UseSqlServer(Configuration.GetConnectionString(connectionString)));
+           // var connectionString = Configuration.GetConnectionString("OrganicSoftContext");
+            services.AddDbContext<OrganicSoftContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OrganicSoftContext")));
 
             ///Inyección de dependencia Especifica
             //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0#register-additional-services-with-extension-methods
