@@ -19,6 +19,24 @@ namespace OrganicSoft.Infraestructura.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("OrganicSoft.Dominio.CarritoCompra", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CedulaCliente")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Codigo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CarritoCompra");
+                });
+
             modelBuilder.Entity("OrganicSoft.Dominio.Componente", b =>
                 {
                     b.Property<int>("Id")
@@ -126,6 +144,34 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.ToTable("Factura");
                 });
 
+            modelBuilder.Entity("OrganicSoft.Dominio.Pedido", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CarritoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodigoPedido")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PedidoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarritoId");
+
+                    b.HasIndex("PedidoId");
+
+                    b.ToTable("Pedido");
+                });
+
             modelBuilder.Entity("OrganicSoft.Dominio.Producto", b =>
                 {
                     b.Property<int>("Id")
@@ -182,6 +228,29 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Producto");
                 });
 
+            modelBuilder.Entity("OrganicSoft.Dominio.ProductoVenta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CantidadVenta")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CarritoCompraId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodigoProducto")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CarritoCompraId");
+
+                    b.ToTable("ProductoVenta");
+                });
+
             modelBuilder.Entity("OrganicSoft.Dominio.ProductoCombo", b =>
                 {
                     b.HasBaseType("OrganicSoft.Dominio.Producto");
@@ -226,6 +295,19 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .HasForeignKey("FacturaId");
                 });
 
+            modelBuilder.Entity("OrganicSoft.Dominio.Pedido", b =>
+                {
+                    b.HasOne("OrganicSoft.Dominio.CarritoCompra", "Carrito")
+                        .WithMany()
+                        .HasForeignKey("CarritoId");
+
+                    b.HasOne("OrganicSoft.Dominio.Pedido", null)
+                        .WithMany("Pedidos")
+                        .HasForeignKey("PedidoId");
+
+                    b.Navigation("Carrito");
+                });
+
             modelBuilder.Entity("OrganicSoft.Dominio.Producto", b =>
                 {
                     b.HasOne("OrganicSoft.Dominio.Descuento", "Descuento")
@@ -235,11 +317,28 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Navigation("Descuento");
                 });
 
+            modelBuilder.Entity("OrganicSoft.Dominio.ProductoVenta", b =>
+                {
+                    b.HasOne("OrganicSoft.Dominio.CarritoCompra", null)
+                        .WithMany("ProductosVenta")
+                        .HasForeignKey("CarritoCompraId");
+                });
+
+            modelBuilder.Entity("OrganicSoft.Dominio.CarritoCompra", b =>
+                {
+                    b.Navigation("ProductosVenta");
+                });
+
             modelBuilder.Entity("OrganicSoft.Dominio.Factura", b =>
                 {
                     b.Navigation("Detalles");
 
                     b.Navigation("Facturas");
+                });
+
+            modelBuilder.Entity("OrganicSoft.Dominio.Pedido", b =>
+                {
+                    b.Navigation("Pedidos");
                 });
 
             modelBuilder.Entity("OrganicSoft.Dominio.ProductoCombo", b =>

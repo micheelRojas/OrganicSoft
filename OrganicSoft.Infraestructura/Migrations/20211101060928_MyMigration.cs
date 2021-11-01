@@ -8,6 +8,20 @@ namespace OrganicSoft.Infraestructura.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CarritoCompra",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Codigo = table.Column<int>(type: "int", nullable: false),
+                    CedulaCliente = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarritoCompra", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Descuento",
                 columns: table => new
                 {
@@ -42,6 +56,55 @@ namespace OrganicSoft.Infraestructura.Migrations
                         name: "FK_Factura_Factura_FacturaId",
                         column: x => x.FacturaId,
                         principalTable: "Factura",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pedido",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodigoPedido = table.Column<int>(type: "int", nullable: false),
+                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CarritoId = table.Column<int>(type: "int", nullable: true),
+                    PedidoId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pedido", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pedido_CarritoCompra_CarritoId",
+                        column: x => x.CarritoId,
+                        principalTable: "CarritoCompra",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Pedido_Pedido_PedidoId",
+                        column: x => x.PedidoId,
+                        principalTable: "Pedido",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductoVenta",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CodigoProducto = table.Column<int>(type: "int", nullable: false),
+                    CantidadVenta = table.Column<int>(type: "int", nullable: false),
+                    CarritoCompraId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductoVenta", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductoVenta_CarritoCompra_CarritoCompraId",
+                        column: x => x.CarritoCompraId,
+                        principalTable: "CarritoCompra",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -149,9 +212,24 @@ namespace OrganicSoft.Infraestructura.Migrations
                 column: "FacturaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pedido_CarritoId",
+                table: "Pedido",
+                column: "CarritoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pedido_PedidoId",
+                table: "Pedido",
+                column: "PedidoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Producto_DescuentoId",
                 table: "Producto",
                 column: "DescuentoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductoVenta_CarritoCompraId",
+                table: "ProductoVenta",
+                column: "CarritoCompraId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -163,10 +241,19 @@ namespace OrganicSoft.Infraestructura.Migrations
                 name: "Detalle");
 
             migrationBuilder.DropTable(
+                name: "Pedido");
+
+            migrationBuilder.DropTable(
+                name: "ProductoVenta");
+
+            migrationBuilder.DropTable(
                 name: "Producto");
 
             migrationBuilder.DropTable(
                 name: "Factura");
+
+            migrationBuilder.DropTable(
+                name: "CarritoCompra");
 
             migrationBuilder.DropTable(
                 name: "Descuento");
