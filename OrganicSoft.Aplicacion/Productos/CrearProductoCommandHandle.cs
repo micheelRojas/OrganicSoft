@@ -23,27 +23,17 @@ namespace OrganicSoft.Aplicacion
             Producto producto = _productoRepository.FindFirstOrDefault(t => t.Id == command.Id);
             if (producto == null)
             {
-                List<Componente> componentesdelProducto = new List<Componente>();
-                if (command.TipoProducto.ToUpper().Equals("COMBO"))
-                {
-                   
-                    for (int i = 0; i < command.Componetes.Count; i++)
-                    {
-                        componentesdelProducto.Add(new Componente(command.Componetes[i].Producto, command.Componetes[i].Cantidad));
-
-                    }
-
-                }
+               
                 Producto productoNuevo = TipoProducto.CrearProducto(
                                                 command.TipoProducto,
                                                 command.CodigoProducto,
                                                 command.Nombre,
-                                                command.Decripcion,
+                                                command.Descripcion,
                                                 command.Precio,
                                                 command.Categoria,
                                                 command.Presentacion,
                                                 command.MinimoStock,
-                                                componentesdelProducto,
+                                                command.Componetes,
                                                 command.Costo
                                                 );
 
@@ -63,7 +53,8 @@ namespace OrganicSoft.Aplicacion
             public string TipoProducto { get; set; }
             public int CodigoProducto { get; set; }
             public string Nombre { get; set; }
-            public string Decripcion { get; set; }
+            public string Descripcion { get; set; }
+            
             public double Precio { get; set; }
             public string Categoria { get; set; }
             public string Presentacion { get; set; }

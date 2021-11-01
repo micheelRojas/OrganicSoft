@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -13,6 +13,9 @@ import { ProductoComponent } from './producto/producto.component';
 import { FormProductoComponent } from './producto/form-producto/form-producto.component';
 import { ListProductoComponent } from './producto/list-producto/list-producto.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MensajesModule } from './mensajes/mensajes.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSortModule, MatTableModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,9 +38,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'registrar-producto', component: FormProductoComponent },
       { path: 'lista-productos', component: ProductoComponent },
-    ])
+    ]),
+    MensajesModule,
+    BrowserAnimationsModule,
+    MatSortModule,
+    MatTableModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

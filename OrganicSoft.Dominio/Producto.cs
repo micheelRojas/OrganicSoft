@@ -11,14 +11,14 @@ namespace OrganicSoft.Dominio
     {
         public int CodigoProducto { get; private set; }
         public string Nombre { get; private set; }
-        public string Decripcion { get; private set; }
+        public string Descripcion { get; private set; }
         public double Costo { get; private set; }
         public double Precio { get; private set; }
         public string Categoria { get; private set; }
         public string Presentacion { get; private set; }
         public int MinimoStock { get; private set; }
         public int CantidadExistente { get; private set; }
-        public int CantidadVendidad { get; private set; }
+        public int CantidadVendida { get; private set; }
         public Descuento Descuento { get; private set; }
         public double PrecioConDescuento { get; private set; }
         Inventario inventario = Inventario.getInventario();
@@ -27,7 +27,7 @@ namespace OrganicSoft.Dominio
         {
             CodigoProducto = codigo;
             Nombre = nombre;
-            Decripcion = decripcion;
+            Descripcion = decripcion;
             Precio = precio;
             PrecioConDescuento = precio;
             Categoria = categoria;
@@ -103,7 +103,7 @@ namespace OrganicSoft.Dominio
                 if (CantidadExistente >= cantidad)
                 {
                     CantidadExistente -= cantidad;
-                    CantidadVendidad += cantidad;
+                    CantidadVendida += cantidad;
                 }
 
             }
