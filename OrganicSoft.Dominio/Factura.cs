@@ -17,7 +17,7 @@ namespace OrganicSoft.Dominio
         protected List<Factura> _facturas = new List<Factura>();
 
         Inventario inventario = Inventario.getInventario();
-
+        public Factura() { }
         public Factura(int codigo, DateTime fechaCreacion, string cedulaCliente, Pedido Pedido)
         {
             Codigo = codigo;
