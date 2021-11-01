@@ -11,7 +11,7 @@ namespace OrganicSoft.Dominio
     {
         public int CodigoProducto { get; private set; }
         public string Nombre { get; private set; }
-        public string Decripcion { get; private set; }
+        public string Descripcion { get; private set; }
         public double Costo { get; private set; }
         public double Precio { get; private set; }
         public string Categoria { get; private set; }
@@ -27,7 +27,7 @@ namespace OrganicSoft.Dominio
         {
             CodigoProducto = codigo;
             Nombre = nombre;
-            Decripcion = decripcion;
+            Descripcion = decripcion;
             Precio = precio;
             PrecioConDescuento = precio;
             Categoria = categoria;
