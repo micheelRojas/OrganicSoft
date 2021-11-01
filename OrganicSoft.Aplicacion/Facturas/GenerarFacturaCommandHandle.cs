@@ -12,9 +12,10 @@ namespace OrganicSoft.Aplicacion.Facturas
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFacturaRepository _facturaRepository;
-        public GenerarFacturaCommandHandle(IUnitOfWork unitOfWork)
+        public GenerarFacturaCommandHandle(IUnitOfWork unitOfWork, IFacturaRepository facturaRepository)
         {
             _unitOfWork = unitOfWork;
+            _facturaRepository = facturaRepository;
         }
         public GenerarFacturaResponse Handle(GenerarFacturaCommand command)
         {
@@ -27,11 +28,11 @@ namespace OrganicSoft.Aplicacion.Facturas
 
                 _facturaRepository.Add(facturaNueva);
                 _unitOfWork.Commit();
-                return new GenerarFacturaResponse($"Se creó con exito el producto.");
+                return new GenerarFacturaResponse($"Se creó con exito la factura.");
             }
             else
             {
-                return new GenerarFacturaResponse($"El producto ya exite");
+                return new GenerarFacturaResponse($"La factura ya exite");
             }
         }
     }
