@@ -62,7 +62,7 @@ namespace OrganicSoft.Aplicacion.Facturas
         public string Mensaje { get; set; }
         public bool isOk()
         {
-            return this.Mensaje.Equals("Se creó con exito el producto.");
+            return this.Mensaje.Equals("Se creó con exito la factura.");
         }
     }
 }
