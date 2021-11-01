@@ -18,13 +18,15 @@ namespace OrganicSoft.Infraestructura
         public DbSet<Producto> Producto { get; set; }//equivale a Repositorios
         public DbSet<ProductoSimple> ProductoSimple { get; set; }
         public DbSet<ProductoCombo> ProductoCombo { get; set; }
-      
+        public DbSet<Factura> Factura { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Producto>().HasKey(c => c.Id);
             modelBuilder.Entity<Descuento>().HasKey(c => c.Id);
             modelBuilder.Entity<Componente>().HasKey(c => c.Id);
+            modelBuilder.Entity<Factura>().HasKey(c => c.Id);
 
             //control de concurrencia
             //Campo adicional de version 
