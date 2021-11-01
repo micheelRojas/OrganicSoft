@@ -10,7 +10,7 @@ using OrganicSoft.Infraestructura;
 namespace OrganicSoft.Infraestructura.Migrations
 {
     [DbContext(typeof(OrganicSoftContext))]
-    [Migration("20211101060928_MyMigration")]
+    [Migration("20211101181758_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,14 +162,9 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PedidoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CarritoId");
-
-                    b.HasIndex("PedidoId");
 
                     b.ToTable("Pedido");
                 });
@@ -243,12 +238,17 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Property<int?>("CarritoCompraId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CarritoCompraId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("CodigoProducto")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CarritoCompraId");
+
+                    b.HasIndex("CarritoCompraId1");
 
                     b.ToTable("ProductoVenta");
                 });
@@ -303,10 +303,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .WithMany()
                         .HasForeignKey("CarritoId");
 
-                    b.HasOne("OrganicSoft.Dominio.Pedido", null)
-                        .WithMany("Pedidos")
-                        .HasForeignKey("PedidoId");
-
                     b.Navigation("Carrito");
                 });
 
@@ -322,13 +318,19 @@ namespace OrganicSoft.Infraestructura.Migrations
             modelBuilder.Entity("OrganicSoft.Dominio.ProductoVenta", b =>
                 {
                     b.HasOne("OrganicSoft.Dominio.CarritoCompra", null)
-                        .WithMany("ProductosVenta")
+                        .WithMany("ProductoVentas")
                         .HasForeignKey("CarritoCompraId");
+
+                    b.HasOne("OrganicSoft.Dominio.CarritoCompra", null)
+                        .WithMany("ProductosVenta")
+                        .HasForeignKey("CarritoCompraId1");
                 });
 
             modelBuilder.Entity("OrganicSoft.Dominio.CarritoCompra", b =>
                 {
                     b.Navigation("ProductosVenta");
+
+                    b.Navigation("ProductoVentas");
                 });
 
             modelBuilder.Entity("OrganicSoft.Dominio.Factura", b =>
@@ -336,11 +338,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Navigation("Detalles");
 
                     b.Navigation("Facturas");
-                });
-
-            modelBuilder.Entity("OrganicSoft.Dominio.Pedido", b =>
-                {
-                    b.Navigation("Pedidos");
                 });
 
             modelBuilder.Entity("OrganicSoft.Dominio.ProductoCombo", b =>

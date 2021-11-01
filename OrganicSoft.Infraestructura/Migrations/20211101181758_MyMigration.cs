@@ -68,8 +68,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CodigoPedido = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CarritoId = table.Column<int>(type: "int", nullable: true),
-                    PedidoId = table.Column<int>(type: "int", nullable: true)
+                    CarritoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,12 +77,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                         name: "FK_Pedido_CarritoCompra_CarritoId",
                         column: x => x.CarritoId,
                         principalTable: "CarritoCompra",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Pedido_Pedido_PedidoId",
-                        column: x => x.PedidoId,
-                        principalTable: "Pedido",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -215,11 +208,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                 name: "IX_Pedido_CarritoId",
                 table: "Pedido",
                 column: "CarritoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pedido_PedidoId",
-                table: "Pedido",
-                column: "PedidoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Producto_DescuentoId",

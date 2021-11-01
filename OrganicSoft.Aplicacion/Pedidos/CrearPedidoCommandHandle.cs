@@ -37,9 +37,9 @@ namespace OrganicSoft.Aplicacion.Pedidos
 
     public class CrearPedidoCommand
     {
-        public int Id { get; private set; }
-        public int CodigoPedido { get; private set; }
-        public CarritoCompra Carrito { get; private set; }
+        public int Id { get;  set; }
+        public int CodigoPedido { get;  set; }
+        public CarritoCompra Carrito { get;  set; }
     }
 
     public class CrearPedidoResponse
@@ -57,7 +57,7 @@ namespace OrganicSoft.Aplicacion.Pedidos
         public string Mensaje { get; set; }
         public bool isOk()
         {
-            return this.Mensaje.Equals("Se creó con exito el producto.");
+            return this.Mensaje.Equals("Se creó con exito el pedido.");
         }
     }
 }

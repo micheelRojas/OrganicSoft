@@ -40,9 +40,9 @@ namespace OrganicSoft.Aplicacion.Facturas
     public class GenerarFacturaCommand
     {
         public int Id { get; set; }
-        public int Codigo { get; private set; }
-        public String CedulaCliente { get; private set; }
-        public Pedido Pedido { get; private set; }
+        public int Codigo { get;  set; }
+        public String CedulaCliente { get;  set; }
+        public Pedido Pedido { get;  set; }
 
 
     }

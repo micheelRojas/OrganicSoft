@@ -12,14 +12,15 @@ namespace OrganicSoft.Dominio
         public int CodigoPedido { get; private set; }
         public String Estado { get; private set; }
         public CarritoCompra Carrito { get; private set; }
-        protected List<Pedido> _pedidos = new List<Pedido>();
+
+       // Encargos encargos = new Encargos();
 
         public Pedido()
         {
 
         }
 
-        public IReadOnlyCollection<Pedido> Pedidos => _pedidos.AsReadOnly();
+       // public IReadOnlyCollection<Pedido> Pedidos => encargos.Pedidos.AsReadOnly();
 
         public String GenerarPedido(int codigo, CarritoCompra CarritoCompra)
         {
@@ -28,13 +29,13 @@ namespace OrganicSoft.Dominio
                 CodigoPedido = codigo;
                 Estado = "NO CONFIRMADO";
                 Carrito = CarritoCompra;
-                _pedidos.Add(this);
+               // encargos.Pedidos.Add(this);
                 return $"Se creó un nuevo pedido para el cliente con cédula {CarritoCompra.CedulaCliente}";
             }
             throw new NotImplementedException();
         }
 
-        public String ConfirmarPedido(int codigo)
+        /*public String ConfirmarPedido(int codigo)
         {
             foreach (Pedido pedido in Pedidos)
             {
@@ -45,6 +46,16 @@ namespace OrganicSoft.Dominio
                 }
             }
             throw new NotImplementedException();
+        }*/
+    }
+
+    public class Encargos
+    {
+        public List<Pedido> Pedidos { get; private set; } 
+
+        public Encargos()
+        {
+            Pedidos = new List<Pedido>();
         }
     }
 }

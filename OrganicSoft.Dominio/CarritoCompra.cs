@@ -11,17 +11,17 @@ namespace OrganicSoft.Dominio
     {
         public int Codigo { get; private set; }
         public string CedulaCliente { get; private set; }
-        protected List<ProductoVenta> _productoVentas;
+        public List<ProductoVenta> ProductoVentas { get; private set; }
 
-         Inventario inventario = Inventario.getInventario();
+        Inventario inventario = Inventario.getInventario();
 
         public CarritoCompra(int codigo, string cedulaCliente)
         {
             Codigo = codigo;
             CedulaCliente = cedulaCliente;
-            _productoVentas = new List<ProductoVenta>();
+            ProductoVentas = new List<ProductoVenta>();
         }
-        public IReadOnlyCollection<ProductoVenta> ProductosVenta => _productoVentas.AsReadOnly();
+        public IReadOnlyCollection<ProductoVenta> ProductosVenta => ProductoVentas.AsReadOnly();
 
         public string AgregarAlCarrito(ProductoVenta productoVenta)
         {
@@ -35,7 +35,7 @@ namespace OrganicSoft.Dominio
             {
                 if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
                 {
-                    _productoVentas.Add(productoVenta);
+                    ProductoVentas.Add(productoVenta);
                     respuesta = $"Se ha agregado {productoVenta.CantidadVenta} unidades del producto {producto.Nombre}";
                 }
             }
@@ -50,7 +50,7 @@ namespace OrganicSoft.Dominio
             {
                 if (producto.CodigoProducto.Equals(codigoProductoVenta))
                 {
-                    _productoVentas.Remove(producto);
+                    ProductoVentas.Remove(producto);
                     respuesta = "Se eliminó el productó correctamente";
                     return respuesta;
                 }

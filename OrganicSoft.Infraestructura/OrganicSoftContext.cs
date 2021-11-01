@@ -20,6 +20,7 @@ namespace OrganicSoft.Infraestructura
         public DbSet<ProductoCombo> ProductoCombo { get; set; }
         public DbSet<Factura> Factura { get; set; }
         public DbSet<Pedido> Pedido { get; set; }
+        public DbSet<CarritoCompra> CarritoCompra { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

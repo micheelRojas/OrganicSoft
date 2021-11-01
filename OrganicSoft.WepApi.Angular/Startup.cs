@@ -33,6 +33,8 @@ namespace OrganicSoft.WepApi.Angular
             services.AddScoped<IUnitOfWork, UnitOfWork>(); //Crear Instancia por peticion
             services.AddScoped<IProductoRepository, ProductoRepository>(); //Crear Instancia por peticion
             services.AddScoped<IDbContext, OrganicSoftContext>(); //Crear Instancia por peticion
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IFacturaRepository, FacturaRepository>();
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
