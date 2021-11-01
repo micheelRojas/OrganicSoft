@@ -18,7 +18,7 @@ namespace OrganicSoft.Dominio
         public string Presentacion { get; private set; }
         public int MinimoStock { get; private set; }
         public int CantidadExistente { get; private set; }
-        public int CantidadVendidad { get; private set; }
+        public int CantidadVendida { get; private set; }
         public Descuento Descuento { get; private set; }
         public double PrecioConDescuento { get; private set; }
         Inventario inventario = Inventario.getInventario();
@@ -103,7 +103,7 @@ namespace OrganicSoft.Dominio
                 if (CantidadExistente >= cantidad)
                 {
                     CantidadExistente -= cantidad;
-                    CantidadVendidad += cantidad;
+                    CantidadVendida += cantidad;
                 }
 
             }
