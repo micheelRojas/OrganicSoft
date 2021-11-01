@@ -19,6 +19,7 @@ namespace OrganicSoft.Infraestructura
         public DbSet<ProductoSimple> ProductoSimple { get; set; }
         public DbSet<ProductoCombo> ProductoCombo { get; set; }
         public DbSet<Factura> Factura { get; set; }
+        public DbSet<Pedido> Pedido { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,6 +29,8 @@ namespace OrganicSoft.Infraestructura
             modelBuilder.Entity<Componente>().HasKey(c => c.Id);
             modelBuilder.Entity<Factura>().HasKey(c => c.Id);
             modelBuilder.Entity<Detalle>().HasKey(c => c.Id);
+            modelBuilder.Entity<Pedido>().HasKey(c => c.Id);
+            modelBuilder.Entity<CarritoCompra>().HasKey(c => c.Id);
 
             //control de concurrencia
             //Campo adicional de version 
