@@ -12,13 +12,21 @@ namespace OrganicSoft.Dominio
     {
         static Inventario inventario = Inventario.getInventario();
         public double Utilidad { get; private set; }
-        public List<Componente> Componetes { get; private set; }
+        public List<Componente> Componentes { get; private set; }
         public ProductoCombo(int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, List<Componente> componentes) : base(codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock)
         {
-            Componetes = componentes;
+            Componentes = new List<Componente>();
+            LlenarListaComponente(componentes);
         }
       
         ProductoCombo() { 
+        }
+
+        private void LlenarListaComponente(List<Componente> componentes) {
+            for (int i = 0; i < componentes.LongCount(); i++)
+            {
+                AddComponente(componentes[i].Producto, componentes[i].Cantidad);
+            }
         }
         private static double CalcularCostos(List<Componente> componentes)
         {
@@ -44,8 +52,8 @@ namespace OrganicSoft.Dominio
                 if (validacion)
                 {
                     AumentarCantidadProducto(cantidad);
-                    SalidadeProductosdelProductoCompuesto(Componetes, cantidad);
-                   var v=  AsignarCosto( CalcularCostos(Componetes));
+                    SalidadeProductosdelProductoCompuesto(Componentes, cantidad);
+                   var v=  AsignarCosto( CalcularCostos(Componentes));
                     Utilidad= cantidad * ( PrecioConDescuento- Costo);
                     return $"La utilidad de {Nombre} es de: {Utilidad}";
                 }
@@ -79,11 +87,11 @@ namespace OrganicSoft.Dominio
             int validador = 0;
             for (int i = 0; i < inventario.productos.Count(); i++)
             {
-                for (int j = 0; j < producto.Componetes.Count(); j++)
+                for (int j = 0; j < producto.Componentes.Count(); j++)
                 {
-                    if (inventario.productos.ToList()[i].Nombre.Equals(producto.Componetes[j].Producto.Nombre))
+                    if (inventario.productos.ToList()[i].Nombre.Equals(producto.Componentes[j].Producto.Nombre))
                     {
-                        if (inventario.productos.ToList()[i].CantidadExistente >= producto.Componetes[j].Cantidad * cantidad)
+                        if (inventario.productos.ToList()[i].CantidadExistente >= producto.Componentes[j].Cantidad * cantidad)
                         {
                             validador++;
                         }
@@ -91,7 +99,7 @@ namespace OrganicSoft.Dominio
 
                 }
             }
-            if (validador == producto.Componetes.Count())
+            if (validador == producto.Componentes.Count())
             {
                 return true;
             }
@@ -103,7 +111,7 @@ namespace OrganicSoft.Dominio
 
         public void AddComponente(Producto producto, int cantidad) 
         {
-            Componetes.Add(new Componente(producto, cantidad));
+            Componentes.Add(new Componente(producto, cantidad));
         }
     }
     public class Componente : Entity<int>

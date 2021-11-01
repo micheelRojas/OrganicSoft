@@ -38,7 +38,7 @@ namespace OrganicSoft.Test.Productos
             var combo = new ProductoCombo(codigo: 1, nombre: "combo",
             decripcion: "Combo de 3 jabones minis de sandia, avena y frutos rojos.",
             precio: 20000.00, categoria: "Jabon", presentacion: "combo de jabones minis", minimoStock: 3,componentes:componentesCombo);
-
+          
             #endregion
             #region CUANDO se solicited la venta de un combo
 
@@ -81,8 +81,7 @@ namespace OrganicSoft.Test.Productos
             var combo = new ProductoCombo(codigo: 1, nombre: "combo",
             decripcion: "Combo de 3 jabones minis de sandia, avena y frutos rojos.",
             precio: 20000.00, categoria: "Jabon", presentacion: "combo de jabones minis", minimoStock: 3, componentes: componentesCombo);
-
-
+           
             #endregion
             #region CUANDO se solicited la venta de 3 combos
 
