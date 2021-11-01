@@ -37,22 +37,14 @@ namespace OrganicSoft.WepApi.Angular.Controllers
 
             return Ok(result.Facturas);
         }
-        /*
-        [HttpPut]
-        public EntradadeProductosResponse Put(EntradadeProductosCommand command)
-        {
-            var service = new EntradadeProductosCommandHandle(_unitOfWork, _facturaRepository);
-            var response = service.Handle(command);
-            return response;
-        }
 
-        [HttpPut("{id}")]
-        public GenerarFacturaResponse PutSalidaProducto([FromRoute] int id, SalidaProductosCommand command)
+        /*[HttpPut("{id}")]
+        public GenerarFacturaResponse PutSalidaProducto([FromRoute] int id, GenerarFacturaCommand command)
         {
-            var service = new SalidaProductoCommandHandle(_unitOfWork, _facturaRepository);
-            var response = service.Handle(command);
+            var service = new GenerarFacturaCommandHandle(_unitOfWork, _facturaRepository);
+            var response = service.Handle(command); //Se comenta porque factura no se debería actualizar
             return response;
-        } */
+        } */ 
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFactura([FromRoute] int id)

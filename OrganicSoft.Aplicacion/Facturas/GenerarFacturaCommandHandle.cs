@@ -23,7 +23,7 @@ namespace OrganicSoft.Aplicacion.Facturas
             if (factura == null)
             {
                 Factura facturaNueva = new Factura(
-                    command.Codigo, DateTime.Now, command.CedulaCliente, command.pedido
+                    command.Codigo, DateTime.Now, command.CedulaCliente, command.Pedido
                     );
 
                 _facturaRepository.Add(facturaNueva);
@@ -42,7 +42,7 @@ namespace OrganicSoft.Aplicacion.Facturas
         public int Id { get; set; }
         public int Codigo { get; private set; }
         public String CedulaCliente { get; private set; }
-        public Pedido pedido { get; private set; }
+        public Pedido Pedido { get; private set; }
 
 
     }
