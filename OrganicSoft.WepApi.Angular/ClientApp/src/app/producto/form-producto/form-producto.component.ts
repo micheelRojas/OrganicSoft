@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule  } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MensajesModule } from '../../mensajes/mensajes.module';
 import { IProductoCrear } from '../producto.component';
 import { ProductoService } from '../producto.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-form-producto',
   templateUrl: './form-producto.component.html',
@@ -13,7 +14,7 @@ export class FormProductoComponent implements OnInit {
 
   
   constructor(private fb: FormBuilder, private productoService: ProductoService,
-    private router: Router, private activatedRoute: ActivatedRoute) { }
+    private router: Router, private activatedRoute: ActivatedRoute, private mensaje: MensajesModule,private location: Location) { }
   formGroup = this.fb.group({
     tipoProducto: ['', [Validators.required]],
     codigoProducto: ['', [Validators.required]],
@@ -38,13 +39,14 @@ export class FormProductoComponent implements OnInit {
     if (this.formGroup.valid) {
       this.productoService.createProducto(producto)
         .subscribe(producto => this.goBack(),
-          error => console.log('Error al crear el producto'));
+          error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
     } else {
-      console.log('Error 2');
+      this.mensaje.mensajeAlertaError('Error', 'El formGroup de producto no es valido');
     }
   }
   goBack(): void { 
-    console.log('Guardado');
+    this.mensaje.mensajeAlertaCorrecto('¡Exitoso!', 'Producto guardado correctamente');
+    this.location.back();
   }
   get tipoProducto() {
     return this.formGroup.get('tipoProducto');
