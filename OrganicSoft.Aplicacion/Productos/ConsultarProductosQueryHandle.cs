@@ -19,8 +19,9 @@ namespace OrganicSoft.Aplicacion.Productos
             {
                 Id = t.Id,
                 Nombre = t.Nombre,
-                Decripcion = t.Descripcion,
+                Descripcion = t.Descripcion,
                 Costo = t.Costo,
+                Precio= t.Precio,
                 CantidadExistente = t.CantidadExistente,
                 CantidadVendida = t.CantidadVendida
             }).ToList();
@@ -41,7 +42,7 @@ namespace OrganicSoft.Aplicacion.Productos
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Decripcion { get; set; }
+        public string Descripcion { get; set; }
         public double Costo { get; set; }
         public double Precio { get; set; }
         public int CantidadExistente { get; set; }
