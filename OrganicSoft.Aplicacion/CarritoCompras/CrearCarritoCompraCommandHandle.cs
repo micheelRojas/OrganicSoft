@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace OrganicSoft.Aplicacion.CarritoDeCompra
 {
-    public class CrearProductoCommandHandle
+    public class CrearCarritoCompraCommandHandle
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICarritoCompraRepository _carritoCompraRepository;
-        public CrearProductoCommandHandle(
+        public CrearCarritoCompraCommandHandle(
            IUnitOfWork unitOfWork,
            ICarritoCompraRepository carritoCompraRepository
        )
