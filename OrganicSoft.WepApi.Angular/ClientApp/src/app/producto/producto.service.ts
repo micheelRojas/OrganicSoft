@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { IProducto, IProductoCrear } from './producto.component';
+import { IProducto, IProductoCrear, IProductoEdit } from './producto.component';
 import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,10 @@ export class ProductoService {
   createProducto(producto: IProductoCrear): Observable<IProductoCrear> {
     return this.http.post<IProductoCrear>(this.apiURL, producto);
   }
+  updateProducto(producto: IProductoEdit): Observable<IProductoEdit> {
+    return this.http.put<IProductoEdit>(this.apiURL, producto);
+  }
+
 
 }
 

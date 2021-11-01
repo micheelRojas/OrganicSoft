@@ -41,11 +41,17 @@ namespace OrganicSoft.WepApi.Angular.Controllers
         }
 
         [HttpPut]
-        public EntradadeProductosResponse Put(EntradadeProductosCommand command)
+        public async Task<IActionResult> updateProducto([FromBody] EntradadeProductosCommand command)
         {
             var service = new EntradadeProductosCommandHandle(_unitOfWork, _productoRepository);
             var response = service.Handle(command);
-            return response;
+            if (response.isOk())
+            {
+                await _context.SaveChangesAsync();
+                return Ok(response);
+            }
+            return BadRequest(response.Mensaje);
+           
         }
 
         [HttpPut("{id}")]

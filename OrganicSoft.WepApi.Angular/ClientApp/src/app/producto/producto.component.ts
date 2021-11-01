@@ -49,4 +49,7 @@ export interface IDescuento {
   fechaFin: string,
   porcentajeDescuento: number
 }
-
+export interface IProductoEdit {
+  id: number,
+  cantidad: number
+}

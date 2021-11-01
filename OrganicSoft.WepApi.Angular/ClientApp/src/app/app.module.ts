@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MensajesModule } from './mensajes/mensajes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule, MatTableModule } from '@angular/material';
+import { EditProductoComponent } from './producto/edit-producto/edit-producto.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { MatSortModule, MatTableModule } from '@angular/material';
     FetchDataComponent,
     ProductoComponent,
     FormProductoComponent,
-    ListProductoComponent
+    ListProductoComponent,
+    EditProductoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,6 +40,7 @@ import { MatSortModule, MatTableModule } from '@angular/material';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'registrar-producto', component: FormProductoComponent },
       { path: 'lista-productos', component: ProductoComponent },
+      { path: 'entrada-productos', component: EditProductoComponent },
     ]),
     MensajesModule,
     BrowserAnimationsModule,
