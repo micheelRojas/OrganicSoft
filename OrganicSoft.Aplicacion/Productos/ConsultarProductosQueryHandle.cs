@@ -21,7 +21,7 @@ namespace OrganicSoft.Aplicacion.Productos
                 Nombre = t.Nombre,
                 Descripcion = t.Descripcion,
                 Costo = t.Costo,
-                Precio= t.Precio,
+                Precio= t.PrecioConDescuento,
                 CantidadExistente = t.CantidadExistente,
                 CantidadVendida = t.CantidadVendida
             }).ToList();

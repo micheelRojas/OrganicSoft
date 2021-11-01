@@ -43,6 +43,10 @@ namespace OrganicSoft.Aplicacion
             }
 
             public string Mensaje { get; set; }
+            public bool isOk()
+            {
+                return this.Mensaje!=("La cantidad debe ser mayor a cero");
+            }
         }
     }
 }

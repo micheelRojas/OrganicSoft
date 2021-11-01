@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Formulario de Entrada de Productos</h1>
+  <form [formGroup]="formGroup" (ngSubmit)="save()">
+
+    <div class="form-group col-md-5">
+      <label for="id">Producto</label>
+      <select formControlName="id" class="form-control" id="id">
+        <option value="">Seleccione un Producto</option>
+        <option value="{{dato.id}}" *ngFor="let dato of ListaProductos">
+          Nombre: {{dato.nombre}},
+          Precio: {{dato.precio}}
+          
+        </option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="cantidad">Cantidad</label>
+          <input type="text" class="form-control" formControlName="cantidad" id="cantidad" placeholder="Ej: 1065">
+        </div>
+      </div>
+    </div>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!formGroup.valid">
+      Aceptar
+    </button>
+  </form>
+</div>
