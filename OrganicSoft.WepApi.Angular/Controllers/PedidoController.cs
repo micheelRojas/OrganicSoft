@@ -38,13 +38,13 @@ namespace OrganicSoft.WepApi.Angular.Controllers
 
             return Ok(result.Pedidos);
         }
-
-        /*[HttpPut("{id}")]
-        public GenerarFacturaResponse PutSalidaProducto([FromRoute] int id, GenerarFacturaCommand command)
+        /*
+        [HttpPut("{id}")]
+        public CrearPedidoResponse Put([FromRoute] int id, CrearPedidoCommand command)
         {
-            var service = new GenerarFacturaCommandHandle(_unitOfWork, _facturaRepository);
-            var response = service.Handle(command); //Se comenta porque factura no se debería actualizar
-            return response;
+            var service = new CrearPedidoCommandHandle(_unitOfWork, _pedidoRepository);
+            var response = service.Handle(command); 
+            return response; //Lo único modificable del pedido es el estado y se hace automáticamente
         } */
 
         [HttpGet("{id}")]

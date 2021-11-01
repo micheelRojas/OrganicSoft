@@ -31,6 +31,7 @@ namespace OrganicSoft.Infraestructura
             modelBuilder.Entity<Detalle>().HasKey(c => c.Id);
             modelBuilder.Entity<Pedido>().HasKey(c => c.Id);
             modelBuilder.Entity<CarritoCompra>().HasKey(c => c.Id);
+            modelBuilder.Entity<ProductoVenta>().HasKey(c => c.Id);
 
             //control de concurrencia
             //Campo adicional de version 
