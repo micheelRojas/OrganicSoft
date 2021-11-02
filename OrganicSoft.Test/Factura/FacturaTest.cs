@@ -90,12 +90,12 @@ namespace OrganicSoft.Test.Facturacion
         {
 
             #region Dado que laly Organis tiene multiples productos, como jabon de sandia, exfoliante y el cliente ha hecho un pedido
-            var jabonSandia = new ProductoSimple(codigo: 1, nombre: "Jabón de Sandía",
+            var jabonSandia = new ProductoSimple(codigo: 4, nombre: "Jabón de Papaya",
             decripcion: " Ea hidrante facial y corporal 🍉La sandía es rica en antioxidantes, ayuda a" +
             " retrasar el envejecimiento de la piel debido a su protección contra los radicales libres." +
             " Gracias a estas propiedades, previene los primeros síntomas de la edad, como manchas, " +
             "arrugas y unas líneas de expresión marcadas.", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
-            var exfoliante = new ProductoSimple(codigo: 2, nombre: "Exfoliante Mujer",
+            var exfoliante = new ProductoSimple(codigo: 5, nombre: "Exfoliante Hombre",
             decripcion: "Un exfoliante es un producto hecho principalmente a base de ingredientes naturales que sirve para remover las impurezas y células muertas de los labios",
             costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
             jabonSandia.EntradaProductos(cantidad: 10);
