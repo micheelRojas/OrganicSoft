@@ -11,7 +11,7 @@ namespace OrganicSoft.Test.Dobles
     class FacturaDummyTest
     {
         [Test]
-        public void PuedoGenerarPedidoCorrecto()
+        public void PuedoGenerarPedidoCorrectoDummy()
         {
 
             #region Dado que laly Organis tiene multiples productos, como jabon de sandia, exfoliante y el cliente cuenta con un carrito de compras lleno
