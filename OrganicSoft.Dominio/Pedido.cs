@@ -35,18 +35,11 @@ namespace OrganicSoft.Dominio
             throw new NotImplementedException();
         }
 
-        /*public String ConfirmarPedido(int codigo)
+        public String ConfirmarPedido()
         {
-            foreach (Pedido pedido in Pedidos)
-            {
-                if (pedido.Carrito.Codigo.Equals(codigo))
-                {
-                    pedido.Estado = "CONFIRMADO";
-                    return $"El nuevo estado del pedido es {pedido.Estado}";
-                }
-            }
-            throw new NotImplementedException();
-        }*/
+            Estado = "CONFIRMADO";
+            return $"El nuevo estado del pedido es {Estado}";
+        }
     }
 
     public class Encargos
