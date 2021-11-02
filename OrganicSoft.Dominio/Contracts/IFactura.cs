@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace OrganicSoft.Dominio.Contracts
 {
-    public interface ICarritoCompra
+    public interface IFactura
     {
+        abstract void CalcularTotal(Pedido Pedido);
     }
 }

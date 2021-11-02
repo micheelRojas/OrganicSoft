@@ -1,4 +1,5 @@
 ﻿using OrganicSoft.Dominio.Base;
+using OrganicSoft.Dominio.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrganicSoft.Dominio
 {
-    public class Factura : Entity<int>, IAggregateRoot
+    public class Factura : Entity<int>, IAggregateRoot, IFactura
     {
         public int Codigo { get; private set; }
         public DateTime FechaCreacion { get; private set; }
@@ -30,22 +31,24 @@ namespace OrganicSoft.Dominio
 
         public void CalcularTotal(Pedido Pedido)
         {
-            //int num = 0;
-            double sumaSubtotalesDetalles = 0;
-            foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductosVenta)
-            {
-                foreach (Producto producto in inventario.productos)
+            if (Pedido.Estado.Equals("CONFIRMADO")) { 
+                //int num = 0;
+                double sumaSubtotalesDetalles = 0;
+                foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductosVenta)
                 {
-                    if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
+                    foreach (Producto producto in inventario.productos)
                     {
-                        TotalPagar = TotalPagar + (producto.PrecioConDescuento * productoVenta.CantidadVenta);
-                        producto.DisminuirCantidadProductoStock(productoVenta.CantidadVenta);
-                        Detalle detalle = new Detalle(codigoFactura: this.Codigo, cantidadVendida: productoVenta.CantidadVenta, 
-                            subtotal: productoVenta.CantidadVenta * producto.Precio, codigoProducto: producto.CodigoProducto);
-                        sumaSubtotalesDetalles += detalle.Subtotal;
-                        this.Detalles.Add(detalle);
-                        _facturas.Add(this);
-                        //num += producto.CantidadExitente;
+                        if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
+                        {
+                            TotalPagar = TotalPagar + (producto.PrecioConDescuento * productoVenta.CantidadVenta);
+                            producto.DisminuirCantidadProductoStock(productoVenta.CantidadVenta);
+                            Detalle detalle = new Detalle(codigoFactura: this.Codigo, cantidadVendida: productoVenta.CantidadVenta, 
+                                subtotal: productoVenta.CantidadVenta * producto.Precio, codigoProducto: producto.CodigoProducto);
+                            sumaSubtotalesDetalles += detalle.Subtotal;
+                            this.Detalles.Add(detalle);
+                            _facturas.Add(this);
+                            //num += producto.CantidadExitente;
+                        }
                     }
                 }
             }

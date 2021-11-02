@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OrganicSoft.Aplicacion\OrganicSoft.Aplicacion.csproj" />
     <ProjectReference Include="..\OrganicSoft.Dominio\OrganicSoft.Dominio.csproj" />
   </ItemGroup>
 
