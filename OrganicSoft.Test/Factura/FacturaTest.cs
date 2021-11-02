@@ -40,7 +40,7 @@ namespace OrganicSoft.Test.Facturacion
             var respuesta = pedido.GenerarPedido(codigo: 1, CarritoCompra: carrito);
             #endregion
             #region ENTONCES  el sistema generará el pedido y mostrara el mensaje "Se creó un nuevo pedido para el cliente con cédula 1002353645"
-            Assert.AreEqual("Se creó un nuevo pedido para el cliente con cédula 1002353645", respuesta);
+            Assert.AreEqual($"Se creó un nuevo pedido con código {pedido.CodigoPedido} en estado {pedido.Estado}", respuesta);
             #endregion
 
         }

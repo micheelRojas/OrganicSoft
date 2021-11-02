@@ -30,7 +30,7 @@ namespace OrganicSoft.Dominio
                 Estado = "NO CONFIRMADO";
                 Carrito = CarritoCompra;
                // encargos.Pedidos.Add(this);
-                return $"Se creó un nuevo pedido para el cliente con cédula {CarritoCompra.CedulaCliente}";
+                return $"Se creó un nuevo pedido con código {CodigoPedido} en estado {Estado}";
             }
             throw new NotImplementedException();
         }

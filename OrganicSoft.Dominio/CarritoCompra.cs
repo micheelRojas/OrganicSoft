@@ -14,7 +14,7 @@ namespace OrganicSoft.Dominio
         public List<ProductoVenta> ProductoVentas { get; private set; }
 
         Inventario inventario = Inventario.getInventario();
-
+        public CarritoCompra() { }
         public CarritoCompra(int codigo, string cedulaCliente)
         {
             Codigo = codigo;

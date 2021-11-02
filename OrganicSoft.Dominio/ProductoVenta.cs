@@ -17,7 +17,7 @@ namespace OrganicSoft.Dominio
             CodigoProducto = codigoProducto;
             CantidadVenta = cantidadVenta;
         }
-
+        public ProductoVenta() { }
         public int AumentarCantidadProductoVenta(int cantidad)
         {
             return CantidadVenta += cantidad;
