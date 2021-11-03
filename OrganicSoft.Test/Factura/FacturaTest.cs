@@ -86,7 +86,7 @@ namespace OrganicSoft.Test.Facturacion
         } */
         
         [Test]
-        public void PuedoGenerarFacturaCorrecta()
+        public void PuedoGenerarFacturaCorrectaDominio()
         {
 
             #region Dado que laly Organis tiene multiples productos, como jabon de sandia, exfoliante y el cliente ha hecho un pedido
