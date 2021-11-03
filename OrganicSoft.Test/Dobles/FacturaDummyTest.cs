@@ -15,7 +15,7 @@ namespace OrganicSoft.Test.Dobles
     {
         private CrearPedidoCommandHandle _crearPedidoService;
         private OrganicSoftContext _dbContext;
-        /*
+
         [Test]
         public void PuedoGenerarPedidoCorrectoDummy()
         {
@@ -48,6 +48,6 @@ namespace OrganicSoft.Test.Dobles
             Assert.AreEqual($"Se creó con exito el pedido.", respuesta);
             #endregion
 
-        }*/
+        }
     }
 }

@@ -39,18 +39,6 @@ namespace OrganicSoft.Aplicacion.Facturas
 
     public class GenerarFacturaCommand
     {
-        public GenerarFacturaCommand()
-        {
-        }
-
-        public GenerarFacturaCommand(int id, int codigo, string cedulaCliente, Pedido pedido)
-        {
-            Id = id;
-            Codigo = codigo;
-            CedulaCliente = cedulaCliente;
-            Pedido = pedido;
-        }
-
         public int Id { get; set; }
         public int Codigo { get;  set; }
         public String CedulaCliente { get;  set; }
