@@ -25,6 +25,12 @@ namespace OrganicSoft.Aplicacion
         }
         public class EntradadeProductosCommand
         {
+            public EntradadeProductosCommand() { }
+            public EntradadeProductosCommand(int id, int cantidad)
+            {
+                Id = id;
+                Cantidad = cantidad;
+            }
             public int Id { get; set; }
             public int Cantidad{ get; set; }
         }

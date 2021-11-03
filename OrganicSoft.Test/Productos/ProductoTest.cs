@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrganicSoft.Test.Producto
+namespace OrganicSoft.Test.Productos
 {
     class ProductoTest
     {/*

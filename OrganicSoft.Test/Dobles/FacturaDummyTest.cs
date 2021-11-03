@@ -1,5 +1,8 @@
 ﻿using NUnit.Framework;
+using OrganicSoft.Aplicacion.Pedidos;
 using OrganicSoft.Dominio;
+using OrganicSoft.Infraestructura;
+using OrganicSoft.Infraestructura.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +13,9 @@ namespace OrganicSoft.Test.Dobles
 {
     class FacturaDummyTest
     {
+        private CrearPedidoCommandHandle _crearPedidoService;
+        private OrganicSoftContext _dbContext;
+
         [Test]
         public void PuedoGenerarPedidoCorrectoDummy()
         {
@@ -31,11 +37,15 @@ namespace OrganicSoft.Test.Dobles
             carrito.AgregarAlCarrito(productoVenta);
             #endregion
             #region CUANDO el cliente desea generar el pedido para dar por terminada la compra
+            _crearPedidoService = new CrearPedidoCommandHandle(
+                 new UnitOfWork(_dbContext),
+                 new PedidoRepository(_dbContext));
+
             Pedido pedido = new Pedido();
-            var respuesta = pedido.GenerarPedido(codigo: 1, CarritoCompra: carrito);
+            var respuesta = _crearPedidoService.Handle(new CrearPedidoCommand(10000, 10000, carrito));
             #endregion
             #region ENTONCES  el sistema generará el pedido y mostrara el mensaje "Se creó un nuevo pedido para el cliente con cédula 1002353645"
-            Assert.AreEqual($"Se creó un nuevo pedido con código {pedido.CodigoPedido} en estado {pedido.Estado}", respuesta);
+            Assert.AreEqual($"Se creó con exito el pedido.", respuesta);
             #endregion
 
         }
