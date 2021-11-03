@@ -29,9 +29,9 @@ namespace OrganicSoft.Test.Dobles
             exfoliante.EntradaProductos(cantidad: 10);
 
             CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
-            ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
+            ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 4, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
-            ProductoVenta productoVenta2 = new ProductoVenta(codigoProducto: 2, cantidadVenta: 2);
+            ProductoVenta productoVenta2 = new ProductoVenta(codigoProducto: 5, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta2);
             Pedido pedido = new Pedido();
             pedido.GenerarPedido(codigo: 1, CarritoCompra: carrito);

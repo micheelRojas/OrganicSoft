@@ -90,21 +90,21 @@ namespace OrganicSoft.Test.Facturacion
         {
 
             #region Dado que laly Organis tiene multiples productos, como jabon de sandia, exfoliante y el cliente ha hecho un pedido
-            var jabonSandia = new ProductoSimple(codigo: 8, nombre: "Jabón de Mango",
+            var jabonSandia = new ProductoSimple(codigo: 123, nombre: "Jabón de Mango",
             decripcion: " Ea hidrante facial y corporal 🍉La sandía es rica en antioxidantes, ayuda a" +
             " retrasar el envejecimiento de la piel debido a su protección contra los radicales libres." +
             " Gracias a estas propiedades, previene los primeros síntomas de la edad, como manchas, " +
             "arrugas y unas líneas de expresión marcadas.", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
-            var exfoliante = new ProductoSimple(codigo: 9, nombre: "Exfoliante Unicef",
+            var exfoliante = new ProductoSimple(codigo: 124, nombre: "Exfoliante Unicef",
             decripcion: "Un exfoliante es un producto hecho principalmente a base de ingredientes naturales que sirve para remover las impurezas y células muertas de los labios",
             costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
 
             CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
-            ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
+            ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 123, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
-            ProductoVenta productoVenta2 = new ProductoVenta(codigoProducto: 2, cantidadVenta: 2);
+            ProductoVenta productoVenta2 = new ProductoVenta(codigoProducto: 124, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta2);
             Pedido pedido = new Pedido();
             pedido.GenerarPedido(codigo: 1, CarritoCompra: carrito);
