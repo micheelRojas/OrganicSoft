@@ -26,11 +26,11 @@ namespace OrganicSoft.Aplicacion.Pedidos
                 pedidoNuevo.GenerarPedido(command.CodigoPedido, command.Carrito);
                 _pedidoRepository.Add(pedidoNuevo);
                 _unitOfWork.Commit();
-                return new CrearPedidoResponse($"Se creó con exito el pedido.");
+                return new CrearPedidoResponse("Se creó con exito el pedido.");
             }
             else
             {
-                return new CrearPedidoResponse($"La factura ya exite");
+                return new CrearPedidoResponse("La factura ya exite");
             }
         }
     }

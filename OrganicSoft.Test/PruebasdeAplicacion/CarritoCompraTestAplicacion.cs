@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using OrganicSoft.Aplicacion.CarritoDeCompra;
+using OrganicSoft.Aplicacion.Pedidos;
 using OrganicSoft.Dominio;
 using OrganicSoft.Infraestructura;
 using OrganicSoft.Infraestructura.Base;
@@ -19,6 +20,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
         private OrganicSoftContext _context;
         private AgregarAlCarritoCommandHandle _agregarAlCarritoService;
         private CrearCarritoCompraCommandHandle _crearCarritoService;
+        private CrearPedidoCommandHandle _crearPedidoService;
         [SetUp]
         public void Setup()
         {
@@ -33,6 +35,10 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _crearCarritoService = new CrearCarritoCompraCommandHandle(
                 new UnitOfWork(_context),
                 new CarritoCompraRepository(_context));
+
+            _crearPedidoService = new CrearPedidoCommandHandle(
+                new UnitOfWork(_context),
+                new PedidoRepository(_context));
         }
         [Test]
         public void PuedoAgregarProductosAlCarritoAplicacion()
@@ -117,6 +123,33 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _context.CarritoCompra.Remove(carrito);
             _context.SaveChanges();
 
+        }
+
+        [Test]
+        public void PuedoCrearPedidoCorrectoAplicacion()
+        {
+
+            //Arange          
+            CarritoCompra carrito = new CarritoCompra(codigo: 32423, cedulaCliente: "1002353645");
+            ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
+            carrito.AgregarAlCarrito(productoVenta);
+            _context.CarritoCompra.Add(carrito);
+            _context.SaveChanges();
+
+            Pedido pedido = new Pedido();
+            pedido.GenerarPedido(654, carrito);
+            _context.Pedido.Add(pedido);
+            _context.SaveChanges();
+
+            //Act
+            var respuesta = _crearPedidoService.Handle(new CrearPedidoCommand(123, 324, carrito));
+
+            //Assert
+            Assert.AreEqual($"Se creó con exito el pedido.", respuesta.Mensaje);
+
+            _context.CarritoCompra.Remove(carrito);
+            _context.Pedido.Remove(pedido);
+            _context.SaveChanges();
         }
     }
 }
