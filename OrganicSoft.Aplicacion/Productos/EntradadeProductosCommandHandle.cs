@@ -15,7 +15,7 @@ namespace OrganicSoft.Aplicacion
         public EntradadeProductosResponse Handle(EntradadeProductosCommand command)
         {
             
-                var producto= _productoRepository.FindFirstOrDefault(producto => producto.Id == command.Id);//infraestructura-datos
+                var producto= _productoRepository.FindFirstOrDefault(producto => producto.Id == command.Id || producto.CodigoProducto ==command.Id);//infraestructura-datos
                 if (producto == null) return new EntradadeProductosResponse("el producto no existe");
                 var response = producto.EntradaProductos(command.Cantidad);//domain
                 _productoRepository.Update(producto);//proyectarse el cambio y registrarlo en la unidad de trabajo

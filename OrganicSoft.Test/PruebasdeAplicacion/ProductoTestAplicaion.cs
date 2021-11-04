@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using OrganicSoft.Aplicacion;
+using OrganicSoft.Dominio;
 using OrganicSoft.Infraestructura;
 using OrganicSoft.Infraestructura.Base;
 using System;
@@ -9,12 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static OrganicSoft.Aplicacion.CrearProductoCommandHandle;
+using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
 
 namespace OrganicSoft.Test.PruebasdeAplicacion
 {
     class ProductoTestAplicaion
     {
         private CrearProductoCommandHandle _productoCrearService;
+        private EntradadeProductosCommandHandle _productoEntradaService;
         private OrganicSoftContext _context;
        
         [SetUp]
@@ -26,6 +29,9 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _productoCrearService = new CrearProductoCommandHandle(
                 new UnitOfWork(_context),
                 new ProductoRepository(_context));
+            _productoEntradaService = new EntradadeProductosCommandHandle(
+               new UnitOfWork(_context),
+               new ProductoRepository(_context));
         }
         [Test]
         public void PuedoCrearProductosAplicacion()
@@ -38,6 +44,27 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             "arrugas y unas líneas de expresión marcadas.", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3));
             // Assert
             Assert.AreEqual("Se creó con exito el producto.", response.Mensaje);
+        }
+        [Test]
+        public void PuedoRealizarEntradaProductosAplicacionCorreta()
+        {
+            //Arrange , 
+
+             Producto producto=new ProductoSimple(codigo: 2345, nombre: "Jabon de Arandano",
+            decripcion: " Ea hidrante facial y corporal 🍉La sandía es rica en antioxidantes, ayuda a" +
+            " retrasar el envejecimiento de la piel debido a su protección contra los radicales libres." +
+            " Gracias a estas propiedades, previene los primeros síntomas de la edad, como manchas, " +
+            "arrugas y unas líneas de expresión marcadas.", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
+            _context.Producto.Add(producto);
+            _context.SaveChanges();
+            //Act
+
+            var response = _productoEntradaService.Handle(new EntradadeProductosCommand(id: 2345, cantidad: 1));
+            
+            // Assert
+            Assert.AreEqual($"La cantidad de Jabon de Arandano es: 1", response.Mensaje);
+            _context.Producto.Remove(producto);
+            _context.SaveChanges();
         }
     }
 }
