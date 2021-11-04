@@ -19,7 +19,7 @@ namespace OrganicSoft.Aplicacion.Pedidos
         }
         public CrearPedidoResponse Handle(CrearPedidoCommand command)
         {
-            Pedido pedido = _pedidoRepository.FindFirstOrDefault(t => t.Id == command.Id);
+            Pedido pedido = _pedidoRepository.FindFirstOrDefault(t => t.Id == command.Id || t.CodigoPedido == command.Id);
             if (pedido == null)
             {
                 Pedido pedidoNuevo = new Pedido();
@@ -30,7 +30,7 @@ namespace OrganicSoft.Aplicacion.Pedidos
             }
             else
             {
-                return new CrearPedidoResponse("La factura ya exite");
+                return new CrearPedidoResponse("El pedido ya existe");
             }
         }
     }

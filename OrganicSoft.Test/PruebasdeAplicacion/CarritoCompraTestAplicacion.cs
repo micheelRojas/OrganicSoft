@@ -151,5 +151,32 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _context.Pedido.Remove(pedido);
             _context.SaveChanges();
         }
+
+        [Test]
+        public void NoPuedoCrearPedidoCorrectoAplicacion()
+        {
+
+            //Arange          
+            CarritoCompra carrito = new CarritoCompra(codigo: 32423, cedulaCliente: "1002353645");
+            ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
+            carrito.AgregarAlCarrito(productoVenta);
+            _context.CarritoCompra.Add(carrito);
+            _context.SaveChanges();
+
+            Pedido pedido = new Pedido();
+            pedido.GenerarPedido(654, carrito);
+            _context.Pedido.Add(pedido);
+            _context.SaveChanges();
+
+            //Act
+            var respuesta = _crearPedidoService.Handle(new CrearPedidoCommand(654, 435, carrito));
+
+            //Assert
+            Assert.AreEqual($"El pedido ya existe", respuesta.Mensaje);
+
+            _context.CarritoCompra.Remove(carrito);
+            _context.Pedido.Remove(pedido);
+            _context.SaveChanges();
+        }
     }
 }
