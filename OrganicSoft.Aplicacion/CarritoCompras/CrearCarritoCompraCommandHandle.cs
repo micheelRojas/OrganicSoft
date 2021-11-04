@@ -39,6 +39,17 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
         }
         public class CrearCarritoCommand
         {
+            public CrearCarritoCommand()
+            {
+            }
+
+            public CrearCarritoCommand(int id, int codigo, string cedulaCliente)
+            {
+                Id = id;
+                Codigo = codigo;
+                CedulaCliente = cedulaCliente;
+            }
+
             public int Id { get; set; }
             public int Codigo { get;  set; }
             public string CedulaCliente { get;  set; }
