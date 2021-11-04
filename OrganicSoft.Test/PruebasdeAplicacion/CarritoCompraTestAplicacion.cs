@@ -99,5 +99,24 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _context.SaveChanges();
 
         }
+
+        [Test]
+        public void NoPuedoCrearCarritoCompraAplicacion()
+        {
+            //Arange
+            CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
+
+            _context.CarritoCompra.Add(carrito);
+            _context.SaveChanges();
+
+            //Act
+            var response = _crearCarritoService.Handle(new CrearCarritoCommand(1, 342, "1002343454"));
+            //Assert
+            Assert.AreEqual($"El carrito ya exite", response.Mensaje);
+
+            _context.CarritoCompra.Remove(carrito);
+            _context.SaveChanges();
+
+        }
     }
 }
