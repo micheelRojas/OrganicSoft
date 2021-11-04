@@ -13,26 +13,53 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly ICarritoCompraRepository _carritoCompraRepository;
-        public AgregarAlCarritoCommandHandle(IUnitOfWork unitOfWork, ICarritoCompraRepository carritoCompraRepository)
+        private readonly IProductoRepository _productoRepository;
+        public AgregarAlCarritoCommandHandle(IUnitOfWork unitOfWork, ICarritoCompraRepository carritoCompraRepository, IProductoRepository productoRepository)
         {
             _unitOfWork = unitOfWork;
             _carritoCompraRepository = carritoCompraRepository;
+            _productoRepository = productoRepository;
         }
         public AgregarAlCarritoResponse Handle(AgregarAlCarritoCommand command)
         {
 
-            var carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.Id);//infraestructura-datos
-            if (carritoCompra == null) return new AgregarAlCarritoResponse("el producto no existe");
-            var response = carritoCompra.AgregarAlCarrito(command.ProductoVenta);//domain
-            _carritoCompraRepository.Update(carritoCompra);//proyectarse el cambio y registrarlo en la unidad de trabajo
-            _unitOfWork.Commit();//infraestructura-datos
+            var carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.IdCarrito || carrito.Codigo == command.IdCarrito);//infraestructura-datos
+            if (carritoCompra == null) return new AgregarAlCarritoResponse("el carrito no existe");
 
+            String response = "No se pudo agregar el producto al carrito";
+            foreach (var producto in _productoRepository.GetAll().ToList())
+            {
+                if (command.ProductoVenta.CodigoProducto.Equals(producto.CodigoProducto))
+                {
+
+                    response = carritoCompra.AgregarAlCarrito(command.ProductoVenta);
+                    _carritoCompraRepository.Update(carritoCompra);//proyectarse el cambio y registrarlo en la unidad de trabajo
+                    _unitOfWork.Commit();//infraestructura-datos
+
+                    return new AgregarAlCarritoResponse(response);
+                }
+                
+            }
             return new AgregarAlCarritoResponse(response);
+            
+            
         }
         public class AgregarAlCarritoCommand
         {
+            public AgregarAlCarritoCommand()
+            {
+            }
+
+            public AgregarAlCarritoCommand(int id, ProductoVenta productoVenta, int idCarrito)
+            {
+                Id = id;
+                ProductoVenta = productoVenta;
+                IdCarrito = idCarrito;
+            }
+
             public int Id { get; set; }
             public ProductoVenta ProductoVenta { get; set; }
+            public int IdCarrito { get; set; }
         }
 
         public record AgregarAlCarritoResponse

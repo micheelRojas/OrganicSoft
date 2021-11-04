@@ -25,20 +25,18 @@ namespace OrganicSoft.Dominio
 
         public string AgregarAlCarrito(ProductoVenta productoVenta)
         {
-            String respuesta = "No se encontró el producto";
+            String respuesta = "";
             if (productoVenta.CantidadVenta <= 0)
             {
                 respuesta = "La cantidad del producto debe ser mayor a cero";
                 return respuesta;
             }
-            foreach (var producto in inventario.productos)
-            {
-                if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
-                {
-                    ProductoVentas.Add(productoVenta);
-                    respuesta = $"Se ha agregado {productoVenta.CantidadVenta} unidades del producto {producto.Nombre}";
-                }
-            }
+            
+
+
+            ProductoVentas.Add(productoVenta);
+            respuesta = $"Se ha agregado correctamente el producto";
+               
             return respuesta;
         }
 
