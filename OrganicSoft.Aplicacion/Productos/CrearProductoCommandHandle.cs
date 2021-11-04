@@ -49,6 +49,25 @@ namespace OrganicSoft.Aplicacion
         }
         public class CrearProductosCommand
         {
+            public CrearProductosCommand()
+            {
+            }
+
+            public CrearProductosCommand(int id, string tipoProducto, int codigoProducto, string nombre, string descripcion, double precio, string categoria, string presentacion, int minimoStock, double costo)
+            {
+                Id = id;
+                TipoProducto = tipoProducto;
+                CodigoProducto = codigoProducto;
+                Nombre = nombre;
+                Descripcion = descripcion;
+                Precio = precio;
+                Categoria = categoria;
+                Presentacion = presentacion;
+                MinimoStock = minimoStock;
+                Componetes = null;
+                Costo = costo;
+            }
+
             public int Id { get;  set; }
             public string TipoProducto { get; set; }
             public int CodigoProducto { get; set; }
