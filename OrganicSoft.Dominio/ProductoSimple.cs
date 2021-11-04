@@ -14,15 +14,12 @@ namespace OrganicSoft.Dominio
 
             if (cantidad > 0 && CantidadExistente >= cantidad)
             {
-                DisminuirCantidadProducto(cantidad);
-                if (CantidadExistente >= MinimoStock)
+                int temporarl = CantidadExistente - cantidad;
+               
+                if (temporarl >= MinimoStock)
                 {
-
+                    DisminuirCantidadProducto(cantidad);
                     return $"La cantidad de {Nombre} es: {CantidadExistente}";
-                }
-                else if (CantidadExistente < MinimoStock)
-                {
-                    return $"La cantidad de {Nombre} es: {CantidadExistente}, considere unidades de este producto";
                 }
 
             }
@@ -30,8 +27,7 @@ namespace OrganicSoft.Dominio
             {
                 return $"La cantidad pedida debe ser mayor a cero";
             }
-
-            throw new NotImplementedException();
+            return $"No hay suficietes productos de {Nombre} para realizar la operacion"; 
         }
     }
 }

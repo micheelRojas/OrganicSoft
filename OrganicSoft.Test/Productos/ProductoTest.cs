@@ -115,7 +115,7 @@ namespace OrganicSoft.Test.Productos
             string respuesta = producto.SalidaProductos(cantidad: cantidad);
             #endregion
             #region ENTONCES  el sistema disminuira la cantidad del mismo y mostrara el mensaje "La cantidad de Jabon de sandia es 2, considere unidades de este producto"
-            Assert.AreEqual("La cantidad de Jabon de sandia es: 2, considere unidades de este producto", respuesta);
+            Assert.AreEqual("No hay suficietes productos de Jabon de sandia para realizar la operacion", respuesta);
             #endregion
 
         }

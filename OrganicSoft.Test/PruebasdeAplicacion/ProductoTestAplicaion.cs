@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static OrganicSoft.Aplicacion.CrearProductoCommandHandle;
 using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
+using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
 
 namespace OrganicSoft.Test.PruebasdeAplicacion
 {
@@ -18,6 +19,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
     {
         private CrearProductoCommandHandle _productoCrearService;
         private EntradadeProductosCommandHandle _productoEntradaService;
+        private SalidaProductoCommandHandle _productoSalidaService;
         private OrganicSoftContext _context;
        
         [SetUp]
@@ -32,6 +34,9 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _productoEntradaService = new EntradadeProductosCommandHandle(
                new UnitOfWork(_context),
                new ProductoRepository(_context));
+            _productoSalidaService = new SalidaProductoCommandHandle(
+              new UnitOfWork(_context),
+              new ProductoRepository(_context));
         }
         [Test]
         public void PuedoCrearProductosAplicacion()
@@ -84,6 +89,28 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
 
             // Assert
             Assert.AreEqual($"La cantidad debe ser mayor a cero", response.Mensaje);
+            _context.Producto.Remove(producto);
+            _context.SaveChanges();
+        }
+        [Test]
+        public void PuedoRealizarSalidadProductosAplicacionCorrecta()
+        {
+            //Arrange 
+
+            Producto producto = new ProductoSimple(codigo: 569, nombre: "Jabon de Te verde",
+           decripcion: " Ea hidrante facial y corporal 🍉La sandía es rica en antioxidantes, ayuda a" +
+           " retrasar el envejecimiento de la piel debido a su protección contra los radicales libres." +
+           " Gracias a estas propiedades, previene los primeros síntomas de la edad, como manchas, " +
+           "arrugas y unas líneas de expresión marcadas.", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 1);
+            _context.Producto.Add(producto);
+            _context.SaveChanges();
+            _productoEntradaService.Handle(new EntradadeProductosCommand(id: 569, cantidad:4 ));
+            //Act
+
+            var response = _productoSalidaService.Handle(new SalidaProductosCommand(id: 569, cantidad: 1));
+
+            // Assert
+            Assert.AreEqual($"La cantidad de Jabon de Te verde es: 3", response.Mensaje);
             _context.Producto.Remove(producto);
             _context.SaveChanges();
         }

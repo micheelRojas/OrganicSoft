@@ -20,7 +20,7 @@ namespace OrganicSoft.Aplicacion
         public SalidaProductosResponse Handle(SalidaProductosCommand command)
         {
 
-            var producto = _productoRepository.FindFirstOrDefault(producto => producto.Id == command.Id);//infraestructura-datos
+            var producto = _productoRepository.FindFirstOrDefault(producto => producto.Id == command.Id || producto.CodigoProducto==command.Id);//infraestructura-datos
             if (producto == null) return new SalidaProductosResponse("el producto no existe");
             var response = producto.SalidaProductos(command.Cantidad);//domain
             _productoRepository.Update(producto);//proyectarse el cambio y registrarlo en la unidad de trabajo
@@ -30,6 +30,16 @@ namespace OrganicSoft.Aplicacion
         }
         public class SalidaProductosCommand
         {
+            public SalidaProductosCommand()
+            {
+            }
+
+            public SalidaProductosCommand(int id, int cantidad)
+            {
+                Id = id;
+                Cantidad = cantidad;
+            }
+
             public int Id { get; set; }
             public int Cantidad { get; set; }
         }
