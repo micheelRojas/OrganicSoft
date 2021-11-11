@@ -27,18 +27,39 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
             if (carritoCompra == null) return new AgregarAlCarritoResponse("el carrito no existe");
 
             String response = "No se pudo agregar el producto al carrito";
+
+            // VERSION1 COMO FILTRAR VERSION LENTA filtro en el cliente
+            var productoParaElCarrito = _productoRepository.GetAll().Where(t => t.CodigoProducto == command.ProductoVenta.CodigoProducto);
+            if (productoParaElCarrito == null) 
+            {
+                return new AgregarAlCarritoResponse(response);
+            }
+            response = carritoCompra.AgregarAlCarrito(command.ProductoVenta);
+            _carritoCompraRepository.Update(carritoCompra);//proyectarse el cambio y registrarlo en la unidad de trabajo
+            _unitOfWork.Commit();//infraestructura-datos
+
+            //VERSION2 COMO filtro en la base de datos
+            var productoParaElCarrito1 = _productoRepository.FindBy(t => t.CodigoProducto == command.ProductoVenta.CodigoProducto);
+            if (productoParaElCarrito1 == null)
+            {
+                return new AgregarAlCarritoResponse(response);
+            }
+            response = carritoCompra.AgregarAlCarrito(command.ProductoVenta);
+            _carritoCompraRepository.Update(carritoCompra);//proyectarse el cambio y registrarlo en la unidad de trabajo
+            _unitOfWork.Commit();//infraestructura-datos
+
+
+
             foreach (var producto in _productoRepository.GetAll().ToList())
             {
                 if (command.ProductoVenta.CodigoProducto.Equals(producto.CodigoProducto))
                 {
-
                     response = carritoCompra.AgregarAlCarrito(command.ProductoVenta);
                     _carritoCompraRepository.Update(carritoCompra);//proyectarse el cambio y registrarlo en la unidad de trabajo
                     _unitOfWork.Commit();//infraestructura-datos
 
                     return new AgregarAlCarritoResponse(response);
                 }
-                
             }
             return new AgregarAlCarritoResponse(response);
             

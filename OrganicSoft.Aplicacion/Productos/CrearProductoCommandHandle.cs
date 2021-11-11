@@ -2,6 +2,7 @@
 using OrganicSoft.Dominio;
 using OrganicSoft.Dominio.Contracts;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OrganicSoft.Aplicacion
 {
@@ -18,7 +19,7 @@ namespace OrganicSoft.Aplicacion
             _productoRepository = productoRepository;
 
         }
-        public CrearProductosResponse Handle(CrearProductosCommand command)
+        public async Task<CrearProductosResponse> Handle(CrearProductosCommand command)
         {
             Producto producto = _productoRepository.FindFirstOrDefault(t => t.Id == command.Id);
             if (producto == null)
@@ -39,8 +40,8 @@ namespace OrganicSoft.Aplicacion
 
 
                 _productoRepository.Add(productoNuevo);
-                _unitOfWork.Commit();
-                return new CrearProductosResponse($"Se creó con exito el producto.");
+                await _unitOfWork.CommitAsync();
+                return new CrearProductosResponse($"Se creó con éxito el producto.");
             }
             else
             {

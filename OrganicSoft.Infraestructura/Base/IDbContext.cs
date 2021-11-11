@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OrganicSoft.Infraestructura.Base
@@ -11,5 +12,6 @@ namespace OrganicSoft.Infraestructura.Base
     {
         DbSet<T> Set<T>() where T : class;
         int SaveChanges();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

@@ -1,9 +1,5 @@
 ﻿using OrganicSoft.Dominio.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrganicSoft.Dominio
 {
@@ -20,7 +16,9 @@ namespace OrganicSoft.Dominio
         public int CantidadExistente { get; private set; }
         public int CantidadVendida { get; private set; }
         public Descuento Descuento { get; private set; }
-        public double PrecioConDescuento { get; private set; }
+        public DateTime FechadelDescuento{ get; private set; }
+        public double PrecioConDescuento => ObtenerPrecioConDescuento(FechadelDescuento);
+
         Inventario inventario = Inventario.getInventario();
         public Producto() { }
         public Producto(int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock)
@@ -29,13 +27,12 @@ namespace OrganicSoft.Dominio
             Nombre = nombre;
             Descripcion = decripcion;
             Precio = precio;
-            PrecioConDescuento = precio;
             Categoria = categoria;
             Presentacion = presentacion;
             MinimoStock = minimoStock;
             CantidadExistente = 0;
         }
-        
+
         public virtual string EntradaProductos(int cantidad)
         {
 
@@ -53,31 +50,26 @@ namespace OrganicSoft.Dominio
         }
 
         public abstract string SalidaProductos(int cantidad);
-       
 
-        public string AplicarDescuento(Descuento descuento)
+        public string AplicarDescuento(Descuento descuento, DateTime fechaDescuento)
         {
             Descuento = descuento;
-            if (descuento.FechaInicio <= DateTime.Now && descuento.FechaFin >= DateTime.Now)
-            {
-                PrecioConDescuento = Precio - (Precio * descuento.PorcentajeDescuento);
-
-            }
+            FechadelDescuento = fechaDescuento;
             return $"Precio de {Nombre}, es de: {PrecioConDescuento}";
-
-
         }
-
-        public string RetirarDescuento()
+        private double ObtenerPrecioConDescuento(DateTime fechaDescuento)
         {
             if (Descuento != null)
             {
-                PrecioConDescuento = Precio + (Precio * Descuento.PorcentajeDescuento);
-                Descuento = null;
-                return $"El nuevo precio de {Nombre}, es de: {Precio}";
+                return Precio - (Precio * Descuento.ObtenerDescuentoVigente(fechaDescuento));
             }
-            throw new NotImplementedException();
+            else 
+            {
+                return Precio;
+            }
         }
+
+      
 
         public void DisminuirCantidadProductoStock(int cantidad)
         {
@@ -85,13 +77,14 @@ namespace OrganicSoft.Dominio
             {
                 CantidadExistente -= cantidad;
             }
-            
+
         }
         public virtual void AumentarCantidadProducto(int cantidad)
         {
             CantidadExistente += cantidad;
         }
-        public virtual double AsignarCosto(double costo) {
+        public virtual double AsignarCosto(double costo)
+        {
             return Costo = costo;
         }
 

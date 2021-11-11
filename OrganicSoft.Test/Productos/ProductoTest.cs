@@ -139,7 +139,7 @@ namespace OrganicSoft.Test.Productos
             #endregion
             #region CUANDO se desee registrar el un descuente de este del 20% durante tres dias
             var decuento = new Descuento(codigoDescuento:1, fechaInicio: new DateTime(2021, 09, 28), fechaFin: new DateTime(2022, 10, 20),porcentajeDescuento:0.2);
-            var respuesta = producto.AplicarDescuento(descuento:decuento);
+            var respuesta = producto.AplicarDescuento(descuento:decuento, fechaDescuento: new DateTime(2021, 10, 20));
             #endregion
             #region ENTONCES  el sistema Cambiara el precio por el tiempo correspondiente y mostrarara el mensaje "El nuevo precio de Jabon de sandia, es de: $ 8.000,00"
             Assert.AreEqual("Precio de Jabon de sandia, es de: 8000", respuesta);
@@ -160,36 +160,14 @@ namespace OrganicSoft.Test.Productos
             #endregion
             #region CUANDO se desee registrar el un descuente de este del 20% durante tres dias pero las fechas son inferiores a la actula
             var decuento = new Descuento(codigoDescuento: 1, fechaInicio: new DateTime(2021, 09, 26), fechaFin: new DateTime(2021, 09, 28), porcentajeDescuento: 0.2);
-            var respuesta = producto.AplicarDescuento(descuento: decuento);
+            var respuesta = producto.AplicarDescuento(descuento: decuento,fechaDescuento: new DateTime(2021, 10, 20));
             #endregion
             #region ENTONCES  el sistema no Cambiara el precio por el tiempo correspondiente y mostrarara el mensaje "El nuevo precio de Jabon de sandia, es de: $ 8.000,00"
             Assert.AreEqual("Precio de Jabon de sandia, es de: 10000", respuesta);
             #endregion
 
         }
-        [Test]
-        public void PuedoQuitarDescuentos()
-        {
-
-            #region Dado que laly Organis tiene multiples productos,como jabon de sandia y se tienen 10 de este con un descuennto por tres dias
-            var producto = new ProductoSimple(codigo: 1, nombre: "Jabon de sandia",
-            decripcion: " Ea hidrante facial y corporal 🍉La sandía es rica en antioxidantes, ayuda a" +
-            " retrasar el envejecimiento de la piel debido a su protección contra los radicales libres." +
-            " Gracias a estas propiedades, previene los primeros síntomas de la edad, como manchas, " +
-            "arrugas y unas líneas de expresión marcadas.", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
-            producto.EntradaProductos(cantidad: 10);
-            var decuento = new Descuento(codigoDescuento: 1, fechaInicio: new DateTime(2021, 09, 28), fechaFin: new DateTime(2021, 10, 1), porcentajeDescuento: 0.2);
-            producto.AplicarDescuento(descuento: decuento);
-            #endregion
-            #region CUANDO hallan pasado los tres dias y se aplique el descuento el producto devera volver al precio original
-           
-            var respuesta = producto.RetirarDescuento();
-            #endregion
-            #region ENTONCES  el sistema Cambiara el precio por el tiempo correspondiente y mostrarara el mensaje "El nuevo precio de Jabon de sandia, es de: $ 8.000,00"
-            Assert.AreEqual("El nuevo precio de Jabon de sandia, es de: 10000", respuesta);
-            #endregion
-
-        }
+       
     }
 
     

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OrganicSoft.Infraestructura.Base
@@ -12,9 +13,14 @@ namespace OrganicSoft.Infraestructura.Base
         private readonly IDbContext _context;
         public UnitOfWork(IDbContext context) => _context = context;
 
-        public void Commit()
+        public int Commit()
         {
-            _context.SaveChanges();
+           return _context.SaveChanges();
+        }
+
+        public async Task<int> CommitAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.SaveChangesAsync(cancellationToken);
         }
 
 

@@ -69,10 +69,10 @@ namespace OrganicSoft.WepApi.Angular.Controllers
             return Ok(producto);
         }*/
         [HttpPost]
-        public ActionResult CreateProducto([FromBody] CrearProductosCommand command)
+        public async Task<ActionResult> CreateProducto([FromBody] CrearProductosCommand command)
         {
             var service = new CrearProductoCommandHandle(_unitOfWork, _productoRepository);
-            var response = service.Handle(command);
+            var response = await service.Handle(command);
 
             if (response.isOk())
             {

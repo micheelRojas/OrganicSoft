@@ -9,6 +9,7 @@ using System.Linq;
 using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
 using System.Collections.Generic;
 using OrganicSoft.Aplicacion.Productos;
+using System.Threading.Tasks;
 
 namespace OrganicSoft.WepApi.Controllers
 {
@@ -54,11 +55,19 @@ namespace OrganicSoft.WepApi.Controllers
         }
 
         [HttpPost]
-        public CrearProductosResponse Post(CrearProductosCommand command)
+        public async Task<ActionResult> CreateProducto([FromBody] CrearProductosCommand command)
         {
             var service = new CrearProductoCommandHandle(_unitOfWork, _productoRepository);
-            var response = service.Handle(command);
-            return response;
+            var response = await service.Handle(command);
+
+            if (response.isOk())
+            {
+
+                return Ok(response);
+
+            }
+            return BadRequest(response.Mensaje);
+
         }
 
     }

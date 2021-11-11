@@ -23,5 +23,17 @@ namespace OrganicSoft.Dominio
             FechaFin = fechaFin;
             PorcentajeDescuento = porcentajeDescuento;
         }
+
+        public double ObtenerDescuentoVigente(DateTime fechaDescuento) 
+        {
+            if (FechaInicio <= fechaDescuento && FechaFin >= fechaDescuento)
+            {
+                return PorcentajeDescuento;
+            }
+            else 
+            {
+                return 0;
+            }
+        }
     }
 }

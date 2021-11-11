@@ -48,7 +48,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             " Gracias a estas propiedades, previene los primeros síntomas de la edad, como manchas, " +
             "arrugas y unas líneas de expresión marcadas.", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3));
             // Assert
-            Assert.AreEqual("Se creó con exito el producto.", response.Mensaje);
+            Assert.AreEqual("Se creó con éxito el producto.", response.Result.Mensaje);
         }
         [Test]
         public void PuedoRealizarEntradaProductosAplicacionCorreta()
