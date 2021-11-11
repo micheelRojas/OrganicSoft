@@ -2,6 +2,7 @@
 using OrganicSoft.Dominio;
 using OrganicSoft.Dominio.Contracts;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OrganicSoft.Aplicacion
@@ -22,9 +23,16 @@ namespace OrganicSoft.Aplicacion
         public async Task<CrearProductosResponse> Handle(CrearProductosCommand command)
         {
             Producto producto = _productoRepository.FindFirstOrDefault(t => t.Id == command.Id);
-            if (producto == null)
+            if (producto != null) {
+                return new CrearProductosResponse($"El producto ya exite");
+            }
+            IReadOnlyList<string> errors = command.CanCrear();
+            if (errors.Any())
             {
-               
+                string ListaErrors = "Errores: " + string.Join(",", errors);
+                return new CrearProductosResponse(ListaErrors);
+            }
+           
                 Producto productoNuevo = TipoProducto.CrearProducto(
                                                 command.TipoProducto,
                                                 command.CodigoProducto,
@@ -41,12 +49,8 @@ namespace OrganicSoft.Aplicacion
 
                 _productoRepository.Add(productoNuevo);
                 await _unitOfWork.CommitAsync();
-                return new CrearProductosResponse($"Se creó con éxito el producto.");
-            }
-            else
-            {
-                return new CrearProductosResponse($"El producto ya exite");
-            }
+                return new CrearProductosResponse($"Se creó con éxito el producto."); 
+          
         }
         public class CrearProductosCommand
         {
@@ -81,7 +85,26 @@ namespace OrganicSoft.Aplicacion
             public int MinimoStock { get; set; }
             public List<Componente> Componetes { get; set; }
             public double Costo { get; set; }
-           
+
+            public IReadOnlyList<string> CanCrear()
+            {
+                var errors = new List<string>();
+
+                if ((CodigoProducto==0))
+                    errors.Add("Codigo del producto no especificado");
+
+                if (string.IsNullOrEmpty(Nombre))
+                    errors.Add("Nombre del producto no especificado");
+                if (string.IsNullOrEmpty(Descripcion))
+                    errors.Add("Descripcion del producto no especificado");
+                if (string.IsNullOrEmpty(Categoria))
+                    errors.Add("Categoria del producto no especificado");
+                if (string.IsNullOrEmpty(Presentacion))
+                    errors.Add("Presenctacion del producto no especificado");
+                if (Precio == 0)
+                    errors.Add("Precio del producto no especificado");
+                return errors;
+            }
         }
 
         public static class TipoProducto

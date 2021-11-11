@@ -10,8 +10,8 @@ using OrganicSoft.Infraestructura;
 namespace OrganicSoft.Infraestructura.Migrations
 {
     [DbContext(typeof(OrganicSoftContext))]
-    [Migration("20211101181758_MyMigration")]
-    partial class MyMigration
+    [Migration("20211111023322_MigracionNuevaProducto")]
+    partial class MigracionNuevaProducto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -201,6 +201,9 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("FechadelDescuento")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MinimoStock")
                         .HasColumnType("int");
 
@@ -208,9 +211,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Precio")
-                        .HasColumnType("float");
-
-                    b.Property<double>("PrecioConDescuento")
                         .HasColumnType("float");
 
                     b.Property<string>("Presentacion")

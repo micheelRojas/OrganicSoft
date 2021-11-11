@@ -199,6 +199,9 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("FechadelDescuento")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MinimoStock")
                         .HasColumnType("int");
 
@@ -206,9 +209,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Precio")
-                        .HasColumnType("float");
-
-                    b.Property<double>("PrecioConDescuento")
                         .HasColumnType("float");
 
                     b.Property<string>("Presentacion")
@@ -236,12 +236,17 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Property<int?>("CarritoCompraId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CarritoCompraId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("CodigoProducto")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CarritoCompraId");
+
+                    b.HasIndex("CarritoCompraId1");
 
                     b.ToTable("ProductoVenta");
                 });
@@ -313,6 +318,10 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.HasOne("OrganicSoft.Dominio.CarritoCompra", null)
                         .WithMany("ProductoVentas")
                         .HasForeignKey("CarritoCompraId");
+
+                    b.HasOne("OrganicSoft.Dominio.CarritoCompra", null)
+                        .WithMany("ProductosVenta")
+                        .HasForeignKey("CarritoCompraId1");
                 });
 
             modelBuilder.Entity("OrganicSoft.Dominio.CarritoCompra", b =>

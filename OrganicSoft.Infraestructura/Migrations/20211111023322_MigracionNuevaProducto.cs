@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrganicSoft.Infraestructura.Migrations
 {
-    public partial class MyMigration : Migration
+    public partial class MigracionNuevaProducto : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -89,7 +89,8 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CodigoProducto = table.Column<int>(type: "int", nullable: false),
                     CantidadVenta = table.Column<int>(type: "int", nullable: false),
-                    CarritoCompraId = table.Column<int>(type: "int", nullable: true)
+                    CarritoCompraId = table.Column<int>(type: "int", nullable: true),
+                    CarritoCompraId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -97,6 +98,12 @@ namespace OrganicSoft.Infraestructura.Migrations
                     table.ForeignKey(
                         name: "FK_ProductoVenta_CarritoCompra_CarritoCompraId",
                         column: x => x.CarritoCompraId,
+                        principalTable: "CarritoCompra",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductoVenta_CarritoCompra_CarritoCompraId1",
+                        column: x => x.CarritoCompraId1,
                         principalTable: "CarritoCompra",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -119,7 +126,7 @@ namespace OrganicSoft.Infraestructura.Migrations
                     CantidadExistente = table.Column<int>(type: "int", nullable: false),
                     CantidadVendida = table.Column<int>(type: "int", nullable: false),
                     DescuentoId = table.Column<int>(type: "int", nullable: true),
-                    PrecioConDescuento = table.Column<double>(type: "float", nullable: false),
+                    FechadelDescuento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Utilidad = table.Column<double>(type: "float", nullable: true)
                 },
@@ -218,6 +225,11 @@ namespace OrganicSoft.Infraestructura.Migrations
                 name: "IX_ProductoVenta_CarritoCompraId",
                 table: "ProductoVenta",
                 column: "CarritoCompraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductoVenta_CarritoCompraId1",
+                table: "ProductoVenta",
+                column: "CarritoCompraId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
