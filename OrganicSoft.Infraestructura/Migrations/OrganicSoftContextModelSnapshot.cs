@@ -236,17 +236,12 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Property<int?>("CarritoCompraId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CarritoCompraId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("CodigoProducto")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CarritoCompraId");
-
-                    b.HasIndex("CarritoCompraId1");
 
                     b.ToTable("ProductoVenta");
                 });
@@ -318,10 +313,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.HasOne("OrganicSoft.Dominio.CarritoCompra", null)
                         .WithMany("ProductoVentas")
                         .HasForeignKey("CarritoCompraId");
-
-                    b.HasOne("OrganicSoft.Dominio.CarritoCompra", null)
-                        .WithMany("ProductosVenta")
-                        .HasForeignKey("CarritoCompraId1");
                 });
 
             modelBuilder.Entity("OrganicSoft.Dominio.CarritoCompra", b =>
