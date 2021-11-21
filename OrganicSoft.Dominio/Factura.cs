@@ -15,7 +15,7 @@ namespace OrganicSoft.Dominio
         public String CedulaCliente { get; private set; }
         public double TotalPagar { get; private set; }
         public List<Detalle> Detalles { get; private set; }
-        protected List<Factura> _facturas = new List<Factura>();
+        
 
         Inventario inventario = Inventario.getInventario();
         public Factura() { }
@@ -27,7 +27,6 @@ namespace OrganicSoft.Dominio
             Detalles = new List<Detalle>();
             CalcularTotal(Pedido);
         }
-        public IReadOnlyCollection<Factura> Facturas => _facturas.AsReadOnly();
 
         public void CalcularTotal(Pedido Pedido)
         {
@@ -46,7 +45,6 @@ namespace OrganicSoft.Dominio
                                 subtotal: productoVenta.CantidadVenta * producto.Precio, codigoProducto: producto.CodigoProducto);
                             sumaSubtotalesDetalles += detalle.Subtotal;
                             this.Detalles.Add(detalle);
-                            _facturas.Add(this);
                             //num += producto.CantidadExitente;
                         }
                     }

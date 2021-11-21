@@ -46,18 +46,11 @@ namespace OrganicSoft.Infraestructura.Migrations
                     Codigo = table.Column<int>(type: "int", nullable: false),
                     FechaCreacion = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CedulaCliente = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TotalPagar = table.Column<double>(type: "float", nullable: false),
-                    FacturaId = table.Column<int>(type: "int", nullable: true)
+                    TotalPagar = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Factura", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Factura_Factura_FacturaId",
-                        column: x => x.FacturaId,
-                        principalTable: "Factura",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,11 +190,6 @@ namespace OrganicSoft.Infraestructura.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Detalle_FacturaId",
                 table: "Detalle",
-                column: "FacturaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Factura_FacturaId",
-                table: "Factura",
                 column: "FacturaId");
 
             migrationBuilder.CreateIndex(

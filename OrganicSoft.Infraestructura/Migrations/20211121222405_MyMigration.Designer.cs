@@ -10,7 +10,7 @@ using OrganicSoft.Infraestructura;
 namespace OrganicSoft.Infraestructura.Migrations
 {
     [DbContext(typeof(OrganicSoftContext))]
-    [Migration("20211121214900_MyMigration")]
+    [Migration("20211121222405_MyMigration")]
     partial class MyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,9 +130,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                     b.Property<int>("Codigo")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FacturaId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("FechaCreacion")
                         .HasColumnType("datetime2");
 
@@ -140,8 +137,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FacturaId");
 
                     b.ToTable("Factura");
                 });
@@ -285,13 +280,6 @@ namespace OrganicSoft.Infraestructura.Migrations
                         .HasForeignKey("FacturaId");
                 });
 
-            modelBuilder.Entity("OrganicSoft.Dominio.Factura", b =>
-                {
-                    b.HasOne("OrganicSoft.Dominio.Factura", null)
-                        .WithMany("Facturas")
-                        .HasForeignKey("FacturaId");
-                });
-
             modelBuilder.Entity("OrganicSoft.Dominio.Pedido", b =>
                 {
                     b.HasOne("OrganicSoft.Dominio.CarritoCompra", "Carrito")
@@ -320,8 +308,6 @@ namespace OrganicSoft.Infraestructura.Migrations
             modelBuilder.Entity("OrganicSoft.Dominio.Factura", b =>
                 {
                     b.Navigation("Detalles");
-
-                    b.Navigation("Facturas");
                 });
 
             modelBuilder.Entity("OrganicSoft.Dominio.ProductoCombo", b =>
