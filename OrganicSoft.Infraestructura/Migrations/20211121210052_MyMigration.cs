@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrganicSoft.Infraestructura.Migrations
 {
-    public partial class NuevoProducto : Migration
+    public partial class MyMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
