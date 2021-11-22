@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using static OrganicSoft.Aplicacion.CrearProductoCommandHandle;
+using static OrganicSoft.Aplicacion.CrearProductoSimpleCommandHandle;
 
 namespace OrganicSoft.WebApi.Angular.Test
 {

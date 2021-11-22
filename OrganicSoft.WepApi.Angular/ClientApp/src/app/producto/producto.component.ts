@@ -13,7 +13,7 @@ export class ProductoComponent implements OnInit {
   }
 
 }
-export interface IProductoCrear {
+export interface IProductoCombo {
   id: number,
   tipoProducto: string,
   codigoProducto: number,
