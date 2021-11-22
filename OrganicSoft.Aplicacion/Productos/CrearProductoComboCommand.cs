@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace OrganicSoft.Aplicacion.Productos
 {
-    public class CrearProductoComboComand : CrearProductosCommand
+    public class CrearProductoComboCommand : CrearProductosCommand
     {
-        public CrearProductoComboComand()
+        public CrearProductoComboCommand()
         {
         }
 
-        public CrearProductoComboComand(int id,int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, List<Componente> componentes) : base(id,codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock,0)
+        public CrearProductoComboCommand(int id,int codigo, string nombre, string decripcion, double precio, string categoria, string presentacion, int minimoStock, List<Componente> componentes) : base(id,codigo, nombre, decripcion, precio, categoria, presentacion, minimoStock,0)
         {
             Componentes = componentes;
         }

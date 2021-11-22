@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { IProducto, IProductoCombo, IProductoEdit } from './producto.component';
 import { tap } from 'rxjs/operators';
+import { IpcNetConnectOpts } from 'net';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +23,9 @@ export class ProductoService {
   updateProducto(producto: IProductoEdit): Observable<IProductoEdit> {
     return this.http.put<IProductoEdit>(this.apiURL, producto);
   }
-
+  CreateProductoCombo(producto: IProductoCombo): Observable<IProductoCombo> {
+    return this.http.post<IProductoCombo>(this.apiURL +'/CrearCombo/', producto);
+  }
 
 }
 

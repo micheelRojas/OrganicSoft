@@ -83,6 +83,20 @@ namespace OrganicSoft.WepApi.Angular.Controllers
             return BadRequest(response.Mensaje);
           
         }
+        [HttpPost("CrearCombo")]
+        public async Task<ActionResult> CreateProductoCombo([FromBody] CrearProductoComboCommand command)
+        {
+            var service = new CrearProductoComboCommandHandle(_unitOfWork, _productoRepository);
+            var response = await service.Handle(command);
 
+            if (response.isOk())
+            {
+
+                return Ok(response);
+
+            }
+            return BadRequest(response.Mensaje);
+
+        }
     }
 }

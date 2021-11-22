@@ -21,7 +21,7 @@ namespace OrganicSoft.Aplicacion.Productos
             _productoRepository = productoRepository;
 
         }
-        public async Task<CrearProductosResponse> Handle(CrearProductoComboComand command)
+        public async Task<CrearProductosResponse> Handle(CrearProductoComboCommand command)
         {
             Producto producto = _productoRepository.FindFirstOrDefault(t => t.Id == command.Id || t.CodigoProducto == command.CodigoProducto);
             if (producto != null)
