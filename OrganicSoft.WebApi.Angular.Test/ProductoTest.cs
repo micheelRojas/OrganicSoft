@@ -27,7 +27,7 @@ namespace OrganicSoft.WebApi.Angular.Test
         {
             var request = new CrearProductosCommand()
             {
-                Id = 3421,
+                
                 TipoProducto = "SIMPLE",
                 CodigoProducto = 2123,
                 Nombre = "Jabón de cuerpo",
@@ -69,9 +69,31 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 37);
             respuesta.Should().Be("La cantidad de Jabón de cuerpo es: 40");
-            //var context = _factory.CreateContext();
-            //var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
-            //producto3421.Should().NotBeNull();
+            var context = _factory.CreateContext();
+            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
+            producto3421.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task NoPuedoHaceEntradaDeProductoSimpleCorrecto()
+        {
+            var request = new EntradadeProductosCommand()
+            {
+                Id = 4231,
+                Cantidad = 40
+            };
+
+            var jsonObject = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            var httpClient = _factory.CreateClient();
+            var responseHttp = await httpClient.PutAsync("api/Producto", content);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
+            var respuesta = respuesta2.Substring(12, 21);
+            respuesta.Should().Be("el producto no existe");
+            var context = _factory.CreateContext();
+            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 4231);
+            producto3421.Should().BeNull();
         }
     }
 }
