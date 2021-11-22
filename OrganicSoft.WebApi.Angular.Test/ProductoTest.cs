@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using static OrganicSoft.Aplicacion.CrearProductoSimpleCommandHandle;
+using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
 
 namespace OrganicSoft.WebApi.Angular.Test
 {
@@ -49,6 +50,28 @@ namespace OrganicSoft.WebApi.Angular.Test
             var context = _factory.CreateContext();
             var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
             producto3421.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task PuedoHaceEntradaDeProductoSimpleCorrecto()
+        {
+            var request = new EntradadeProductosCommand()
+            {
+                Id = 2123,
+                Cantidad = 40
+        };
+
+            var jsonObject = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            var httpClient = _factory.CreateClient();
+            var responseHttp = await httpClient.PutAsync("api/Producto", content);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
+            var respuesta = respuesta2.Substring(12, 37);
+            respuesta.Should().Be("La cantidad de Jabón de cuerpo es: 40");
+            //var context = _factory.CreateContext();
+            //var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
+            //producto3421.Should().NotBeNull();
         }
     }
 }
