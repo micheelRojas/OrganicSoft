@@ -27,6 +27,7 @@ namespace OrganicSoft.WepApi.Angular
         {
            // var connectionString = Configuration.GetConnectionString("OrganicSoftContext");
             services.AddDbContext<OrganicSoftContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OrganicSoftContext")));
+            services.AddDbContext<OrganicSoftContext>(options => options.UseSqlServer(Configuration.GetConnectionString("OrganicSoftContextTest")));
 
             ///Inyección de dependencia Especifica
             //https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0#register-additional-services-with-extension-methods
