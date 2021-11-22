@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static OrganicSoft.Aplicacion.CrearProductoCommandHandle;
+using static OrganicSoft.Aplicacion.CrearProductoSimpleCommandHandle;
 using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
 using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
 
@@ -69,9 +69,9 @@ namespace OrganicSoft.WepApi.Angular.Controllers
             return Ok(producto);
         }*/
         [HttpPost]
-        public async Task<ActionResult> CreateProducto([FromBody] CrearProductosCommand command)
+        public async Task<ActionResult> CreateProductoSimple([FromBody] CrearProductosCommand command)
         {
-            var service = new CrearProductoCommandHandle(_unitOfWork, _productoRepository);
+            var service = new CrearProductoSimpleCommandHandle(_unitOfWork, _productoRepository);
             var response = await service.Handle(command);
 
             if (response.isOk())

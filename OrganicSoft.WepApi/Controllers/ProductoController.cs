@@ -3,7 +3,7 @@ using OrganicSoft.Aplicacion;
 using OrganicSoft.Dominio;
 using OrganicSoft.Dominio.Contracts;
 using OrganicSoft.Infraestructura;
-using static OrganicSoft.Aplicacion.CrearProductoCommandHandle;
+using static OrganicSoft.Aplicacion.CrearProductoSimpleCommandHandle;
 using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
 using System.Linq;
 using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
@@ -18,7 +18,7 @@ namespace OrganicSoft.WepApi.Controllers
     public class ProductoController : ControllerBase
     {
 
-        private readonly IUnitOfWork _unitOfWork;
+       /* private readonly IUnitOfWork _unitOfWork;
    
         private readonly IProductoRepository _productoRepository;
         private readonly OrganicSoftContext _context;
@@ -57,7 +57,7 @@ namespace OrganicSoft.WepApi.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateProducto([FromBody] CrearProductosCommand command)
         {
-            var service = new CrearProductoCommandHandle(_unitOfWork, _productoRepository);
+            var service = new CrearProductoSimpleCommandHandle(_unitOfWork, _productoRepository);
             var response = await service.Handle(command);
 
             if (response.isOk())
@@ -68,7 +68,7 @@ namespace OrganicSoft.WepApi.Controllers
             }
             return BadRequest(response.Mensaje);
 
-        }
+        }*/
 
     }
 }

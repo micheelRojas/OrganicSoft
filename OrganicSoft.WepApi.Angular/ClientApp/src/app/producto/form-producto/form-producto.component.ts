@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule  } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MensajesModule } from '../../mensajes/mensajes.module';
-import { IProductoCrear } from '../producto.component';
+import { IProducto, IProductoCombo } from '../producto.component';
 import { ProductoService } from '../producto.service';
 import { Location } from '@angular/common';
 @Component({
@@ -16,7 +16,6 @@ export class FormProductoComponent implements OnInit {
   constructor(private fb: FormBuilder, private productoService: ProductoService,
     private router: Router, private activatedRoute: ActivatedRoute, private mensaje: MensajesModule,private location: Location) { }
   formGroup = this.fb.group({
-    tipoProducto: ['', [Validators.required]],
     codigoProducto: ['', [Validators.required]],
     nombre: ['', [Validators.required]],
     descripcion: ['', [Validators.required]],
@@ -24,7 +23,6 @@ export class FormProductoComponent implements OnInit {
     categoria: ['', [Validators.required]],
     presentacion: ['', [Validators.required]],
     minimoStock: ['', [Validators.required]],
-    componentes: [''],
     costo: ['']
 
   });
@@ -33,11 +31,10 @@ export class FormProductoComponent implements OnInit {
     
   }
   save() {
-    let producto: IProductoCrear = Object.assign({}, this.formGroup.value);
-    producto.componentes = null;
+    let producto: IProducto = Object.assign({}, this.formGroup.value);
     console.table(producto); //ver grado por consola
     if (this.formGroup.valid) {
-      this.productoService.createProducto(producto)
+      this.productoService.CreateProductoSimple(producto)
         .subscribe(producto => this.goBack(),
           error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
     } else {
@@ -45,12 +42,10 @@ export class FormProductoComponent implements OnInit {
     }
   }
   goBack(): void { 
-    this.mensaje.mensajeAlertaCorrecto('¡Exitoso!', 'Producto guardado correctamente');
+    this.mensaje.mensajeAlertaCorrecto('Â¡Exitoso!', 'Producto guardado correctamente');
     this.location.back();
   }
-  get tipoProducto() {
-    return this.formGroup.get('tipoProducto');
-  }
+  
   get codigoProducto() {
     return this.formGroup.get('codigoProducto');
   }
@@ -71,9 +66,6 @@ export class FormProductoComponent implements OnInit {
   }
   get minimoStock() {
     return this.formGroup.get('minimoStock');
-  }
-  get componentes() {
-    return this.formGroup.get('componentes');
   }
   get costo() {
     return this.formGroup.get('costo');
