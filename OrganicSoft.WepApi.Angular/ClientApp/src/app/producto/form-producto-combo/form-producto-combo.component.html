@@ -1,0 +1,62 @@
+<div class="container">
+  <h1>Formulario de Producto Combo</h1>
+  <app-list-producto></app-list-producto>
+  <form [formGroup]="formGroup" (ngSubmit)="save()">
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="codigoProducto">Codigo Producto</label>
+        <input type="number" class="form-control" formControlName="codigoProducto" id="codigoProducto" placeholder="Ej: 1">
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Ej: Jabon de Sandia">
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="descripcion"> Descripcion</label>
+        <input type="text" class="form-control" formControlName="descripcion" id="descripcion" placeholder="Ej: Hidratante para el cuidado de la piel">
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="precio"> Precio</label>
+        <input type="number" class="form-control" formControlName="precio" id="precio" placeholder="Ej: 1000">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="categoria">Categoria</label>
+        <input type="text" class="form-control" formControlName="categoria" id="categoria" placeholder="Ej: Jabon">
+      </div>
+    </div>
+    <div class="form-row">
+
+      <div class="form-group col-md-6">
+        <label for="presentacion"> Presentacion</label>
+        <input type="text" class="form-control" formControlName="presentacion" id="presentacion" placeholder="Ej:mini 50gr">
+      </div>
+
+    </div> <div class="form-row">
+
+      <div class="form-group col-md-6">
+        <label for="minimoStock">Minimo Stock</label>
+        <input type="number" class="form-control" formControlName="minimoStock" id="minimoStock" placeholder="Ej: 1">
+      </div>
+
+    </div>
+    <button type="submit" color="primary">
+      Aceptar
+    </button>
+  </form>
+</div>
