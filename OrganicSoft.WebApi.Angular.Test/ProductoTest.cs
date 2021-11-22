@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Newtonsoft.Json;
+using OrganicSoft.Aplicacion.Productos;
 using OrganicSoft.WebApi.Angular.Test.Base;
 using OrganicSoft.WepApi.Angular;
 using System;
@@ -21,7 +22,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             _factory = factory;
         }
         [Fact]
-        public async Task PuedeCrearProductoCorrecto()
+        public async Task PuedeCrearProductoSimpleCorrecto()
         {
             var request = new CrearProductosCommand()
             {
@@ -34,7 +35,6 @@ namespace OrganicSoft.WebApi.Angular.Test
                 Categoria = "Jabones",
                 Presentacion = "Pequeño",
                 MinimoStock = 2,
-                Componetes = null,
                 Costo = 12000
             };
 
