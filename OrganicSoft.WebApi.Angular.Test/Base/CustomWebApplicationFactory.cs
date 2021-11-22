@@ -14,7 +14,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
     public class CustomWebApplicationFactory<TStartup>
     : WebApplicationFactory<TStartup> where TStartup : class
     {
-        private readonly string ConnectionString = @"Data Source=DESKTOP-FFMH835\SQLEXPRESS;Initial Catalog=OrganisoftTest;Integrated Security=True;";
+        private readonly string ConnectionString = @"Data Source=DESKTOP-FFMH835\SQLEXPRESS;Initial Catalog=OrganisoftProduction;Integrated Security=True;";
 
         //private readonly string _connectionString = @"Data Source=C:\sqlite\bancoDataBaseEndToEnd.db";
         public OrganicSoftContext CreateContext()
@@ -35,7 +35,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
 
                 services.AddDbContext<OrganicSoftContext>(options =>
                 {
-                    options.UseSqlServer(@"Data Source=DESKTOP-FFMH835\SQLEXPRESS;Initial Catalog=OrganisoftTest;Integrated Security=True;");
+                    options.UseSqlServer(@"Data Source=DESKTOP-FFMH835\SQLEXPRESS;Initial Catalog=OrganisoftProduction;Integrated Security=True;");
                 });
                 #endregion
 
