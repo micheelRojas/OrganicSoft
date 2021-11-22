@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { IProducto, IProductoCombo, IProductoEdit } from './producto.component';
 import { tap } from 'rxjs/operators';
-import { IpcNetConnectOpts } from 'net';
+
 @Injectable({
   providedIn: 'root'
 })

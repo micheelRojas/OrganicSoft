@@ -17,6 +17,7 @@ import { MensajesModule } from './mensajes/mensajes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule, MatTableModule } from '@angular/material';
 import { EditProductoComponent } from './producto/edit-producto/edit-producto.component';
+import { FormProductoComboComponent } from './producto/form-producto-combo/form-producto-combo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { EditProductoComponent } from './producto/edit-producto/edit-producto.co
     ProductoComponent,
     FormProductoComponent,
     ListProductoComponent,
-    EditProductoComponent
+    EditProductoComponent,
+    FormProductoComboComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,6 +43,7 @@ import { EditProductoComponent } from './producto/edit-producto/edit-producto.co
       { path: 'registrar-producto', component: FormProductoComponent },
       { path: 'lista-productos', component: ProductoComponent },
       { path: 'entrada-productos', component: EditProductoComponent },
+      { path: 'registrar-producto-combo', component: FormProductoComboComponent },
     ]),
     MensajesModule,
     BrowserAnimationsModule,
