@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Xunit;
 using static OrganicSoft.Aplicacion.CrearProductoSimpleCommandHandle;
 using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
+using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
 
 namespace OrganicSoft.WebApi.Angular.Test
 {
@@ -86,7 +87,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             var jsonObject = JsonConvert.SerializeObject(request);
             var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
             var httpClient = _factory.CreateClient();
-            var responseHttp = await httpClient.PutAsync("api/Producto", content);
+            var responseHttp = await httpClient.PutAsync($"api/Producto", content);
             responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 21);
@@ -94,6 +95,28 @@ namespace OrganicSoft.WebApi.Angular.Test
             var context = _factory.CreateContext();
             var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 4231);
             producto3421.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task PuedoHaceSalidaDeProductoSimpleCorrecto()
+        {
+            var request = new SalidaProductosCommand()
+            {
+                Id = 2123,
+                Cantidad = 20
+            };
+
+            var jsonObject = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            var httpClient = _factory.CreateClient();
+            var responseHttp = await httpClient.PutAsync($"api/Producto/{request.Id}", content);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
+            var respuesta = respuesta2.Substring(12, 37);
+            respuesta.Should().Be("La cantidad de Jabón de cuerpo es: 20");
+            //var context = _factory.CreateContext();
+            //var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
+            //producto3421.Should().BeNull();
         }
     }
 }
