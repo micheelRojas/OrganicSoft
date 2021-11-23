@@ -1,12 +1,11 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+
 <div mat-dialog-content>
-  <p>Numero</p>
   <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
+    <mat-label>¿Cual es la cantidad a ingresar?</mat-label>
     <input matInput [(ngModel)]="numero">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="numero" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="numero" cdkFocusInitial>Confirmar</button>
 </div>

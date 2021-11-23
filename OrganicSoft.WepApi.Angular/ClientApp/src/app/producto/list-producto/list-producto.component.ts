@@ -4,9 +4,9 @@ import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/m
 import { ActivatedRoute, Router } from '@angular/router';
 import { MensajesModule } from '../../mensajes/mensajes.module';
 import { ModalProductoComponent } from '../modal-producto/modal-producto.component';
-import { IComponente, IProducto } from '../producto.component';
+import { IComponente, IProducto, IProductoEdit } from '../producto.component';
 import { ProductoService } from '../producto.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-list-producto',
   templateUrl: './list-producto.component.html',
@@ -20,6 +20,7 @@ export class ListProductoComponent implements OnInit {
   productos!: IProducto[];
   producto!: IProducto;
   componente!: IComponente;
+  productoEdit!: IProductoEdit;
   displayedColumns: string[] = [
     'id',
     'nombre',
@@ -35,7 +36,7 @@ export class ListProductoComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor(private productoService: ProductoService, private router: Router,
     private activatedRoute: ActivatedRoute, private mensaje: MensajesModule,
-    public dialog: MatDialog) {
+    public dialog: MatDialog, private location: Location) {
   }
   id: number;
 
@@ -74,6 +75,31 @@ export class ListProductoComponent implements OnInit {
       this.addComponente.emit(this.componente);
       console.log(result);
     });
+  }
+  editar(producto: IProducto) {
+    this.producto = producto;
+    this.openDialogEdit();
+  }
+  openDialogEdit() {
+    const dialogRef = this.dialog.open(ModalProductoComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.productoEdit = {
+        cantidad: Number(result),
+        id: this.producto.id
+      };
+      this.productoService.updateProducto(this.productoEdit)
+        .subscribe(producto => this.goBack(),
+          error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
+      console.log(result);
+    });
+  }
+  
+  goBack(): void {
+    this.location.back();
+    this.mensaje.mensajeAlertaCorrecto('Exitoso!', 'Entrada  de producto realizada correctamente');
   }
 
 }
