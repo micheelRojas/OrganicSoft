@@ -1,8 +1,10 @@
+import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MensajesModule } from '../../mensajes/mensajes.module';
-import { IProducto } from '../producto.component';
+import { ModalProductoComponent } from '../modal-producto/modal-producto.component';
+import { IComponente, IProducto } from '../producto.component';
 import { ProductoService } from '../producto.service';
 
 @Component({
@@ -11,7 +13,13 @@ import { ProductoService } from '../producto.service';
   styleUrls: ['./list-producto.component.css']
 })
 export class ListProductoComponent implements OnInit {
-  producto!: IProducto[];
+
+  @Output() addComponente = new EventEmitter<IComponente>();
+
+
+  productos!: IProducto[];
+  producto!: IProducto;
+  componente!: IComponente;
   displayedColumns: string[] = [
     'id',
     'nombre',
@@ -19,13 +27,15 @@ export class ListProductoComponent implements OnInit {
     'costo',
     'precio',
     'cantidadExistente',
-    'cantidadVendida'
+    'cantidadVendida',
+    'opciones'
    ];
-  dataSource = new MatTableDataSource<IProducto>(this.producto);
+  dataSource = new MatTableDataSource<IProducto>(this.productos);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor(private productoService: ProductoService, private router: Router,
-    private activatedRoute: ActivatedRoute, private mensaje: MensajesModule) {
+    private activatedRoute: ActivatedRoute, private mensaje: MensajesModule,
+    public dialog: MatDialog) {
   }
   id: number;
 
@@ -44,6 +54,26 @@ export class ListProductoComponent implements OnInit {
     this.productoService.getProductos()
       .subscribe(productos => this.dataSource.data = productos,
         error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
+  }
+
+  ejecutar(producto: IProducto) {
+    this.producto = producto;
+    this.openDialog();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalProductoComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.componente = {
+        cantidad: Number(result),
+        producto: this.producto
+      };
+      this.addComponente.emit(this.componente);
+      console.log(result);
+    });
   }
 
 }

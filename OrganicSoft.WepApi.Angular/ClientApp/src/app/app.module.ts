@@ -16,8 +16,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MensajesModule } from './mensajes/mensajes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule, MatTableModule } from '@angular/material';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { EditProductoComponent } from './producto/edit-producto/edit-producto.component';
 import { FormProductoComboComponent } from './producto/form-producto-combo/form-producto-combo.component';
+import { ModalProductoComponent } from './producto/modal-producto/modal-producto.component';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,10 +32,12 @@ import { FormProductoComboComponent } from './producto/form-producto-combo/form-
     FormProductoComponent,
     ListProductoComponent,
     EditProductoComponent,
-    FormProductoComboComponent
+    FormProductoComboComponent,
+    ModalProductoComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -48,10 +53,12 @@ import { FormProductoComboComponent } from './producto/form-producto-combo/form-
     MensajesModule,
     BrowserAnimationsModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [ModalProductoComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

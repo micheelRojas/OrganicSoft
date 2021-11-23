@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.WepApi", "Organ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.WepApi.Angular", "OrganicSoft.WepApi.Angular\OrganicSoft.WepApi.Angular.csproj", "{F396E97D-C718-46F0-8BFD-B8EDB3264637}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.WebApi.Angular.Test", "OrganicSoft.WebApi.Angular.Test\OrganicSoft.WebApi.Angular.Test.csproj", "{97B8C969-E02D-4B1F-9C7B-45C59828C349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.WebApi.Angular.Test", "OrganicSoft.WebApi.Angular.Test\OrganicSoft.WebApi.Angular.Test.csproj", "{97B8C969-E02D-4B1F-9C7B-45C59828C349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.Selenium.Test", "OrganicSoft.Selenium.Test\OrganicSoft.Selenium.Test.csproj", "{4A554C0F-DBFD-4200-84CD-9B83A907A93F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{97B8C969-E02D-4B1F-9C7B-45C59828C349}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97B8C969-E02D-4B1F-9C7B-45C59828C349}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97B8C969-E02D-4B1F-9C7B-45C59828C349}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A554C0F-DBFD-4200-84CD-9B83A907A93F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A554C0F-DBFD-4200-84CD-9B83A907A93F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A554C0F-DBFD-4200-84CD-9B83A907A93F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A554C0F-DBFD-4200-84CD-9B83A907A93F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

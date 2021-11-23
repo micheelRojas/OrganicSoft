@@ -23,10 +23,10 @@ export interface IProductoCombo {
   categoria: string,
   presentacion: string,
   minimoStock: number,
-  componentes: IComponete[],
+  componentes: IComponente[],
   costo: number
 }
-export interface IComponete {
+export interface IComponente {
   producto: IProducto,
   cantidad: number
 }

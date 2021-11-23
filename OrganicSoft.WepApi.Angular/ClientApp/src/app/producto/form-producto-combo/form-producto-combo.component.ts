@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MensajesModule } from '../../mensajes/mensajes.module';
-import { IProductoCombo } from '../producto.component';
+import { IComponente, IProducto, IProductoCombo } from '../producto.component';
 import { ProductoService } from '../producto.service';
 import { Location } from '@angular/common';
 @Component({
@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./form-producto-combo.component.css']
 })
 export class FormProductoComboComponent implements OnInit {
-
+  componentes: IComponente[] = [];
   constructor(private fb: FormBuilder, private productoService: ProductoService,
     private router: Router, private activatedRoute: ActivatedRoute, private mensaje: MensajesModule, private location: Location) { }
   formGroup = this.fb.group({
@@ -27,10 +27,10 @@ export class FormProductoComboComponent implements OnInit {
   });
 
   ngOnInit() {
-
   }
   save() {
     let producto: IProductoCombo = Object.assign({}, this.formGroup.value);
+    producto.componentes = this.componentes;
     console.table(producto); //ver grado por consola
     if (this.formGroup.valid) {
       this.productoService.CreateProductoCombo(producto)
@@ -43,6 +43,11 @@ export class FormProductoComboComponent implements OnInit {
   goBack(): void {
     this.mensaje.mensajeAlertaCorrecto('¡Exitoso!', 'Producto guardado correctamente');
     this.location.back();
+  }
+
+  agregar(componente: IComponente) {
+    this.componentes.push(componente);
+    console.log(componente);
   }
 
   get codigoProducto() {

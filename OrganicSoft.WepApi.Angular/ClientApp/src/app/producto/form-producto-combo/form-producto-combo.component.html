@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Formulario de Producto Combo</h1>
-  <app-list-producto></app-list-producto>
+  <app-list-producto (addComponente)="agregar($event)"></app-list-producto>
   <form [formGroup]="formGroup" (ngSubmit)="save()">
 
     <div class="form-row">
