@@ -25,7 +25,7 @@ namespace OrganicSoft.Selenium.Test
             NavegarHaciaRegistrarProductos(driver);
             LlenarFormularioProductoSimple(driver);
             System.Threading.Thread.Sleep(1000);
-            Assert.AreNotEqual(driver.FindElement(By.Id("swal2-title")).Text,"Error");
+            Assert.AreNotEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
         /// Configura el driver para Chrome
         private IWebDriver GetDriver()
@@ -40,6 +40,14 @@ namespace OrganicSoft.Selenium.Test
             IWebDriver driver = new ChromeDriver(Directory.GetCurrentDirectory(), options);
             return driver;
         }
+
+        //[TearDown]
+        //public void despuesTest() {
+        //    if (driver!=null)
+        //    {
+        //        driver.Quit();
+        //    }
+        //}
         private void NavegarHaciaRegistrarProductos(IWebDriver driver)
         {
             driver.FindElement(By.Id("opcion-registrar-simple")).Click();
