@@ -58,10 +58,10 @@ namespace OrganicSoft.Selenium.Test
             //mirar como mandar un codigo difertente cada ves que eejectuta
            
             driver.FindElement(By.Id("codigoProducto")).SendKeys("123457");
-            driver.FindElement(By.Id("nombre")).SendKeys("Jabon Banana");
-            driver.FindElement(By.Id("descripcion")).SendKeys("Hidrata y Humeta");
+            driver.FindElement(By.Id("nombre")).SendKeys("Jabón Banana");
+            driver.FindElement(By.Id("descripcion")).SendKeys("Hidrata y Humecta");
             driver.FindElement(By.Id("precio")).SendKeys("10000");
-            driver.FindElement(By.Id("categoria")).SendKeys("Jabon");
+            driver.FindElement(By.Id("categoria")).SendKeys("Jabón");
             driver.FindElement(By.Id("presentacion")).SendKeys("80 gr Grande");
             driver.FindElement(By.Id("minimoStock")).SendKeys("1");
             driver.FindElement(By.Id("costo")).SendKeys("5000");
