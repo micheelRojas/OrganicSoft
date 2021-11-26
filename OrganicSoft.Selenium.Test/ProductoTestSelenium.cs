@@ -21,10 +21,11 @@ namespace OrganicSoft.Selenium.Test
         [Test]
         public void ProductosSimples()
         {
-            driver.Navigate().GoToUrl(angularUrl);
+            driver.Navigate().GoToUrl(coreUrl);
             NavegarHaciaRegistrarProductos(driver);
             LlenarFormularioProductoSimple(driver);
-            Assert.IsTrue(driver.FindElement(By.ClassName("swal2-title")).Displayed);
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreNotEqual(driver.FindElement(By.Id("swal2-title")).Text,"Error");
         }
         /// Configura el driver para Chrome
         private IWebDriver GetDriver()
@@ -46,8 +47,9 @@ namespace OrganicSoft.Selenium.Test
         }
         private static void LlenarFormularioProductoSimple(IWebDriver driver)
         {
+            //mirar como mandar un codigo difertente cada ves que eejectuta
            
-            driver.FindElement(By.Id("codigoProducto")).SendKeys("1234");
+            driver.FindElement(By.Id("codigoProducto")).SendKeys("123457");
             driver.FindElement(By.Id("nombre")).SendKeys("Jabon Banana");
             driver.FindElement(By.Id("descripcion")).SendKeys("Hidrata y Humeta");
             driver.FindElement(By.Id("precio")).SendKeys("10000");
@@ -58,5 +60,6 @@ namespace OrganicSoft.Selenium.Test
             driver.FindElement(By.Id("boton-guardar-simple")).Click();
             System.Threading.Thread.Sleep(100);
         }
+       
     }
 }
