@@ -1,6 +1,8 @@
 using FluentAssertions;
 using Newtonsoft.Json;
+using OrganicSoft.Aplicacion.Pedidos;
 using OrganicSoft.Aplicacion.Productos;
+using OrganicSoft.Dominio;
 using OrganicSoft.WebApi.Angular.Test.Base;
 using OrganicSoft.WepApi.Angular;
 using System;
@@ -10,6 +12,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using static OrganicSoft.Aplicacion.CarritoDeCompra.CrearCarritoCompraCommandHandle;
 using static OrganicSoft.Aplicacion.CrearProductoSimpleCommandHandle;
 using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
 using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
@@ -140,5 +143,63 @@ namespace OrganicSoft.WebApi.Angular.Test
             var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 3241);
             producto3421.Should().BeNull();
         }
+
+        [Fact]
+        public async Task PuedeCrearCarritoCompraCorrecto()
+        {
+
+            var request = new CrearCarritoCommand()
+            {
+                Codigo = 1324,
+                CedulaCliente = "1002543452"
+            };
+
+            var jsonObject = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            var httpClient = _factory.CreateClient();
+            var responseHttp = await httpClient.PostAsync("api/CarritoCompra", content);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
+            var respuesta = respuesta2.Substring(12, 40);
+            respuesta.Should().Be("Se creó con exito el carrito de compras.");
+            //var context = _factory.CreateContext();
+            //var carrito = context.CarritoCompra.FirstOrDefault(t => t.Codigo == 1324);
+            //carrito.Should().NotBeNull();
+        }
+
+        //[Fact]
+        //public async Task PuedeCrearPedidoCorrecto()
+        //{
+        //    var jabonSandia = new ProductoSimple(codigo: 1, nombre: "Jabón de Sandía",
+        //    decripcion: " Ea hidrante facial y corporal", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
+        //    var exfoliante = new ProductoSimple(codigo: 2, nombre: "Exfoliante Mujer",
+        //    decripcion: "Un exfoliante es un producto hecho principalmente a base de ingredientes naturales",
+        //    costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
+        //    jabonSandia.EntradaProductos(cantidad: 10);
+        //    exfoliante.EntradaProductos(cantidad: 10);
+
+        //    CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
+        //    ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
+
+        //    carrito.AgregarAlCarrito(productoVenta);
+
+        //    var request = new CrearPedidoCommand()
+        //    {
+        //        CodigoPedido = 1324,
+        //        Carrito = carrito
+        //    };
+
+        //    var jsonObject = JsonConvert.SerializeObject(request);
+        //    var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+        //    var httpClient = _factory.CreateClient();
+        //    var responseHttp = await httpClient.PostAsync("api/Pedido", content);
+        //    responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+        //    var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
+        //    var respuesta = respuesta2.Substring(12, 30);
+        //    respuesta.Should().Be("Se creó con éxito el pedido.");
+        //    ////var context = _factory.CreateContext();
+        //    ////var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
+        //    ////producto3421.Should().NotBeNull();
+        //}
     }
 }
