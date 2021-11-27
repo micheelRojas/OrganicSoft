@@ -35,6 +35,13 @@ namespace OrganicSoft.Aplicacion.Productos
                 return new CrearProductosResponse(ListaErrors);
             }
 
+            var componentes = new List<Componente>();
+            componentes = command.Componentes.Select(
+                c => new Componente
+                (
+                    _productoRepository.FindFirstOrDefault(x => x.Id == c.Producto.Id),
+                    c.Cantidad
+                )).ToList();
             Producto productoNuevo = new ProductoCombo(
                                             command.CodigoProducto,
                                             command.Nombre,
@@ -43,7 +50,7 @@ namespace OrganicSoft.Aplicacion.Productos
                                             command.Categoria,
                                             command.Presentacion,
                                             command.MinimoStock,
-                                            command.Componentes
+                                            componentes
                                             );
 
 
