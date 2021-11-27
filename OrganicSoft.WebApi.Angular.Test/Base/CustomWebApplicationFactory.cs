@@ -14,7 +14,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
     public class CustomWebApplicationFactory<TStartup>
     : WebApplicationFactory<TStartup> where TStartup : class
     {
-        private readonly string ConnectionString = @"Data Source=.\;Initial Catalog=OrganisoftProduction;Integrated Security=True;";
+        private readonly string ConnectionString = @"Server=sqlservermicheel.database.windows.net;Database=organicsoft;User Id = micheel; Password=ismael2021.;";
 
         //private readonly string _connectionString = @"Data Source=C:\sqlite\bancoDataBaseEndToEnd.db";
         public OrganicSoftContext CreateContext()
