@@ -56,9 +56,9 @@ export class ListProductoComponent implements OnInit {
     if (segments[0].toString() == 'lista-productos') {
       this.modoEdicion = true;
     }
-    this.ConsultarMensualidad();
+    this.ConsultarProductos();
   }
-  ConsultarMensualidad() {
+  ConsultarProductos() {
     this.productoService.getProductos()
       .subscribe(productos => this.dataSource.data = productos,
         error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));

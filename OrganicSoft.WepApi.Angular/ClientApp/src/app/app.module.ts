@@ -21,6 +21,7 @@ import { EditProductoComponent } from './producto/edit-producto/edit-producto.co
 import { FormProductoComboComponent } from './producto/form-producto-combo/form-producto-combo.component';
 import { ModalProductoComponent } from './producto/modal-producto/modal-producto.component';
 import { CommonModule } from '@angular/common';
+import { ProductoVentaComponent } from './producto/producto-venta/producto-venta.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { CommonModule } from '@angular/common';
     ListProductoComponent,
     EditProductoComponent,
     FormProductoComboComponent,
-    ModalProductoComponent
+    ModalProductoComponent,
+    ProductoVentaComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -49,6 +51,7 @@ import { CommonModule } from '@angular/common';
       { path: 'lista-productos', component: ProductoComponent },
       { path: 'entrada-productos', component: EditProductoComponent },
       { path: 'registrar-producto-combo', component: FormProductoComboComponent },
+      { path: 'productos-venta', component: ProductoVentaComponent },
     ]),
     MensajesModule,
     BrowserAnimationsModule,

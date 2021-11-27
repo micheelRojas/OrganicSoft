@@ -40,7 +40,8 @@ export interface IProducto {
   presentacion: string,
   minimoStock: number,
   costo: number
-  descuento: IDescuento
+  descuento: IDescuento,
+  imagen: string
 }
 export interface IDescuento {
   id: number,
