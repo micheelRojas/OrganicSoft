@@ -29,11 +29,7 @@ namespace OrganicSoft.Aplicacion.CarritoCompras
             String response = "No se pudo eliminar el producto del carrito";
 
             // VERSION1 COMO FILTRAR VERSION LENTA filtro en el cliente
-            var productoParaElCarrito = carritoCompra.ProductoVentas.Where(t => t.CodigoProducto == command.ProductoVenta.CodigoProducto && carritoCompra.Id == command.IdCarrito);
-            if (productoParaElCarrito == null)
-            {
-                return new EliminarDelCarritoResponse(response);
-            }
+            
             response = carritoCompra.EliminarDelCarrito(command.ProductoVenta.Id);
             _carritoCompraRepository.Update(carritoCompra);//proyectarse el cambio y registrarlo en la unidad de trabajo
             _unitOfWork.Commit();//infraestructura-datos
