@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using static OrganicSoft.Aplicacion.CarritoDeCompra.AgregarAlCarritoCommandHandle;
 using static OrganicSoft.Aplicacion.CarritoDeCompra.CrearCarritoCompraCommandHandle;
 using static OrganicSoft.Aplicacion.CrearProductoSimpleCommandHandle;
 using static OrganicSoft.Aplicacion.EntradadeProductosCommandHandle;
@@ -63,7 +64,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             {
                 Id = 2123,
                 Cantidad = 40
-        };
+            };
 
             var jsonObject = JsonConvert.SerializeObject(request);
             var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
@@ -166,6 +167,44 @@ namespace OrganicSoft.WebApi.Angular.Test
             //var carrito = context.CarritoCompra.FirstOrDefault(t => t.Codigo == 1324);
             //carrito.Should().NotBeNull();
         }
+
+        //[Fact]
+        //public async Task PuedeAgregarACarritoCompraCorrecto()
+        //{
+        //    //var request2 = new CrearCarritoCommand()
+        //    //{
+
+        //    //    Codigo = 2534,
+        //    //    CedulaCliente = "1002543452"
+        //    //};
+
+        //    //var jsonObject2 = JsonConvert.SerializeObject(request2);
+        //    //var content2 = new StringContent(jsonObject2, Encoding.UTF8, "application/json");
+        //    //var httpClient2 = _factory.CreateClient();
+        //    //var responseHttp2 = await httpClient2.PostAsync("api/CarritoCompra", content2);
+        //    //responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
+        //    //var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
+
+        //    ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 543, cantidadVenta: 2);
+        //    var request = new AgregarAlCarritoCommand(423,productoVenta,1);
+        //    //{
+        //    //    Id = 423,
+        //    //    ProductoVenta = productoVenta,
+        //    //    IdCarrito = request2.Id
+        //    //};
+
+        //    var jsonObject = JsonConvert.SerializeObject(request);
+        //    var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+        //    var httpClient = _factory.CreateClient();
+        //    var responseHttp = await httpClient.PutAsync("api/CarritoCompra/add", content);
+        //    responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+        //    var respuesta = await responseHttp.Content.ReadAsStringAsync();
+        //    //var respuesta = respuesta2.Substring(12, 40);
+        //    respuesta.Should().Be("Se ha agregado correctamente el producto");
+        //    //var context = _factory.CreateContext();
+        //    //var carrito = context.CarritoCompra.FirstOrDefault(t => t.Codigo == 1324);
+        //    //carrito.Should().NotBeNull();
+        //}
 
         //[Fact]
         //public async Task PuedeCrearPedidoCorrecto()

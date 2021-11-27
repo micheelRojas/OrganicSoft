@@ -13,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static OrganicSoft.Aplicacion.CarritoCompras.EliminarDelCarritoCommandHandle;
+using static OrganicSoft.Aplicacion.CarritoDeCompra.AgregarAlCarritoCommandHandle;
 using static OrganicSoft.Aplicacion.CarritoDeCompra.CrearCarritoCompraCommandHandle;
 
 namespace OrganicSoft.WepApi.Angular.Controllers
@@ -25,9 +27,10 @@ namespace OrganicSoft.WepApi.Angular.Controllers
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly ICarritoCompraRepository _carritoCompraRepository;
+        private readonly IProductoRepository _productoRepository;
         private readonly OrganicSoftContext _context;
 
-        public CarritoCompraController(IUnitOfWork unitOfWork, ICarritoCompraRepository carritoCompraRepository, OrganicSoftContext context)
+        public CarritoCompraController(IUnitOfWork unitOfWork, IProductoRepository productoRepository, ICarritoCompraRepository carritoCompraRepository, OrganicSoftContext context)
         {
             _context = context;
             _unitOfWork = unitOfWork;
@@ -67,6 +70,32 @@ namespace OrganicSoft.WepApi.Angular.Controllers
             if (response.isOk())
             {
                 await _context.SaveChangesAsync();
+                return Ok(response);
+            }
+            return BadRequest(response.Mensaje);
+
+        }
+
+        [HttpPut("add")]
+        public ActionResult addToCarrito([FromBody] AgregarAlCarritoCommand command)
+        {
+            var service = new AgregarAlCarritoCommandHandle(_unitOfWork, _carritoCompraRepository, _productoRepository);
+            var response = service.Handle(command);
+            if (response.isOk())
+            {
+                return Ok(response);
+            }
+            return BadRequest(response.Mensaje);
+
+        }
+
+        [HttpPut("remove")]
+        public ActionResult removeOfCarrito([FromBody] EliminarDelCarritoCommand command)
+        {
+            var service = new EliminarDelCarritoCommandHandle(_unitOfWork, _carritoCompraRepository);
+            var response = service.Handle(command);
+            if (response.isOk())
+            {
                 return Ok(response);
             }
             return BadRequest(response.Mensaje);
