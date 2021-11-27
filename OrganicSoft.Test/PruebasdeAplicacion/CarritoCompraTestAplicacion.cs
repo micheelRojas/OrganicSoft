@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using OrganicSoft.Aplicacion.CarritoCompras;
 using OrganicSoft.Aplicacion.CarritoDeCompra;
 using OrganicSoft.Aplicacion.Pedidos;
 using OrganicSoft.Dominio;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static OrganicSoft.Aplicacion.CarritoCompras.EliminarDelCarritoCommandHandle;
 using static OrganicSoft.Aplicacion.CarritoDeCompra.AgregarAlCarritoCommandHandle;
 using static OrganicSoft.Aplicacion.CarritoDeCompra.CrearCarritoCompraCommandHandle;
 
@@ -19,6 +21,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
     {
         private OrganicSoftContext _context;
         private AgregarAlCarritoCommandHandle _agregarAlCarritoService;
+        private EliminarDelCarritoCommandHandle _eliminarDelCarritoService;
         private CrearCarritoCompraCommandHandle _crearCarritoService;
         private CrearPedidoCommandHandle _crearPedidoService;
         [SetUp]
@@ -28,6 +31,11 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _context = new OrganicSoftContext(optionsInMemory);
 
             _agregarAlCarritoService = new AgregarAlCarritoCommandHandle(
+                new UnitOfWork(_context),
+                new CarritoCompraRepository(_context),
+                new ProductoRepository(_context));
+
+            _eliminarDelCarritoService = new EliminarDelCarritoCommandHandle(
                 new UnitOfWork(_context),
                 new CarritoCompraRepository(_context),
                 new ProductoRepository(_context));
@@ -72,6 +80,76 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _context.SaveChanges();
 
         }
+
+        [Test]
+        public void PuedoEliminarProductosDelCarritoAplicacion()
+        {
+            //Arange
+            var jabonSandia = new ProductoSimple(codigo: 5434, nombre: "Jabón de Frutal",
+            decripcion: " Ea hidrante facial y corporal 🍉La sandía es rica en antioxidantes, ayuda a" +
+            " retrasar el envejecimiento de la piel debido a su protección contra los radicales libres." +
+            " Gracias a estas propiedades, previene los primeros síntomas de la edad, como manchas, " +
+            "arrugas y unas líneas de expresión marcadas.", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
+            var exfoliante = new ProductoSimple(codigo: 5444, nombre: "Exfoliante Frutal",
+            decripcion: "Un exfoliante es un producto hecho principalmente a base de ingredientes naturales que sirve para remover las impurezas y células muertas de los labios",
+            costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
+            jabonSandia.EntradaProductos(cantidad: 10);
+            exfoliante.EntradaProductos(cantidad: 10);
+            _context.Producto.Add(jabonSandia);
+            _context.SaveChanges();
+
+            CarritoCompra carrito = new CarritoCompra(codigo: 31, cedulaCliente: "1002353645");
+            ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 5434, cantidadVenta: 2);
+            _context.CarritoCompra.Add(carrito);
+            _context.SaveChanges();
+            _agregarAlCarritoService.Handle(new AgregarAlCarritoCommand(1, productoVenta, carrito.Id));
+
+            //Act
+            var response = _eliminarDelCarritoService.Handle(new EliminarDelCarritoCommand(1, productoVenta, carrito.Id));
+            //Assert
+            Assert.AreEqual($"Se eliminó el productó correctamente", response.Mensaje);
+
+            _context.CarritoCompra.Remove(carrito);
+            _context.Producto.Remove(jabonSandia);
+            _context.SaveChanges();
+
+        }
+
+        [Test]
+        public void NoPuedoEliminarProductosDelCarritoAplicacion()
+        {
+            //Arange
+            var jabonSandia = new ProductoSimple(codigo: 5434, nombre: "Jabón de Frutal",
+            decripcion: " Ea hidrante facial y corporal 🍉La sandía es rica en antioxidantes, ayuda a" +
+            " retrasar el envejecimiento de la piel debido a su protección contra los radicales libres." +
+            " Gracias a estas propiedades, previene los primeros síntomas de la edad, como manchas, " +
+            "arrugas y unas líneas de expresión marcadas.", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
+            var exfoliante = new ProductoSimple(codigo: 5444, nombre: "Exfoliante Frutal",
+            decripcion: "Un exfoliante es un producto hecho principalmente a base de ingredientes naturales que sirve para remover las impurezas y células muertas de los labios",
+            costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
+            jabonSandia.EntradaProductos(cantidad: 10);
+            exfoliante.EntradaProductos(cantidad: 10);
+            _context.Producto.Add(jabonSandia);
+            _context.SaveChanges();
+
+            CarritoCompra carrito = new CarritoCompra(codigo: 31, cedulaCliente: "1002353645");
+            ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 5434, cantidadVenta: 2);
+            _context.CarritoCompra.Add(carrito);
+            _context.SaveChanges();
+            _agregarAlCarritoService.Handle(new AgregarAlCarritoCommand(1, productoVenta, carrito.Id));
+
+            //Act
+            ProductoVenta productoVenta2 = new ProductoVenta(codigoProducto: 54, cantidadVenta: 2);
+            var response = _eliminarDelCarritoService.Handle(new EliminarDelCarritoCommand(1, productoVenta2, carrito.Id));
+            //Assert
+            Assert.AreEqual($"No se pudo eliminar el producto", response.Mensaje);
+
+            _context.CarritoCompra.Remove(carrito);
+            _context.Producto.Remove(jabonSandia);
+            _context.SaveChanges();
+
+        }
+
 
         [Test]
         public void PuedoCrearCarritoCompraAplicacion()
