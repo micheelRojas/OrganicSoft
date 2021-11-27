@@ -1,7 +1,7 @@
 import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { MensajesModule } from '../../mensajes/mensajes.module';
 import { ModalProductoComponent } from '../modal-producto/modal-producto.component';
 import { IComponente, IProducto, IProductoEdit } from '../producto.component';
@@ -39,7 +39,7 @@ export class ListProductoComponent implements OnInit {
     public dialog: MatDialog, private location: Location) {
   }
   id: number;
-
+  modoEdicion: boolean = false;
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -49,6 +49,13 @@ export class ListProductoComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
   ngOnInit(): void {
+    
+    const segments: UrlSegment[] = this.activatedRoute.snapshot.url;
+
+    console.log(segments[0].toString());
+    if (segments[0].toString() == 'lista-productos') {
+      this.modoEdicion = true;
+    }
     this.ConsultarMensualidad();
   }
   ConsultarMensualidad() {

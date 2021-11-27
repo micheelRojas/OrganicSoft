@@ -8,7 +8,7 @@ namespace OrganicSoft.Selenium.Test
     public class Tests
     {
         IWebDriver driver;
-        string angularUrl = "http://localhost:4200/";
+        //string angularUrl = "http://localhost:4200/";
         string coreUrl = "https://localhost:5001/";
 
         [SetUp]
@@ -19,14 +19,43 @@ namespace OrganicSoft.Selenium.Test
         }
 
         [Test]
-        public void ProductosSimples()
+        public void RegistroProductosSimples()
         {
             driver.Navigate().GoToUrl(coreUrl);
-            NavegarHaciaRegistrarProductos(driver);
+            NavegarHaciaRegistrarProductos(driver, "opcion-registrar-simple");
             LlenarFormularioProductoSimple(driver);
             System.Threading.Thread.Sleep(1000);
             Assert.AreNotEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
+        [Test]
+        public void RegistroProductosSimplesError()
+        {
+            driver.Navigate().GoToUrl(coreUrl);
+            NavegarHaciaRegistrarProductos(driver, "opcion-registrar-simple");
+            LlenarFormularioProductoSimple(driver);
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
+        }
+        [Test]
+        public void RegistroProductosCombo()
+        {
+            driver.Navigate().GoToUrl(coreUrl);
+            NavegarHaciaRegistrarProductos(driver, "opcion-registrar-combo");
+            LlenarFormularioProductoCombo(driver);
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreNotEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
+        }
+        [Test]
+        public void RegistroProductosComboError()
+        {
+            driver.Navigate().GoToUrl(coreUrl);
+            NavegarHaciaRegistrarProductos(driver, "opcion-registrar-combo");
+            LlenarFormularioProductoCombo(driver);
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
+        }
+
+
         /// Configura el driver para Chrome
         private IWebDriver GetDriver()
         {
@@ -48,16 +77,16 @@ namespace OrganicSoft.Selenium.Test
         //        driver.Quit();
         //    }
         //}
-        private void NavegarHaciaRegistrarProductos(IWebDriver driver)
+        private void NavegarHaciaRegistrarProductos(IWebDriver driver,string ir)
         {
-            driver.FindElement(By.Id("opcion-registrar-simple")).Click();
+            driver.FindElement(By.Id(ir)).Click();
             System.Threading.Thread.Sleep(100);
         }
         private static void LlenarFormularioProductoSimple(IWebDriver driver)
         {
             //mirar como mandar un codigo difertente cada ves que eejectuta
            
-            driver.FindElement(By.Id("codigoProducto")).SendKeys("123457");
+            driver.FindElement(By.Id("codigoProducto")).SendKeys("1234578");
             driver.FindElement(By.Id("nombre")).SendKeys("Jabón Banana");
             driver.FindElement(By.Id("descripcion")).SendKeys("Hidrata y Humecta");
             driver.FindElement(By.Id("precio")).SendKeys("10000");
@@ -68,6 +97,23 @@ namespace OrganicSoft.Selenium.Test
             driver.FindElement(By.Id("boton-guardar-simple")).Click();
             System.Threading.Thread.Sleep(100);
         }
-       
+        private static void LlenarFormularioProductoCombo(IWebDriver driver)
+        {
+            //mirar como mandar un codigo difertente cada ves que eejectuta
+            driver.FindElement(By.Id("selecionar-componete")).Click();
+            System.Threading.Thread.Sleep(100);
+            driver.FindElement(By.Id("boton-confirmar")).Click();
+            System.Threading.Thread.Sleep(100);
+            driver.FindElement(By.Id("codigoProducto")).SendKeys("987978");
+            driver.FindElement(By.Id("nombre")).SendKeys("Jabón Banana");
+            driver.FindElement(By.Id("descripcion")).SendKeys("Hidrata y Humecta");
+            driver.FindElement(By.Id("precio")).SendKeys("10000");
+            driver.FindElement(By.Id("categoria")).SendKeys("Jabón");
+            driver.FindElement(By.Id("presentacion")).SendKeys("80 gr Grande");
+            driver.FindElement(By.Id("minimoStock")).SendKeys("1");
+            driver.FindElement(By.Id("boton-guardar-combo")).Click();
+            System.Threading.Thread.Sleep(100);
+        }
+
     }
 }
