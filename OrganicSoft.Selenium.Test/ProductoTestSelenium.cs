@@ -11,14 +11,14 @@ namespace OrganicSoft.Selenium.Test
         //string angularUrl = "http://localhost:4200/";
         string coreUrl = "https://localhost:5001/";
 
-        [SetUp]
+        //[SetUp]
         public void Setup()
         {
             driver = GetDriver();
             driver.Manage().Window.Maximize();
         }
 
-        [Test]
+        //[Test]
         public void RegistroProductosSimples()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -27,7 +27,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreNotEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
-        [Test]
+        //[Test]
         public void RegistroProductosSimplesError()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -36,7 +36,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
-        [Test]
+        //[Test]
         public void RegistroProductosCombo()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -45,7 +45,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreNotEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
-        [Test]
+        //[Test]
         public void RegistroProductosComboError()
         {
             driver.Navigate().GoToUrl(coreUrl);
