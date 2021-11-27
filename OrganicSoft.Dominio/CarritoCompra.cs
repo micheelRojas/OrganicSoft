@@ -45,7 +45,7 @@ namespace OrganicSoft.Dominio
             String respuesta = "No se pudo eliminar el producto";
             foreach (var producto in ProductoVentas)
             {
-                if (producto.CodigoProducto.Equals(codigoProductoVenta))
+                if (producto.Id.Equals(codigoProductoVenta) || producto.CodigoProducto.Equals(codigoProductoVenta))
                 {
                     ProductoVentas.Remove(producto);
                     respuesta = "Se eliminó el productó correctamente";
