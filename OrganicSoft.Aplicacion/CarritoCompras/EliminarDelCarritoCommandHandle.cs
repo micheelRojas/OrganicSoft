@@ -13,12 +13,12 @@ namespace OrganicSoft.Aplicacion.CarritoCompras
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly ICarritoCompraRepository _carritoCompraRepository;
-        private readonly IProductoRepository _productoRepository;
-        public EliminarDelCarritoCommandHandle(IUnitOfWork unitOfWork, ICarritoCompraRepository carritoCompraRepository, IProductoRepository productoRepository)
+        //private readonly IProductoRepository _productoRepository;
+        public EliminarDelCarritoCommandHandle(IUnitOfWork unitOfWork, ICarritoCompraRepository carritoCompraRepository)
         {
             _unitOfWork = unitOfWork;
             _carritoCompraRepository = carritoCompraRepository;
-            _productoRepository = productoRepository;
+            //_productoRepository = productoRepository;
         }
         public EliminarDelCarritoResponse Handle(EliminarDelCarritoCommand command)
         {

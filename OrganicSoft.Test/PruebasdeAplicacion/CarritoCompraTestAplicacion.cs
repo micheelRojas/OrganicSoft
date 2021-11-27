@@ -37,8 +37,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
 
             _eliminarDelCarritoService = new EliminarDelCarritoCommandHandle(
                 new UnitOfWork(_context),
-                new CarritoCompraRepository(_context),
-                new ProductoRepository(_context));
+                new CarritoCompraRepository(_context));
 
             _crearCarritoService = new CrearCarritoCompraCommandHandle(
                 new UnitOfWork(_context),
