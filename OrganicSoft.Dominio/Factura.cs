@@ -33,7 +33,7 @@ namespace OrganicSoft.Dominio
             if (Pedido.Estado.Equals("CONFIRMADO")) { 
                 //int num = 0;
                 double sumaSubtotalesDetalles = 0;
-                foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductosVenta)
+                foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductoVentas)
                 {
                     foreach (Producto producto in inventario.productos)
                     {

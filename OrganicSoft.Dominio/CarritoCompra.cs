@@ -21,7 +21,6 @@ namespace OrganicSoft.Dominio
             CedulaCliente = cedulaCliente;
             ProductoVentas = new List<ProductoVenta>();
         }
-        public IReadOnlyCollection<ProductoVenta> ProductosVenta => ProductoVentas.AsReadOnly();
 
         public string AgregarAlCarrito(ProductoVenta productoVenta)
         {
@@ -44,7 +43,7 @@ namespace OrganicSoft.Dominio
         {
 
             String respuesta = "No se pudo eliminar el producto";
-            foreach (var producto in ProductosVenta)
+            foreach (var producto in ProductoVentas)
             {
                 if (producto.CodigoProducto.Equals(codigoProductoVenta))
                 {
@@ -64,7 +63,7 @@ namespace OrganicSoft.Dominio
                 respuesta = "La cantidad a disminuir debe ser mayor a cero";
                 return respuesta;
             }
-            foreach (var productoVenta in ProductosVenta)
+            foreach (var productoVenta in ProductoVentas)
             {
                 if (codigoProductoVenta.Equals(productoVenta.CodigoProducto))
                 {
@@ -100,7 +99,7 @@ namespace OrganicSoft.Dominio
                 respuesta = "La cantidad a aumentar debe ser mayor a cero";
                 return respuesta;
             }
-            foreach (var productoVenta in ProductosVenta)
+            foreach (var productoVenta in ProductoVentas)
             {
                 if (codigoProductoVenta.Equals(productoVenta.CodigoProducto))
                 {

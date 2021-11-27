@@ -22,7 +22,7 @@ namespace OrganicSoft.Aplicacion.Dobles
         public void CalcularTotal(Pedido Pedido)
         {
             if (Pedido.Estado.Equals("CONFIRMADO")) { 
-                    foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductosVenta)
+                    foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductoVentas)
                     {
                         foreach (Producto producto in inventario.productos)
                         {
