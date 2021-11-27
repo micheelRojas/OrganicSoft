@@ -35,7 +35,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
 
                 services.AddDbContext<OrganicSoftContext>(options =>
                 {
-                    options.UseSqlServer(@"Data Source=DESKTOP-FFMH835\SQLEXPRESS;Initial Catalog=OrganisoftProduction;Integrated Security=True;");
+                    options.UseSqlServer(@"Server=sqlservermicheel.database.windows.net;Database=organicsoft;User Id = micheel; Password=ismael2021.;");
                 });
                 #endregion
 
