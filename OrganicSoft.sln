@@ -11,13 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.Aplicacion", "O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.Infraestructura", "OrganicSoft.Infraestructura\OrganicSoft.Infraestructura.csproj", "{97EC204C-D47C-421D-9872-CA87445B02E2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.WepApi", "OrganicSoft.WepApi\OrganicSoft.WepApi.csproj", "{23BC5B93-D771-4C11-B379-881F0CD63A0A}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.WepApi.Angular", "OrganicSoft.WepApi.Angular\OrganicSoft.WepApi.Angular.csproj", "{F396E97D-C718-46F0-8BFD-B8EDB3264637}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.WebApi.Angular.Test", "OrganicSoft.WebApi.Angular.Test\OrganicSoft.WebApi.Angular.Test.csproj", "{97B8C969-E02D-4B1F-9C7B-45C59828C349}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganicSoft.Selenium.Test", "OrganicSoft.Selenium.Test\OrganicSoft.Selenium.Test.csproj", "{4A554C0F-DBFD-4200-84CD-9B83A907A93F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganicSoft.Selenium.Test", "OrganicSoft.Selenium.Test\OrganicSoft.Selenium.Test.csproj", "{4A554C0F-DBFD-4200-84CD-9B83A907A93F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{97EC204C-D47C-421D-9872-CA87445B02E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97EC204C-D47C-421D-9872-CA87445B02E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97EC204C-D47C-421D-9872-CA87445B02E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23BC5B93-D771-4C11-B379-881F0CD63A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23BC5B93-D771-4C11-B379-881F0CD63A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23BC5B93-D771-4C11-B379-881F0CD63A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23BC5B93-D771-4C11-B379-881F0CD63A0A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F396E97D-C718-46F0-8BFD-B8EDB3264637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F396E97D-C718-46F0-8BFD-B8EDB3264637}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F396E97D-C718-46F0-8BFD-B8EDB3264637}.Release|Any CPU.ActiveCfg = Release|Any CPU
