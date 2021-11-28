@@ -13,7 +13,7 @@ export class ProductoVentaComponent implements OnInit {
   productos: IProducto[] = [];
   constructor(private productoService: ProductoService, private router: Router,
     private activatedRoute: ActivatedRoute, private mensaje: MensajesModule) { }
-
+  filterProducto = '';
   ngOnInit() {
     this.ConsultarProductos();
   }

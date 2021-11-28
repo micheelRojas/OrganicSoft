@@ -22,6 +22,7 @@ import { FormProductoComboComponent } from './producto/form-producto-combo/form-
 import { ModalProductoComponent } from './producto/modal-producto/modal-producto.component';
 import { CommonModule } from '@angular/common';
 import { ProductoVentaComponent } from './producto/producto-venta/producto-venta.component';
+import { FilterPipe } from './pipes/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { ProductoVentaComponent } from './producto/producto-venta/producto-venta
     EditProductoComponent,
     FormProductoComboComponent,
     ModalProductoComponent,
-    ProductoVentaComponent
+    ProductoVentaComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
