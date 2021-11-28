@@ -5,6 +5,7 @@
       <input type="text" class=" form-control" name="filterProducto" placeholder="Buscar..." [(ngModel)]="filterProducto">
     </div>
   </div>
+  <button mat-icon-button color="warn" (click)="crear()"><mat-icon>Crear Carrito</mat-icon></button>
 </div>
 <div class="row">
 
@@ -26,6 +27,7 @@
           </div>
         </div>
       </div>
+      <button mat-icon-button color="warn" (click)="agg(producto.id)"><mat-icon>¡Lo quiero!</mat-icon></button>
     </div>
   </div>
   <div class="col-xs-12 col-sm-12 col-md-12 mt-5 container-notFound" *ngIf="productos.length<=0">

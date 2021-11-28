@@ -23,6 +23,9 @@ import { ModalProductoComponent } from './producto/modal-producto/modal-producto
 import { CommonModule } from '@angular/common';
 import { ProductoVentaComponent } from './producto/producto-venta/producto-venta.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ModalDatosCarritoComponent } from './carrito-compra/modal-datos-carrito/modal-datos-carrito.component';
+import { CarritoCompraComponent } from './carrito-compra/carrito-compra.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +40,10 @@ import { FilterPipe } from './pipes/filter.pipe';
     FormProductoComboComponent,
     ModalProductoComponent,
     ProductoVentaComponent,
-    FilterPipe
+    FilterPipe,
+    ModalDatosCarritoComponent,
+    CarritoCompraComponent,
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -54,6 +60,7 @@ import { FilterPipe } from './pipes/filter.pipe';
       { path: 'entrada-productos', component: EditProductoComponent },
       { path: 'registrar-producto-combo', component: FormProductoComboComponent },
       { path: 'productos-venta', component: ProductoVentaComponent },
+      { path: 'datos-carrito', component: ModalDatosCarritoComponent },
     ]),
     MensajesModule,
     BrowserAnimationsModule,
@@ -64,6 +71,7 @@ import { FilterPipe } from './pipes/filter.pipe';
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [ModalProductoComponent],
+
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
