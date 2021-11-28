@@ -15,4 +15,8 @@ export class CarritoCompraService {
   addToCarrito(producto: IAggCarritoCompra): Observable<IAggCarritoCompra> {
     return this.http.put<IAggCarritoCompra>(this.apiURL + '/add/', producto);
   }
+  GetCarritos(): Observable<ICarritoCompra[]> {
+    return this.http.get<ICarritoCompra[]>(this.apiURL);
+  }
+
 }

@@ -22,8 +22,7 @@ export interface ICarritoCompra {
 }
 export interface IAggCarritoCompra {
   id: number,
-  productoVenta: IProductoVenta,
-  idCarrito: number
+  productoVenta: IProductoVenta
 }
 export interface IProductoVenta {
   codigoProducto: number,

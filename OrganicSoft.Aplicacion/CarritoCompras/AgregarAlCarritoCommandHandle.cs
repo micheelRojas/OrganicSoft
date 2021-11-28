@@ -23,18 +23,18 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
         public AgregarAlCarritoResponse Handle(AgregarAlCarritoCommand command)
         {
 
-            var carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.IdCarrito || carrito.Codigo == command.IdCarrito);//infraestructura-datos
+            var carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.Id || carrito.Codigo == command.Id);//infraestructura-datos
             if (carritoCompra == null) return new AgregarAlCarritoResponse("el carrito no existe");
 
             String response = "No se pudo agregar el producto al carrito";
 
             // VERSION1 COMO FILTRAR VERSION LENTA filtro en el cliente
-            var productoParaElCarrito = _productoRepository.GetAll().Where(t => t.CodigoProducto == command.ProductoVenta.CodigoProducto);
-            if (productoParaElCarrito == null) 
+            var productoParaElCarrito = _productoRepository.FindBy(t => t.CodigoProducto == command.ProductoVenta.CodigoProducto || t.CodigoProducto==command.ProductoVenta.CodigoProducto);
+            if (productoParaElCarrito == null)
             {
                 return new AgregarAlCarritoResponse(response);
             }
-            response = carritoCompra.AgregarAlCarrito(command.ProductoVenta);
+            response = carritoCompra.AgregarAlCarrito(new ProductoVenta(command.ProductoVenta.CodigoProducto,command.ProductoVenta.CantidadVenta));
             _carritoCompraRepository.Update(carritoCompra);//proyectarse el cambio y registrarlo en la unidad de trabajo
             _unitOfWork.Commit();//infraestructura-datos
 
@@ -62,8 +62,8 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
             //    }
             //}
             return new AgregarAlCarritoResponse(response);
-            
-            
+
+
         }
         public class AgregarAlCarritoCommand
         {
@@ -71,16 +71,30 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
             {
             }
 
-            public AgregarAlCarritoCommand(int id, ProductoVenta productoVenta, int idCarrito)
+            public AgregarAlCarritoCommand(int id, ProductoVentaCommad productoVenta)
             {
                 Id = id;
                 ProductoVenta = productoVenta;
-                IdCarrito = idCarrito;
+
             }
 
             public int Id { get; set; }
-            public ProductoVenta ProductoVenta { get; set; }
-            public int IdCarrito { get; set; }
+            public ProductoVentaCommad ProductoVenta { get; set; }
+        }
+        public class ProductoVentaCommad
+         {
+            public ProductoVentaCommad()
+            {
+            }
+
+            public ProductoVentaCommad(int codigoProducto, int cantidadVenta)
+            {
+                CodigoProducto = codigoProducto;
+                CantidadVenta = cantidadVenta;
+            }
+
+            public int CodigoProducto { get; set; }
+            public int CantidadVenta { get;  set; }
         }
 
         public record AgregarAlCarritoResponse

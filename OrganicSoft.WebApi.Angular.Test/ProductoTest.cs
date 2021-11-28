@@ -27,7 +27,7 @@ namespace OrganicSoft.WebApi.Angular.Test
         {
             _factory = factory;
         }
-        [Fact]
+       // [Fact]
         public async Task PuedeCrearProductoSimpleCorrecto()
         {
             var request = new CrearProductosCommand()
@@ -57,7 +57,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             producto3421.Should().NotBeNull();
         }
 
-        [Fact]
+        //[Fact]
         public async Task PuedoHaceEntradaDeProductoSimpleCorrecto()
         {
             var request = new EntradadeProductosCommand()
@@ -101,7 +101,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             producto3421.Should().BeNull();
         }
 
-        [Fact]
+       // [Fact]
         public async Task PuedoHaceSalidaDeProductoSimpleCorrecto()
         {
             var request = new SalidaProductosCommand()

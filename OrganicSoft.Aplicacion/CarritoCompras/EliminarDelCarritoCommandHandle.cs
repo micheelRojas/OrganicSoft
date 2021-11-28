@@ -30,7 +30,7 @@ namespace OrganicSoft.Aplicacion.CarritoCompras
 
             // VERSION1 COMO FILTRAR VERSION LENTA filtro en el cliente
             
-            response = carritoCompra.EliminarDelCarrito(command.ProductoVenta.Id);
+            response = carritoCompra.EliminarDelCarrito(command.ProductoVenta.CodigoProducto);
             _carritoCompraRepository.Update(carritoCompra);//proyectarse el cambio y registrarlo en la unidad de trabajo
             _unitOfWork.Commit();//infraestructura-datos
 

@@ -25,6 +25,7 @@ import { ProductoVentaComponent } from './producto/producto-venta/producto-venta
 import { FilterPipe } from './pipes/filter.pipe';
 import { ModalDatosCarritoComponent } from './carrito-compra/modal-datos-carrito/modal-datos-carrito.component';
 import { CarritoCompraComponent } from './carrito-compra/carrito-compra.component';
+import { ListCarritoCompraComponent } from './carrito-compra/list-carrito-compra/list-carrito-compra.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { CarritoCompraComponent } from './carrito-compra/carrito-compra.componen
     FilterPipe,
     ModalDatosCarritoComponent,
     CarritoCompraComponent,
+    ListCarritoCompraComponent,
     
   ],
   imports: [
@@ -59,8 +61,9 @@ import { CarritoCompraComponent } from './carrito-compra/carrito-compra.componen
       { path: 'lista-productos', component: ProductoComponent },
       { path: 'entrada-productos', component: EditProductoComponent },
       { path: 'registrar-producto-combo', component: FormProductoComboComponent },
-      { path: 'productos-venta', component: ProductoVentaComponent },
+      { path: 'productos-venta/:id', component: ProductoVentaComponent },
       { path: 'datos-carrito', component: ModalDatosCarritoComponent },
+      { path: 'lista-carritos', component: CarritoCompraComponent },
     ]),
     MensajesModule,
     BrowserAnimationsModule,

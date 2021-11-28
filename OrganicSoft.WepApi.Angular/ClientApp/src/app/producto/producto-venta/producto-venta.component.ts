@@ -19,26 +19,25 @@ import { ProductoService } from '../producto.service';
 export class ProductoVentaComponent implements OnInit {
   productos: IProducto[] = [];
   carrito!: ICarritoCompra;
-  productoVenta!: IProductoVenta;
   aggCarrito!: IAggCarritoCompra;
+  id: number;
   constructor(private productoService: ProductoService, private router: Router,
     private activatedRoute: ActivatedRoute, private mensaje: MensajesModule, public dialog: MatDialog, private carritoService: CarritoCompraService) { }
   filterProducto = '';
   codigo: number;
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      if (params["id"] == undefined) {
+        return;
+      }
+      this.id = parseInt(params["id"]);
+    })
     this.ConsultarProductos();
   }
   ConsultarProductos() {
     this.productoService.getProductos()
       .subscribe(productos => this.productos = productos,
         error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
-  }
-  crear() {
-    const dialogRef = this.dialog.open(ModalDatosCarritoComponent, {
-      width: '500px',
-       
-    });
-   // this.router.navigate(["/datos-carrito"]);
   }
   
   agg(codigo: number) {
@@ -52,12 +51,16 @@ export class ProductoVentaComponent implements OnInit {
     });
     let aggregar: IAggCarritoCompra;
     dialogRefe.afterClosed().subscribe(result => {
-      this.productoVenta = {
-        cantidadVenta: Number(result),
-        codigoProducto: this.codigo
+      this.aggCarrito = {
+        productoVenta:{
+          cantidadVenta: Number(result),
+          codigoProducto: this.codigo
+        },
+        id: this.id
+        
       };
-      console.table(this.productoVenta);
-      this.aggCarrito.productoVenta = this.productoVenta;
+      console.table(this.aggCarrito);
+      console.log(this.id);
       this.carritoService.addToCarrito(this.aggCarrito)
         .subscribe(producto => this.exitoso(),
           error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));

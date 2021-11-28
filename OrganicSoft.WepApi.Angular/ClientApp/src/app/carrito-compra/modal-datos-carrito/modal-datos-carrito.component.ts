@@ -13,7 +13,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./modal-datos-carrito.component.css']
 })
 export class ModalDatosCarritoComponent implements OnInit {
-
+ 
   constructor(private fb: FormBuilder, private carritoService: CarritoCompraService, private mensaje: MensajesModule, private router: Router, private activatedRoute: ActivatedRoute, private location: Location) { }
   formGroup = this.fb.group({
     codigo: ['', [Validators.required]],
@@ -36,7 +36,7 @@ export class ModalDatosCarritoComponent implements OnInit {
   }
   exitoso(): void {
     this.mensaje.mensajeAlertaCorrecto('¡Exitoso!', 'Datos del carrito guardados correctamente');
-   // this.location.back();
+
 
   }
   get codigo() {

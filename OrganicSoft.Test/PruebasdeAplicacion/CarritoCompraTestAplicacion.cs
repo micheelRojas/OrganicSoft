@@ -70,7 +70,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _context.SaveChanges();
 
             //Act
-            var response = _agregarAlCarritoService.Handle(new AgregarAlCarritoCommand(1, productoVenta, carrito.Id));
+            var response = _agregarAlCarritoService.Handle(new AgregarAlCarritoCommand(carrito.Id, new ProductoVentaCommad(productoVenta.CodigoProducto,productoVenta.CantidadVenta)));
             //Assert
             Assert.AreEqual($"Se ha agregado correctamente el producto", response.Mensaje);
 
@@ -101,10 +101,10 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 5434, cantidadVenta: 2);
             _context.CarritoCompra.Add(carrito);
             _context.SaveChanges();
-            _agregarAlCarritoService.Handle(new AgregarAlCarritoCommand(1, productoVenta, carrito.Id));
+            _agregarAlCarritoService.Handle(new AgregarAlCarritoCommand(carrito.Id, new ProductoVentaCommad(productoVenta.CodigoProducto, productoVenta.CantidadVenta)));
 
             //Act
-            var response = _eliminarDelCarritoService.Handle(new EliminarDelCarritoCommand(1, productoVenta, carrito.Id));
+            var response = _eliminarDelCarritoService.Handle(new EliminarDelCarritoCommand(carrito.Id, productoVenta, carrito.Id));
             //Assert
             Assert.AreEqual($"Se eliminó el productó correctamente", response.Mensaje);
 
@@ -135,7 +135,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 5434, cantidadVenta: 2);
             _context.CarritoCompra.Add(carrito);
             _context.SaveChanges();
-            _agregarAlCarritoService.Handle(new AgregarAlCarritoCommand(1, productoVenta, carrito.Id));
+            _agregarAlCarritoService.Handle(new AgregarAlCarritoCommand(carrito.Id, new ProductoVentaCommad(productoVenta.CodigoProducto, productoVenta.CantidadVenta)));
 
             //Act
             ProductoVenta productoVenta2 = new ProductoVenta(codigoProducto: 54, cantidadVenta: 2);
