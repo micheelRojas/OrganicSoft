@@ -14,7 +14,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
     public class CustomWebApplicationFactory<TStartup>
     : WebApplicationFactory<TStartup> where TStartup : class
     {
-        private readonly string ConnectionString = @" Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private readonly string ConnectionString = @"Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         /*
          * @"Server=sqlservermicheel.database.windows.net;Database=organicsoft;User Id = micheel; Password=ismael2021.;";
@@ -40,7 +40,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
 
                 services.AddDbContext<OrganicSoftContext>(options =>
                 {
-                    options.UseSqlServer(@" Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                    options.UseSqlServer(@"Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
                 });
                 #endregion
 
@@ -50,8 +50,9 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
                 {
                     var scopedServices = scope.ServiceProvider;
                     var db = scopedServices.GetRequiredService<OrganicSoftContext>();
-                    db.Database.EnsureDeleted();
-                    db.Database.EnsureCreated();
+                   
+                   // db.Database.EnsureDeleted();
+                    //db.Database.EnsureCreated();
                     //invocar clase que inicilice los datos semillas. 
                 }
                 #endregion 

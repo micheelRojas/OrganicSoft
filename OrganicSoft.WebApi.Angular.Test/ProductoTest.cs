@@ -27,14 +27,12 @@ namespace OrganicSoft.WebApi.Angular.Test
         {
             _factory = factory;
         }
-       // [Fact]
+       [Fact]
         public async Task PuedeCrearProductoSimpleCorrecto()
         {
             var request = new CrearProductosCommand()
-            {
-                
-                TipoProducto = "SIMPLE",
-                CodigoProducto = 2123,
+            {   Id = 0,
+                CodigoProducto = 2125,
                 Nombre = "Jabón de cuerpo",
                 Descripcion = "Jabón para el cuerpo",
                 Precio = 10000,
@@ -42,7 +40,7 @@ namespace OrganicSoft.WebApi.Angular.Test
                 Presentacion = "Pequeño",
                 MinimoStock = 2,
                 Costo = 12000
-            };
+        };
 
             var jsonObject = JsonConvert.SerializeObject(request);
             var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
@@ -53,13 +51,14 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta = respuesta2.Substring(12, 30);
             respuesta.Should().Be("Se creó con éxito el producto.");
             var context = _factory.CreateContext();
-            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
+            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2125);
             producto3421.Should().NotBeNull();
         }
 
-        //[Fact]
+        [Fact]
         public async Task PuedoHaceEntradaDeProductoSimpleCorrecto()
         {
+            
             var request = new EntradadeProductosCommand()
             {
                 Id = 2123,
@@ -101,7 +100,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             producto3421.Should().BeNull();
         }
 
-       // [Fact]
+        [Fact]
         public async Task PuedoHaceSalidaDeProductoSimpleCorrecto()
         {
             var request = new SalidaProductosCommand()
