@@ -35,6 +35,7 @@ namespace OrganicSoft.WepApi.Angular.Controllers
             _context = context;
             _unitOfWork = unitOfWork;
             _carritoCompraRepository = carritoCompraRepository;
+            _productoRepository = productoRepository;
 
         }
         [HttpGet]

@@ -14,12 +14,12 @@ namespace OrganicSoft.Dominio
         public List<ProductoVenta> ProductoVentas { get; private set; }
 
         Inventario inventario = Inventario.getInventario();
-        public CarritoCompra() { }
-        public CarritoCompra(int codigo, string cedulaCliente)
+        public CarritoCompra() { ProductoVentas = new List<ProductoVenta>(); }
+        public CarritoCompra(int codigo, string cedulaCliente):this()
         {
             Codigo = codigo;
             CedulaCliente = cedulaCliente;
-            ProductoVentas = new List<ProductoVenta>();
+            
         }
 
         public string AgregarAlCarrito(ProductoVenta productoVenta)
@@ -33,7 +33,7 @@ namespace OrganicSoft.Dominio
             
 
 
-            ProductoVentas.Add(productoVenta);
+            ProductoVentas.Add(new ProductoVenta(productoVenta.CodigoProducto,productoVenta.CantidadVenta));
             respuesta = $"Se ha agregado correctamente el producto";
                
             return respuesta;

@@ -59,11 +59,15 @@ export class ProductoVentaComponent implements OnInit {
         id: this.id
         
       };
-      console.table(this.aggCarrito);
+      
+        console.table(this.aggCarrito);
       console.log(this.id);
-      this.carritoService.addToCarrito(this.aggCarrito)
-        .subscribe(producto => this.exitoso(),
-          error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
+      if (this.aggCarrito.productoVenta.cantidadVenta > 0) {
+        this.carritoService.addToCarrito(this.aggCarrito)
+          .subscribe(producto => this.exitoso(),
+            error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
+      }
+     
       console.log(result);
     });
   }

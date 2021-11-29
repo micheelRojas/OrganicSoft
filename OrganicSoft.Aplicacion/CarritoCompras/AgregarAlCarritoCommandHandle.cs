@@ -29,7 +29,8 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
             String response = "No se pudo agregar el producto al carrito";
 
             // VERSION1 COMO FILTRAR VERSION LENTA filtro en el cliente
-            var productoParaElCarrito = _productoRepository.FindBy(t => t.CodigoProducto == command.ProductoVenta.CodigoProducto || t.CodigoProducto==command.ProductoVenta.CodigoProducto);
+            var productoParaElCarrito = _productoRepository.FindFirstOrDefault(t => t.Id == command.ProductoVenta.CodigoProducto || t.CodigoProducto==command.ProductoVenta.CodigoProducto);
+            //_productoRepository.GetAll().Where(t => t.CodigoProducto == command.ProductoVenta.CodigoProducto);
             if (productoParaElCarrito == null)
             {
                 return new AgregarAlCarritoResponse(response);
