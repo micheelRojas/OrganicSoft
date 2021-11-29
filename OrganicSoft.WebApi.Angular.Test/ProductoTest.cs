@@ -32,7 +32,7 @@ namespace OrganicSoft.WebApi.Angular.Test
         {
             var request = new CrearProductosCommand()
             {   Id = 0,
-                CodigoProducto = 2125,
+                CodigoProducto = 2124,
                 Nombre = "Jabón de cuerpo",
                 Descripcion = "Jabón para el cuerpo",
                 Precio = 10000,
@@ -51,7 +51,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta = respuesta2.Substring(12, 30);
             respuesta.Should().Be("Se creó con éxito el producto.");
             var context = _factory.CreateContext();
-            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2125);
+            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2124);
             producto3421.Should().NotBeNull();
         }
 
