@@ -14,10 +14,11 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
     public class CustomWebApplicationFactory<TStartup>
     : WebApplicationFactory<TStartup> where TStartup : class
     {
-        private readonly string ConnectionString = @"Data Source=DESKTOP-FFMH835\SQLEXPRESS; Initial Catalog=OrganisoftProduction; Integrated Security=True; MultipleActiveResultSets=True";
+        private readonly string ConnectionString = @"Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=1000;";
 
         public OrganicSoftContext _context { get; private set; }
-        /* Cadena de conexión correcta: Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=1000;
+        /* Cadena conexión prueba local: Data Source=DESKTOP-FFMH835\SQLEXPRESS; Initial Catalog=OrganisoftProduction; Integrated Security=True; MultipleActiveResultSets=True
+         * Cadena de conexión correcta: Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=1000;
          * @"Server=sqlservermicheel.database.windows.net;Database=organicsoft;User Id = micheel; Password=ismael2021.;";
          * Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
          */
@@ -66,7 +67,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
 
                 services.AddDbContext<OrganicSoftContext>(options =>
                 {
-                    options.UseSqlServer(@"Data Source=DESKTOP-FFMH835\SQLEXPRESS; Initial Catalog=OrganisoftProduction; Integrated Security=True; MultipleActiveResultSets=True");
+                    options.UseSqlServer(@"Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=1000;");
                 });
                 #endregion
 
