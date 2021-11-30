@@ -232,6 +232,45 @@ namespace OrganicSoft.WebApi.Angular.Test
             carrito.Should().NotBeNull();
         }
 
+        [Fact]
+        public async Task NoPuedeAgregarACarritoCompraCorrecto()
+        {
+
+            //Creación del carrito
+            var request2 = new CrearCarritoCommand()
+            {
+
+                Codigo = 25345,
+                CedulaCliente = "1002543452"
+            };
+
+            var jsonObject2 = JsonConvert.SerializeObject(request2);
+            var content2 = new StringContent(jsonObject2, Encoding.UTF8, "application/json");
+            var httpClient2 = _factory.CreateClient();
+            var responseHttp2 = await httpClient2.PostAsync("api/CarritoCompra", content2);
+            responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
+
+            ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 212, cantidadVenta: 2);
+            var request = new AgregarAlCarritoCommand()
+            {
+                Id = request2.Codigo,
+                ProductoVenta = productoVenta
+            };
+
+            var jsonObject = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            var httpClient = _factory.CreateClient();
+            var responseHttp = await httpClient.PutAsync("api/CarritoCompra/add", content);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta = await responseHttp.Content.ReadAsStringAsync();
+            var respuesta3 = respuesta.Substring(12, 41);
+            respuesta3.Should().Be("No se pudo agregar el producto al carrito");
+            //var context = _factory.CreateContext();
+            var carrito = _context.CarritoCompra.FirstOrDefault(t => t.Codigo == 25345);
+            carrito.Should().NotBeNull();
+        }
+
         //[Fact]
         //public async Task PuedeCrearPedidoCorrecto()
         //{
