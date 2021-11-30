@@ -45,7 +45,8 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
 
             _crearPedidoService = new CrearPedidoCommandHandle(
                 new UnitOfWork(_context),
-                new PedidoRepository(_context));
+                new PedidoRepository(_context),
+                new CarritoCompraRepository(_context));
         }
         [Test]
         public void PuedoAgregarProductosAlCarritoAplicacion()
@@ -202,6 +203,8 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
 
         }
 
+        //SE COMENTA POR AHORA MIENTRAS SE ARREGLA PORQUE SE DAÑÓ DEBIDO AL CAMBIO EN EL SERVICIO
+        //SOBRE EL TIPO DE DATO CARRITO
         [Test]
         public void PuedoCrearPedidoCorrectoAplicacion()
         {
@@ -219,7 +222,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _context.SaveChanges();
 
             //Act
-            var respuesta = _crearPedidoService.Handle(new CrearPedidoCommand(123, 324, carrito));
+            var respuesta = _crearPedidoService.Handle(new CrearPedidoCommand(123, 324, new CrearCarritoCommand(1,32423,"100")));
 
             //Assert
             Assert.AreEqual($"Se creó con exito el pedido.", respuesta.Mensaje);

@@ -271,39 +271,76 @@ namespace OrganicSoft.WebApi.Angular.Test
             carrito.Should().NotBeNull();
         }
 
-        //[Fact]
-        //public async Task PuedeCrearPedidoCorrecto()
-        //{
-        //    var jabonSandia = new ProductoSimple(codigo: 1, nombre: "Jabón de Sandía",
-        //    decripcion: " Ea hidrante facial y corporal", costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
-        //    var exfoliante = new ProductoSimple(codigo: 2, nombre: "Exfoliante Mujer",
-        //    decripcion: "Un exfoliante es un producto hecho principalmente a base de ingredientes naturales",
-        //    costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
-        //    jabonSandia.EntradaProductos(cantidad: 10);
-        //    exfoliante.EntradaProductos(cantidad: 10);
+        [Fact]
+        public async Task PuedeCrearPedidoCorrecto()
+        {
+            //Creación de un producto para carrito
+            var request4 = new CrearProductosCommand()
+            {
+                Id = 0,
+                CodigoProducto = 212356,
+                Nombre = "Jabón de cuerpo",
+                Descripcion = "Jabón para el cuerpo",
+                Precio = 10000,
+                Categoria = "Jabones",
+                Presentacion = "Pequeño",
+                MinimoStock = 2,
+                Costo = 12000
+            };
 
-        //    CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
-        //    ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 1, cantidadVenta: 2);
+            var jsonObject4 = JsonConvert.SerializeObject(request4);
+            var content4 = new StringContent(jsonObject4, Encoding.UTF8, "application/json");
+            var httpClient4 = _factory.CreateClient();
+            var responseHttp4 = await httpClient4.PostAsync("api/Producto", content4);
+            responseHttp4.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta4 = await responseHttp4.Content.ReadAsStringAsync();
 
-        //    carrito.AgregarAlCarrito(productoVenta);
+            //Creación del carrito
+            var request2 = new CrearCarritoCommand()
+            {
 
-        //    var request = new CrearPedidoCommand()
-        //    {
-        //        CodigoPedido = 1324,
-        //        Carrito = carrito
-        //    };
+                Codigo = 25,
+                CedulaCliente = "1002543452"
+            };
 
-        //    var jsonObject = JsonConvert.SerializeObject(request);
-        //    var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
-        //    var httpClient = _factory.CreateClient();
-        //    var responseHttp = await httpClient.PostAsync("api/Pedido", content);
-        //    responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
-        //    var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
-        //    var respuesta = respuesta2.Substring(12, 30);
-        //    respuesta.Should().Be("Se creó con éxito el pedido.");
-        //    ////var context = _factory.CreateContext();
-        //    ////var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
-        //    ////producto3421.Should().NotBeNull();
-        //}
+            var jsonObject2 = JsonConvert.SerializeObject(request2);
+            var content2 = new StringContent(jsonObject2, Encoding.UTF8, "application/json");
+            var httpClient2 = _factory.CreateClient();
+            var responseHttp2 = await httpClient2.PostAsync("api/CarritoCompra", content2);
+            responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
+
+            ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 212356, cantidadVenta: 2);
+            var request = new AgregarAlCarritoCommand()
+            {
+                Id = request2.Codigo,
+                ProductoVenta = productoVenta
+            };
+
+            var jsonObject = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            var httpClient = _factory.CreateClient();
+            var responseHttp = await httpClient.PutAsync("api/CarritoCompra/add", content);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta = await responseHttp.Content.ReadAsStringAsync();
+
+            var request5 = new CrearPedidoCommand()
+            {
+                CodigoPedido = 3245,
+                Carrito = request2
+            };
+
+            var jsonObject5 = JsonConvert.SerializeObject(request5);
+            var content5 = new StringContent(jsonObject5, Encoding.UTF8, "application/json");
+            var httpClient5 = _factory.CreateClient();
+            var responseHttp5 = await httpClient5.PostAsync("api/Pedido", content5);
+            responseHttp5.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta5 = await responseHttp5.Content.ReadAsStringAsync();
+            var respuesta6 = respuesta5.Substring(12, 28);
+            respuesta6.Should().Be("Se creó con exito el pedido.");
+            ////var context = _factory.CreateContext();
+            ////var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
+            ////producto3421.Should().NotBeNull();
+        }
     }
 }

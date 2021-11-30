@@ -22,14 +22,15 @@ namespace OrganicSoft.WepApi.Angular.Controllers
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly IPedidoRepository _pedidoRepository;
+        private readonly ICarritoCompraRepository _carritoCompraRepository;
         private readonly OrganicSoftContext _context;
 
-        public PedidoController(IUnitOfWork unitOfWork, IPedidoRepository pedidoRepository, OrganicSoftContext context)
+        public PedidoController(IUnitOfWork unitOfWork, IPedidoRepository pedidoRepository, ICarritoCompraRepository carritoCompraRepository, OrganicSoftContext context)
         {
             _context = context;
             _unitOfWork = unitOfWork;
             _pedidoRepository = pedidoRepository;
-
+            _carritoCompraRepository = carritoCompraRepository;
         }
         [HttpGet]
         public ActionResult<List<PedidoViewModel>> GetPedidos()
@@ -58,7 +59,7 @@ namespace OrganicSoft.WepApi.Angular.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePedido([FromBody] CrearPedidoCommand command)
         {
-            var service = new CrearPedidoCommandHandle(_unitOfWork, _pedidoRepository);
+            var service = new CrearPedidoCommandHandle(_unitOfWork, _pedidoRepository, _carritoCompraRepository);
             var response = service.Handle(command);
 
             if (response.isOk())

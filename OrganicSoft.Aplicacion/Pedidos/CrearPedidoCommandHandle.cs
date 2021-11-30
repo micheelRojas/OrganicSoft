@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static OrganicSoft.Aplicacion.CarritoDeCompra.CrearCarritoCompraCommandHandle;
 
 namespace OrganicSoft.Aplicacion.Pedidos
 {
@@ -12,21 +13,28 @@ namespace OrganicSoft.Aplicacion.Pedidos
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPedidoRepository _pedidoRepository;
-        public CrearPedidoCommandHandle(IUnitOfWork unitOfWork, IPedidoRepository pedidoRepository)
+        private readonly ICarritoCompraRepository _carritoCompraRepository;
+        public CrearPedidoCommandHandle(IUnitOfWork unitOfWork, IPedidoRepository pedidoRepository, ICarritoCompraRepository carritoCompraRepository)
         {
             _unitOfWork = unitOfWork;
             _pedidoRepository = pedidoRepository;
+            _carritoCompraRepository = carritoCompraRepository;
         }
         public CrearPedidoResponse Handle(CrearPedidoCommand command)
         {
             Pedido pedido = _pedidoRepository.FindFirstOrDefault(t => t.Id == command.Id || t.CodigoPedido == command.Id);
             if (pedido == null)
             {
-                Pedido pedidoNuevo = new Pedido();
-                pedidoNuevo.GenerarPedido(command.CodigoPedido, command.Carrito);
-                _pedidoRepository.Add(pedidoNuevo);
-                _unitOfWork.Commit();
-                return new CrearPedidoResponse("Se creó con exito el pedido.");
+                var carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.Carrito.Codigo || carrito.Codigo == command.Carrito.Codigo);
+                if (carritoCompra != null)
+                {
+                    Pedido pedidoNuevo = new Pedido();
+                    pedidoNuevo.GenerarPedido(command.CodigoPedido, carritoCompra);
+                    _pedidoRepository.Add(pedidoNuevo);
+                    _unitOfWork.Commit();
+                    return new CrearPedidoResponse("Se creó con exito el pedido.");
+                }
+                return new CrearPedidoResponse("No se encontró un carrito de compras");
             }
             else
             {
@@ -41,16 +49,24 @@ namespace OrganicSoft.Aplicacion.Pedidos
         {
         }
 
-        public CrearPedidoCommand(int id, int codigoPedido, CarritoCompra carrito)
+        public CrearPedidoCommand(int id, int codigoPedido, CrearCarritoCommand carrito)
         {
             Id = id;
             CodigoPedido = codigoPedido;
             Carrito = carrito;
         }
 
+        public CrearPedidoCommand(int id, int codigoPedido, CarritoCompra carrito)
+        {
+            Id = id;
+            CodigoPedido = codigoPedido;
+            CarritoCompra = carrito;
+        }
+
         public int Id { get;  set; }
         public int CodigoPedido { get;  set; }
-        public CarritoCompra Carrito { get;  set; }
+        public CrearCarritoCommand Carrito { get;  set; }
+        public CarritoCompra CarritoCompra { get; set; }
     }
 
     public class CrearPedidoResponse
