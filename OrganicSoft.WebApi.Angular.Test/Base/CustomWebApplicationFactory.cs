@@ -14,18 +14,44 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
     public class CustomWebApplicationFactory<TStartup>
     : WebApplicationFactory<TStartup> where TStartup : class
     {
-        private readonly string ConnectionString = @"Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private readonly string ConnectionString = @"Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=1000;";
 
+        public OrganicSoftContext _context { get; private set; }
         /*
          * @"Server=sqlservermicheel.database.windows.net;Database=organicsoft;User Id = micheel; Password=ismael2021.;";
          * Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
          */
 
+        public CustomWebApplicationFactory()
+        {
+            _context = CreateContext();
+            _context.Database.SetCommandTimeout(new TimeSpan(0, 1, 0));
+            var time = _context.Database.GetCommandTimeout();
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
+        }
+
+        private void Reset()
+        {
+            var time = _context.Database.GetCommandTimeout();
+        }
+
+        //teardown
+        public void Dispose()
+        {
+            // Dispose here
+            //_context.Database.EnsureCreated();
+            _context.Database.EnsureDeleted();
+        }
+
         //private readonly string _connectionString = @"Data Source=C:\sqlite\bancoDataBaseEndToEnd.db";
-        public OrganicSoftContext CreateContext()
+        protected OrganicSoftContext CreateContext()
         {
             var builder = new DbContextOptionsBuilder<OrganicSoftContext>().UseSqlServer(ConnectionString);
-            return new OrganicSoftContext(builder.Options);
+            var db = new OrganicSoftContext(builder.Options);
+            //db.Database.EnsureDeleted();
+            //db.Database.EnsureCreated();
+            return db;
         }
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -40,7 +66,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
 
                 services.AddDbContext<OrganicSoftContext>(options =>
                 {
-                    options.UseSqlServer(@"Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                    options.UseSqlServer(@"Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=1000;");
                 });
                 #endregion
 
@@ -51,7 +77,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
                     var scopedServices = scope.ServiceProvider;
                     var db = scopedServices.GetRequiredService<OrganicSoftContext>();
                    
-                   // db.Database.EnsureDeleted();
+                    //db.Database.EnsureDeleted();
                     //db.Database.EnsureCreated();
                     //invocar clase que inicilice los datos semillas. 
                 }

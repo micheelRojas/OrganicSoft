@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using OrganicSoft.Aplicacion.Pedidos;
 using OrganicSoft.Aplicacion.Productos;
 using OrganicSoft.Dominio;
+using OrganicSoft.Infraestructura;
 using OrganicSoft.WebApi.Angular.Test.Base;
 using OrganicSoft.WepApi.Angular;
 using System;
@@ -20,19 +21,24 @@ using static OrganicSoft.Aplicacion.SalidaProductoCommandHandle;
 
 namespace OrganicSoft.WebApi.Angular.Test
 {
-    public class ProductoTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class ProductoTest : IClassFixture<CustomWebApplicationFactory<Startup>> 
     {
         private readonly CustomWebApplicationFactory<Startup> _factory;
+
+        private readonly OrganicSoftContext _context;
+
         public ProductoTest(CustomWebApplicationFactory<Startup> factory)
         {
             _factory = factory;
+            _context = _factory._context;
         }
-       [Fact]
+
+        [Fact]
         public async Task PuedeCrearProductoSimpleCorrecto()
         {
             var request = new CrearProductosCommand()
             {   Id = 0,
-                CodigoProducto = 2124,
+                CodigoProducto = 2123,
                 Nombre = "Jabón de cuerpo",
                 Descripcion = "Jabón para el cuerpo",
                 Precio = 10000,
@@ -50,8 +56,8 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 30);
             respuesta.Should().Be("Se creó con éxito el producto.");
-            var context = _factory.CreateContext();
-            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2124);
+            //var context = _factory.CreateContext();
+            var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
             producto3421.Should().NotBeNull();
         }
 
@@ -73,8 +79,8 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 37);
             respuesta.Should().Be("La cantidad de Jabón de cuerpo es: 40");
-            var context = _factory.CreateContext();
-            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
+            //var context = _factory.CreateContext();
+            var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
             producto3421.Should().NotBeNull();
         }
 
@@ -95,8 +101,8 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 21);
             respuesta.Should().Be("el producto no existe");
-            var context = _factory.CreateContext();
-            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 4231);
+            //var context = _factory.CreateContext();
+            var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 4231);
             producto3421.Should().BeNull();
         }
 
@@ -117,8 +123,8 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 37);
             respuesta.Should().Be("La cantidad de Jabón de cuerpo es: 20");
-            var context = _factory.CreateContext();
-            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
+            //var context = _factory.CreateContext();
+            var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
             producto3421.Should().NotBeNull();
         }
 
@@ -139,8 +145,8 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 21);
             respuesta.Should().Be("el producto no existe");
-            var context = _factory.CreateContext();
-            var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 3241);
+            //var context = _factory.CreateContext();
+            var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 3241);
             producto3421.Should().BeNull();
         }
 
