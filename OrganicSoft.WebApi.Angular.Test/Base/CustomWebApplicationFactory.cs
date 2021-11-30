@@ -17,7 +17,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
         private readonly string ConnectionString = @"Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=1000;";
 
         public OrganicSoftContext _context { get; private set; }
-        /*
+        /* Cadena de conexión correcta: Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=1000;
          * @"Server=sqlservermicheel.database.windows.net;Database=organicsoft;User Id = micheel; Password=ismael2021.;";
          * Server=tcp:sqlservermicheel.database.windows.net,1433;Initial Catalog=organicsoft;Persist Security Info=False;User ID=micheel;Password=ismael2021.;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
          */

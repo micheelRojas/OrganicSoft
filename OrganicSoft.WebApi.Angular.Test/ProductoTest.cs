@@ -173,43 +173,64 @@ namespace OrganicSoft.WebApi.Angular.Test
             //carrito.Should().NotBeNull();
         }
 
-        //[Fact]
-        //public async Task PuedeAgregarACarritoCompraCorrecto()
-        //{
-        //    //var request2 = new CrearCarritoCommand()
-        //    //{
+        [Fact]
+        public async Task PuedeAgregarACarritoCompraCorrecto()
+        {
+            //Creación de un producto para carrito
+            var request4 = new CrearProductosCommand()
+            {
+                Id = 0,
+                CodigoProducto = 21235,
+                Nombre = "Jabón de cuerpo",
+                Descripcion = "Jabón para el cuerpo",
+                Precio = 10000,
+                Categoria = "Jabones",
+                Presentacion = "Pequeño",
+                MinimoStock = 2,
+                Costo = 12000
+            };
 
-        //    //    Codigo = 2534,
-        //    //    CedulaCliente = "1002543452"
-        //    //};
+            var jsonObject4 = JsonConvert.SerializeObject(request4);
+            var content4 = new StringContent(jsonObject4, Encoding.UTF8, "application/json");
+            var httpClient4 = _factory.CreateClient();
+            var responseHttp4 = await httpClient4.PostAsync("api/Producto", content4);
+            responseHttp4.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta4 = await responseHttp4.Content.ReadAsStringAsync();
 
-        //    //var jsonObject2 = JsonConvert.SerializeObject(request2);
-        //    //var content2 = new StringContent(jsonObject2, Encoding.UTF8, "application/json");
-        //    //var httpClient2 = _factory.CreateClient();
-        //    //var responseHttp2 = await httpClient2.PostAsync("api/CarritoCompra", content2);
-        //    //responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
-        //    //var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
+            //Creación del carrito
+            var request2 = new CrearCarritoCommand()
+            {
 
-        //    ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 543, cantidadVenta: 2);
-        //    var request = new AgregarAlCarritoCommand(423,productoVenta,1);
-        //    //{
-        //    //    Id = 423,
-        //    //    ProductoVenta = productoVenta,
-        //    //    IdCarrito = request2.Id
-        //    //};
+                Codigo = 2534,
+                CedulaCliente = "1002543452"
+            };
 
-        //    var jsonObject = JsonConvert.SerializeObject(request);
-        //    var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
-        //    var httpClient = _factory.CreateClient();
-        //    var responseHttp = await httpClient.PutAsync("api/CarritoCompra/add", content);
-        //    responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
-        //    var respuesta = await responseHttp.Content.ReadAsStringAsync();
-        //    //var respuesta = respuesta2.Substring(12, 40);
-        //    respuesta.Should().Be("Se ha agregado correctamente el producto");
-        //    //var context = _factory.CreateContext();
-        //    //var carrito = context.CarritoCompra.FirstOrDefault(t => t.Codigo == 1324);
-        //    //carrito.Should().NotBeNull();
-        //}
+            var jsonObject2 = JsonConvert.SerializeObject(request2);
+            var content2 = new StringContent(jsonObject2, Encoding.UTF8, "application/json");
+            var httpClient2 = _factory.CreateClient();
+            var responseHttp2 = await httpClient2.PostAsync("api/CarritoCompra", content2);
+            responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
+
+            ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 21235, cantidadVenta: 2);
+            var request = new AgregarAlCarritoCommand()
+            {
+                Id = request2.Codigo,
+                ProductoVenta = productoVenta
+            };
+
+            var jsonObject = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            var httpClient = _factory.CreateClient();
+            var responseHttp = await httpClient.PutAsync("api/CarritoCompra/add", content);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta = await responseHttp.Content.ReadAsStringAsync();
+            var respuesta3 = respuesta.Substring(12, 40);
+            respuesta3.Should().Be("Se ha agregado correctamente el producto");
+            //var context = _factory.CreateContext();
+            //var carrito = _context.CarritoCompra.FirstOrDefault(t => t.Codigo == 1324);
+            //carrito.Should().NotBeNull();
+        }
 
         //[Fact]
         //public async Task PuedeCrearPedidoCorrecto()
