@@ -228,8 +228,8 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta3 = respuesta.Substring(12, 40);
             respuesta3.Should().Be("Se ha agregado correctamente el producto");
             //var context = _factory.CreateContext();
-            //var carrito = _context.CarritoCompra.FirstOrDefault(t => t.Codigo == 1324);
-            //carrito.Should().NotBeNull();
+            var carrito = _context.CarritoCompra.FirstOrDefault(t => t.Codigo == 2534);
+            carrito.Should().NotBeNull();
         }
 
         //[Fact]
