@@ -26,6 +26,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { ModalDatosCarritoComponent } from './carrito-compra/modal-datos-carrito/modal-datos-carrito.component';
 import { CarritoCompraComponent } from './carrito-compra/carrito-compra.component';
 import { ListCarritoCompraComponent } from './carrito-compra/list-carrito-compra/list-carrito-compra.component';
+import { PedidoComponent } from './pedido/pedido.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ListCarritoCompraComponent } from './carrito-compra/list-carrito-compra
     ModalDatosCarritoComponent,
     CarritoCompraComponent,
     ListCarritoCompraComponent,
+    PedidoComponent,
     
   ],
   imports: [
