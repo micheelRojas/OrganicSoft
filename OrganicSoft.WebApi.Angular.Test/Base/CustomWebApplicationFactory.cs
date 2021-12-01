@@ -26,7 +26,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
         public CustomWebApplicationFactory()
         {
             _context = CreateContext();
-            _context.Database.SetCommandTimeout(new TimeSpan(0, 1, 0));
+            _context.Database.SetCommandTimeout(new TimeSpan(0, 2, 0));
             var time = _context.Database.GetCommandTimeout();
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
