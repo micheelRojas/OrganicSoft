@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MensajesModule } from '../../mensajes/mensajes.module';
+import { IPedido } from '../../pedido/pedido.component';
+import { PedidoService } from '../../pedido/pedido.service';
+import { ModalProductoComponent } from '../../producto/modal-producto/modal-producto.component';
 import { ICarritoCompra } from '../carrito-compra.component';
 import { CarritoCompraService } from '../carrito-compra.service';
 
@@ -12,6 +15,8 @@ import { CarritoCompraService } from '../carrito-compra.service';
 })
 export class ListCarritoCompraComponent implements OnInit {
   carritos!: ICarritoCompra[];
+  carrito!: ICarritoCompra;
+  pedido!: IPedido;
   displayedColumns: string[] = [
     'id',
     'codigo',
@@ -22,7 +27,7 @@ export class ListCarritoCompraComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   constructor(private carritoService: CarritoCompraService, private router: Router,
-    private activatedRoute: ActivatedRoute, private mensaje: MensajesModule) {
+    private activatedRoute: ActivatedRoute, private mensaje: MensajesModule, public dialog: MatDialog, private pedidoService: PedidoService) {
   }
   id: number;
   applyFilter(event: Event) {
@@ -41,8 +46,41 @@ export class ListCarritoCompraComponent implements OnInit {
       .subscribe(carritos => this.dataSource.data = carritos,
         error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
   }
- 
-  finalizar() { }
- 
+
+  finalizar(carrito: ICarritoCompra) {
+    this.carrito = carrito;
+    this.openDialog();
+  }
+
+  openDialog(): void {
+    const dialogRefe = this.dialog.open(ModalProductoComponent, {
+      width: '250px'
+    });
+   
+    dialogRefe.afterClosed().subscribe(result => {
+      this.pedido = {
+        carrito: {
+          id: this.carrito.id,
+          cedulaCliente: this.carrito.cedulaCliente,
+          codigo: this.carrito.codigo
+        },
+        codigo: Number(result),
+        id: 0
+
+      };
+
+      console.table(this.pedido);
+      if (this.pedido.codigo > 0) {
+        this.pedidoService.CreatePedido(this.pedido)
+          .subscribe(producto => this.exitoso(),
+            error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
+      }
+
+      console.log(result);
+    });
+  }
+  exitoso(): void {
+    this.mensaje.mensajeAlertaCorrecto('¡Exitoso!', 'Pedido registrado correctamente');
+  }
 
 }

@@ -28,8 +28,8 @@
     <ng-container matColumnDef="opciones">
       <th mat-header-cell *matHeaderCellDef>Opciones</th>
       <td mat-cell *matCellDef="let element">
-        <button  id="llenar-carrito" mat-icon-button color="warn" [routerLink]='["/productos-venta/"+element.id]'><mat-icon>Llenar</mat-icon></button>
-        <button id="finalizar-compra" mat-icon-button color="warn" (click)="finalizar()"><mat-icon>Finalizar</mat-icon></button>
+        <button class="btn btn-primary"  id="llenar-carrito" mat-icon-button color="warn" [routerLink]='["/productos-venta/"+element.id]'><mat-icon>Llenar</mat-icon></button>
+        <button class="btn btn-primary"  id="finalizar" mat-icon-button color="warn" (click)="finalizar(element)"><mat-icon>Finalizar</mat-icon></button>
       </td>
     </ng-container>
 

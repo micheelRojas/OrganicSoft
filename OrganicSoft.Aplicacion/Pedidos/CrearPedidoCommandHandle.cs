@@ -56,19 +56,14 @@ namespace OrganicSoft.Aplicacion.Pedidos
             Carrito = carrito;
         }
 
-        public CrearPedidoCommand(int id, int codigoPedido, CarritoCompra carrito)
-        {
-            Id = id;
-            CodigoPedido = codigoPedido;
-            CarritoCompra = carrito;
-        }
+       
 
-        public int Id { get;  set; }
-        public int CodigoPedido { get;  set; }
-        public CrearCarritoCommand Carrito { get;  set; }
-        public CarritoCompra CarritoCompra { get; set; }
+        public int Id { get; set; }
+        public int CodigoPedido { get; set; }
+        public CrearCarritoCommand Carrito { get; set; }
+       
     }
-
+   
     public class CrearPedidoResponse
     {
         public CrearPedidoResponse()

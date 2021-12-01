@@ -249,7 +249,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _context.SaveChanges();
 
             //Act
-            var respuesta = _crearPedidoService.Handle(new CrearPedidoCommand(654, 435, carrito));
+            var respuesta = _crearPedidoService.Handle(new CrearPedidoCommand(654, 435, new CrearCarritoCommand(carrito.Id,carrito.Codigo,carrito.CedulaCliente)));
 
             //Assert
             Assert.AreEqual($"El pedido ya existe", respuesta.Mensaje);
