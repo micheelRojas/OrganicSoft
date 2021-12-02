@@ -321,7 +321,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
             var httpClient = _factory.CreateClient();
             var responseHttp = await httpClient.PutAsync("api/CarritoCompra/add", content);
-            responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             var respuesta = await responseHttp.Content.ReadAsStringAsync();
 
             var request5 = new CrearPedidoCommand()
@@ -349,7 +349,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             var responseHttp6 = await httpClient6.PostAsync("api/Pedido", content6);
             responseHttp6.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             var respuesta6 = await responseHttp6.Content.ReadAsStringAsync();
-            var respuesta7 = respuesta6.Substring(12, 28);
+            //var respuesta7 = respuesta6.Substring(12, 28);
             respuesta6.Should().Be("No se encontró un carrito de compras para el pedido");
             //var context = _factory.CreateContext();
             var pedido3421 = _context.Pedido.FirstOrDefault(t => t.CodigoPedido == 3245);
@@ -384,7 +384,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             var request2 = new CrearCarritoCommand()
             {
 
-                Codigo = 25,
+                Codigo = 2521,
                 CedulaCliente = "1002543452"
             };
 
@@ -395,7 +395,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
             var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
 
-            ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 21235678, cantidadVenta: 2);
+            ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 2123567, cantidadVenta: 2);
             var request = new AgregarAlCarritoCommand()
             {
                 Id = request2.Codigo,
@@ -456,7 +456,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             var request2 = new CrearCarritoCommand()
             {
 
-                Codigo = 25646,
+                Codigo = 2564644,
                 CedulaCliente = "1002543452"
             };
 
@@ -467,7 +467,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
             var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
 
-            ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 212356787, cantidadVenta: 2);
+            ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 2123567788, cantidadVenta: 2);
             var request = new AgregarAlCarritoCommand()
             {
                 Id = request2.Codigo,
@@ -517,6 +517,81 @@ namespace OrganicSoft.WebApi.Angular.Test
             //var context = _factory.CreateContext();
             var factura = _context.Factura.FirstOrDefault(t => t.Codigo == 98754);
             factura.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task NoPuedeGenerarFacturaCorrecta()
+        {
+            //Creación de un producto para carrito
+            var request4 = new CrearProductosCommand()
+            {
+                Id = 0,
+                CodigoProducto = 312356778,
+                Nombre = "Jabón de cuerpo",
+                Descripcion = "Jabón para el cuerpo",
+                Precio = 10000,
+                Categoria = "Jabones",
+                Presentacion = "Pequeño",
+                MinimoStock = 2,
+                Costo = 12000
+            };
+
+            var jsonObject4 = JsonConvert.SerializeObject(request4);
+            var content4 = new StringContent(jsonObject4, Encoding.UTF8, "application/json");
+            var httpClient4 = _factory.CreateClient();
+            var responseHttp4 = await httpClient4.PostAsync("api/Producto", content4);
+            responseHttp4.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta4 = await responseHttp4.Content.ReadAsStringAsync();
+
+            //Creación del carrito
+            var request2 = new CrearCarritoCommand()
+            {
+
+                Codigo = 25646,
+                CedulaCliente = "1002543452"
+            };
+
+            var jsonObject2 = JsonConvert.SerializeObject(request2);
+            var content2 = new StringContent(jsonObject2, Encoding.UTF8, "application/json");
+            var httpClient2 = _factory.CreateClient();
+            var responseHttp2 = await httpClient2.PostAsync("api/CarritoCompra", content2);
+            responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
+            var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
+
+            ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 212356787, cantidadVenta: 2);
+            var request = new AgregarAlCarritoCommand()
+            {
+                Id = request2.Codigo,
+                ProductoVenta = productoVenta
+            };
+
+            var jsonObject = JsonConvert.SerializeObject(request);
+            var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            var httpClient = _factory.CreateClient();
+            var responseHttp = await httpClient.PutAsync("api/CarritoCompra/add", content);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            var respuesta = await responseHttp.Content.ReadAsStringAsync();
+
+
+            //Creación de la factura
+            var request6 = new GenerarFacturaCommand()
+            {
+                Codigo = 98754,
+                CedulaCliente = "1435638274",
+                Pedido = new CrearPedidoCommand(1111, 1111, new CrearCarritoCommand(111,111,"100"))
+            };
+
+            var jsonObject6 = JsonConvert.SerializeObject(request6);
+            var content6 = new StringContent(jsonObject6, Encoding.UTF8, "application/json");
+            var httpClient6 = _factory.CreateClient();
+            var responseHttp6 = await httpClient6.PostAsync("api/Factura", content6);
+            responseHttp6.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            var respuesta7 = await responseHttp6.Content.ReadAsStringAsync();
+            //var respuesta8 = respuesta7.Substring(12, 28);
+            respuesta7.Should().Be("No hay pedido por confirmar");
+            //var context = _factory.CreateContext();
+            //var factura = _context.Factura.FirstOrDefault(t => t.Codigo == 98754);
+            //factura.Should().NotBeNull();
         }
     }
 }
