@@ -89,7 +89,7 @@ namespace OrganicSoft.Test.Productos
             string respuesta = combo.SalidaProductos(cantidad: cantidadSalida);
             #endregion
             #region ENTONCES  se mostrara el mensaje   "No existe la Cantidad de productos suficientes para la venta"
-            Assert.AreEqual($"No existe la Cantidad de productos suficientes para la venta", respuesta);
+            Assert.AreEqual($"No existe la cantidad de productos suficientes para la venta", respuesta);
             #endregion
 
         }

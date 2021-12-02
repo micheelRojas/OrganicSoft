@@ -155,7 +155,7 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             var response = _productoSalidaService.Handle(new SalidaProductosCommand(id: 691, cantidad: 20));
 
             // Assert
-            Assert.AreEqual($"No hay suficietes productos de Jabon de Te verde para realizar la operacion", response.Mensaje);
+            Assert.AreEqual($"No hay suficientes productos de Jabon de Te verde para realizar la operación", response.Mensaje);
             _context.Producto.Remove(producto);
             _context.SaveChanges();
         }

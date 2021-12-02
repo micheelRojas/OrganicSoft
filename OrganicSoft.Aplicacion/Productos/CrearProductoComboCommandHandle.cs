@@ -26,7 +26,7 @@ namespace OrganicSoft.Aplicacion.Productos
             Producto producto = _productoRepository.FindFirstOrDefault(t => t.Id == command.Id || t.CodigoProducto == command.CodigoProducto);
             if (producto != null)
             {
-                return new CrearProductosResponse($"El producto ya exite");
+                return new CrearProductosResponse($"El producto ya existe");
             }
             IReadOnlyList<string> errors = command.CanCrear();
             if (errors.Any())

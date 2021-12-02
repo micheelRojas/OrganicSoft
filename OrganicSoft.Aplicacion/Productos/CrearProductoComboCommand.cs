@@ -23,7 +23,7 @@ namespace OrganicSoft.Aplicacion.Productos
         public override IReadOnlyList<string> CanCrear() {
             var errors = new List<string>();
             if (Componentes==null)
-                errors.Add("No se han establecidos los componentes del producto combo");
+                errors.Add("No se han establecido los componentes del producto combo");
             return errors;
         }
     }

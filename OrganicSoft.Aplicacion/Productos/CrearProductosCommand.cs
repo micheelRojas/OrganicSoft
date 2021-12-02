@@ -43,16 +43,16 @@ namespace OrganicSoft.Aplicacion.Productos
             var errors = new List<string>();
 
             if ((CodigoProducto == 0))
-                errors.Add("Codigo del producto no especificado");
+                errors.Add("Código del producto no especificado");
 
             if (string.IsNullOrEmpty(Nombre))
                 errors.Add("Nombre del producto no especificado");
             if (string.IsNullOrEmpty(Descripcion))
-                errors.Add("Descripcion del producto no especificado");
+                errors.Add("Descripción del producto no especificado");
             if (string.IsNullOrEmpty(Categoria))
                 errors.Add("Categoria del producto no especificado");
             if (string.IsNullOrEmpty(Presentacion))
-                errors.Add("Presenctacion del producto no especificado");
+                errors.Add("Presenctación del producto no especificado");
             if (Precio == 0)
                 errors.Add("Precio del producto no especificado");
             if (Costo == 0)

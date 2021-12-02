@@ -54,7 +54,7 @@ namespace OrganicSoft.Aplicacion.Facturas
             }
             else
             {
-                return new GenerarFacturaResponse($"La factura ya exite");
+                return new GenerarFacturaResponse($"La factura ya existe");
             }
         }
     }
