@@ -338,9 +338,9 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta5 = await responseHttp5.Content.ReadAsStringAsync();
             var respuesta6 = respuesta5.Substring(12, 28);
             respuesta6.Should().Be("Se creó con exito el pedido.");
-            ////var context = _factory.CreateContext();
-            ////var producto3421 = context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
-            ////producto3421.Should().NotBeNull();
+            //var context = _factory.CreateContext();
+            var pedido3421 = _context.Pedido.FirstOrDefault(t => t.CodigoPedido == 3245);
+            pedido3421.Should().NotBeNull();
         }
     }
 }
