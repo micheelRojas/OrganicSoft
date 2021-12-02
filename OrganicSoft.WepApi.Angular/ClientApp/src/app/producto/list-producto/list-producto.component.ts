@@ -79,7 +79,9 @@ export class ListProductoComponent implements OnInit {
         cantidad: Number(result),
         producto: this.producto
       };
-      this.addComponente.emit(this.componente);
+      if (result.toString() != "undefined") {
+        this.addComponente.emit(this.componente);
+      }
       console.log(result);
     });
   }
@@ -97,10 +99,13 @@ export class ListProductoComponent implements OnInit {
         cantidad: Number(result),
         id: this.producto.id
       };
-      this.productoService.updateProducto(this.productoEdit)
-        .subscribe(producto => this.goBack(),
-          error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
-      console.log(result);
+      if (result.toString() != "undefined") {
+        this.productoService.updateProducto(this.productoEdit)
+          .subscribe(producto => this.goBack(),
+            error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
+      }
+     
+      console.log(result.toString());
     });
   }
   

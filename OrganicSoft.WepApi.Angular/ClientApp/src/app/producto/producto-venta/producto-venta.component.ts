@@ -62,7 +62,7 @@ export class ProductoVentaComponent implements OnInit {
       
         console.table(this.aggCarrito);
       console.log(this.id);
-      if (this.aggCarrito.productoVenta.cantidadVenta > 0) {
+      if (result.toString() != "undefined") {
         this.carritoService.addToCarrito(this.aggCarrito)
           .subscribe(producto => this.exitoso(),
             error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
