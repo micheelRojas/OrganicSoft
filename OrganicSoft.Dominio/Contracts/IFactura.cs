@@ -8,6 +8,6 @@ namespace OrganicSoft.Dominio.Contracts
 {
     public interface IFactura
     {
-        abstract void CalcularTotal(Pedido Pedido);
+        abstract void CalcularTotal(Pedido Pedido, List<Producto> productos, List<ProductoVenta> productoVentas);
     }
 }

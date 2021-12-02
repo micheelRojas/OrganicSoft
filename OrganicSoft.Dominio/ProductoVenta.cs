@@ -11,6 +11,7 @@ namespace OrganicSoft.Dominio
     {
         public int CodigoProducto { get; private set; }
         public int CantidadVenta { get; private set; }
+        public int CarritoCompraId { get; private set; }
 
         public ProductoVenta(int codigoProducto, int cantidadVenta)
         {

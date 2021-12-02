@@ -21,14 +21,23 @@ namespace OrganicSoft.WepApi.Angular.Controllers
         private readonly IUnitOfWork _unitOfWork;
 
         private readonly IFacturaRepository _facturaRepository;
+        private readonly IPedidoRepository _pedidoRepository;
+        private readonly ICarritoCompraRepository _carritoRepository;
+        private readonly IProductoVentaRepository _productoVentaRepository;
+        private readonly IProductoRepository _productoRepository;
         private readonly OrganicSoftContext _context;
 
-        public FacturaController(IUnitOfWork unitOfWork, IFacturaRepository productoRepository, OrganicSoftContext context)
+        public FacturaController(IUnitOfWork unitOfWork, IFacturaRepository facturaRepository, OrganicSoftContext context,
+            IPedidoRepository pedidoRepository, ICarritoCompraRepository carritoCompraRepository,
+            IProductoVentaRepository productoVentaRepository, IProductoRepository productoRepository)
         {
             _context = context;
             _unitOfWork = unitOfWork;
-            _facturaRepository = productoRepository;
-
+            _facturaRepository = facturaRepository;
+            _pedidoRepository = pedidoRepository;
+            _carritoRepository = carritoCompraRepository;
+            _productoVentaRepository = productoVentaRepository;
+            _productoRepository = productoRepository;
         }
         [HttpGet]
         public ActionResult<List<FacturaViewModel>> GetFacturas()
@@ -57,7 +66,8 @@ namespace OrganicSoft.WepApi.Angular.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateFactura([FromBody] GenerarFacturaCommand command)
         {
-            var service = new GenerarFacturaCommandHandle(_unitOfWork, _facturaRepository);
+            var service = new GenerarFacturaCommandHandle(_unitOfWork, _facturaRepository, _pedidoRepository,
+                _carritoRepository, _productoVentaRepository, _productoRepository);
             var response = service.Handle(command);
 
             if (response.isOk())

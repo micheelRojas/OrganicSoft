@@ -37,6 +37,7 @@ namespace OrganicSoft.WepApi.Angular
             services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IFacturaRepository, FacturaRepository>();
             services.AddScoped<ICarritoCompraRepository, CarritoCompraRepository>();
+            services.AddScoped<IProductoVentaRepository, ProductoVentaRepository>();
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory

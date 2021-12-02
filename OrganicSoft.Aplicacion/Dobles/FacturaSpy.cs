@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OrganicSoft.Aplicacion.Dobles
 {
-    public class FacturaSpy : IFactura
+    public class FacturaSpy
     {
         public int CantidadLlamadas { get; private set; }
 

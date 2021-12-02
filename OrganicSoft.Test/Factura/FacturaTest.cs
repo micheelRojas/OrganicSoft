@@ -100,18 +100,25 @@ namespace OrganicSoft.Test.Facturacion
             costo: 6000.00, precio: 10000.00, categoria: "Jabon", presentacion: "pequeño, 80 gr", minimoStock: 3);
             jabonSandia.EntradaProductos(cantidad: 10);
             exfoliante.EntradaProductos(cantidad: 10);
+            List<Producto> productos = new List<Producto>();
+            productos.Add(jabonSandia);
+            productos.Add(exfoliante);
 
             CarritoCompra carrito = new CarritoCompra(codigo: 1, cedulaCliente: "1002353645");
             ProductoVenta productoVenta = new ProductoVenta(codigoProducto: 123, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta);
             ProductoVenta productoVenta2 = new ProductoVenta(codigoProducto: 124, cantidadVenta: 2);
             carrito.AgregarAlCarrito(productoVenta2);
+            List<ProductoVenta> productoVentas = new List<ProductoVenta>();
+            productoVentas.Add(productoVenta);
+            productoVentas.Add(productoVenta2);
             Pedido pedido = new Pedido();
             pedido.GenerarPedido(codigo: 1, CarritoCompra: carrito);
             #endregion
             #region CUANDO el administrador confirma el pedido para generar la factura
             var respuesta = pedido.ConfirmarPedido();
-            Factura factura = new Factura(codigo: 1, fechaCreacion: DateTime.Now, cedulaCliente: carrito.CedulaCliente, Pedido: pedido);
+            Factura factura = new Factura(codigo: 1, fechaCreacion: DateTime.Now, cedulaCliente: carrito.CedulaCliente, Pedido: pedido,
+                productos, productoVentas);
            
             #endregion
             #region ENTONCES  el sistema generará la factura con su total a pagar, disminuirá los productos correspondientes en stock, registrará los detalles, cambiará el estado del pedido a CONFIRMADO y mostrará el mensaje "El total a pagar es de 40000 pesos"

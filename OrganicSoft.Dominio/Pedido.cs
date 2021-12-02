@@ -12,8 +12,11 @@ namespace OrganicSoft.Dominio
         public int CodigoPedido { get; private set; }
         public String Estado { get; private set; }
         public CarritoCompra Carrito { get; private set; }
+        public int CarritoId { get; private set; }
 
-       // Encargos encargos = new Encargos();
+
+
+        // Encargos encargos = new Encargos();
 
         public Pedido()
         {

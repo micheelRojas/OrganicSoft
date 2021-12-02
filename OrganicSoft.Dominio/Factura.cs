@@ -19,23 +19,24 @@ namespace OrganicSoft.Dominio
 
         Inventario inventario = Inventario.getInventario();
         public Factura() { }
-        public Factura(int codigo, DateTime fechaCreacion, string cedulaCliente, Pedido Pedido)
+        public Factura(int codigo, DateTime fechaCreacion, string cedulaCliente, Pedido Pedido,
+            List<Producto> productos, List<ProductoVenta> productoVentas)
         {
             Codigo = codigo;
             FechaCreacion = fechaCreacion;
             CedulaCliente = cedulaCliente;
             Detalles = new List<Detalle>();
-            CalcularTotal(Pedido);
+            CalcularTotal(Pedido, productos, productoVentas);
         }
 
-        public void CalcularTotal(Pedido Pedido)
+        public void CalcularTotal(Pedido pedido, List<Producto> productos, List<ProductoVenta> productoVentas)
         {
-            if (Pedido.Estado.Equals("CONFIRMADO")) { 
+            if (pedido.Estado.Equals("CONFIRMADO")) { 
                 //int num = 0;
                 double sumaSubtotalesDetalles = 0;
-                foreach (ProductoVenta productoVenta in Pedido.Carrito.ProductoVentas)
+                foreach (ProductoVenta productoVenta in productoVentas)
                 {
-                    foreach (Producto producto in inventario.productos)
+                    foreach (Producto producto in productos)
                     {
                         if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
                         {
@@ -51,5 +52,6 @@ namespace OrganicSoft.Dominio
                 }
             }
         }
+
     }
 }
