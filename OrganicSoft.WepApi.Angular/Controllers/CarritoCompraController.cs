@@ -78,11 +78,16 @@ namespace OrganicSoft.WepApi.Angular.Controllers
         }
 
         [HttpPut("add")]
-        public AgregarAlCarritoResponse addToCarrito([FromBody] AgregarAlCarritoCommand command)
+        public ActionResult  addToCarrito([FromBody] AgregarAlCarritoCommand command)
         {
             var service = new AgregarAlCarritoCommandHandle(_unitOfWork, _carritoCompraRepository, _productoRepository);
             var response = service.Handle(command);
-            return response;
+           
+            if (response.isOk())
+            {
+                return Ok(response);
+            }
+            return BadRequest(response.Mensaje);
 
         }
 
