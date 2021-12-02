@@ -25,7 +25,12 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
 
             var carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.Id || carrito.Codigo == command.Id);//infraestructura-datos
             if (carritoCompra == null) return new AgregarAlCarritoResponse("el carrito no existe");
-
+            IReadOnlyList<string> errors = command.CanCrear();
+            if (errors.Any())
+            {
+                string ListaErrors = "Errores: " + string.Join(",", errors);
+                return new AgregarAlCarritoResponse(ListaErrors);
+            }
             String response = "No se pudo agregar el producto al carrito";
 
             // VERSION1 COMO FILTRAR VERSION LENTA filtro en el cliente
@@ -81,6 +86,18 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
 
             public int Id { get; set; }
             public ProductoVentaCommad ProductoVenta { get; set; }
+            public virtual IReadOnlyList<string> CanCrear()
+            {
+                var errors = new List<string>();
+
+                if ((ProductoVenta.CodigoProducto == 0))
+                    errors.Add("Codigo del producto no especificado");
+
+                if (ProductoVenta.CantidadVenta <= 0)
+                    errors.Add("La cantidad de venta debe ser mayor a cero");
+
+                return errors;
+            }
         }
         public class ProductoVentaCommad
          {
@@ -96,6 +113,8 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
 
             public int CodigoProducto { get; set; }
             public int CantidadVenta { get;  set; }
+
+           
         }
 
         public record AgregarAlCarritoResponse
@@ -113,7 +132,7 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
             public string Mensaje { get; set; }
             public bool isOk()
             {
-                return this.Mensaje != ("No se pudo añadir el producto al carrito");
+                return this.Mensaje.Equals("Se ha agregado correctamente el producto");
             }
         }
     }
