@@ -34,7 +34,7 @@ namespace OrganicSoft.Aplicacion.Pedidos
                     _unitOfWork.Commit();
                     return new CrearPedidoResponse("Se creó con exito el pedido.");
                 }
-                return new CrearPedidoResponse("No se encontró un carrito de compras");
+                return new CrearPedidoResponse("No se encontró un carrito de compras para el pedido");
             }
             else
             {
