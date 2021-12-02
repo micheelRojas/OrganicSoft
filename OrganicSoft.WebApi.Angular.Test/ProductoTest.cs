@@ -255,7 +255,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 212, cantidadVenta: 2);
             var request = new AgregarAlCarritoCommand()
             {
-                Id = request2.Codigo,
+                Id = 16875757,
                 ProductoVenta = productoVenta
             };
 
@@ -265,8 +265,8 @@ namespace OrganicSoft.WebApi.Angular.Test
             var responseHttp = await httpClient.PutAsync("api/CarritoCompra/add", content);
             responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
             var respuesta = await responseHttp.Content.ReadAsStringAsync();
-            var respuesta3 = respuesta.Substring(12, 41);
-            respuesta3.Should().Be("No se pudo agregar el producto al carrito");
+            var respuesta3 = respuesta.Substring(12, 20);
+            respuesta3.Should().Be("el carrito no existe");
             //var context = _factory.CreateContext();
             var carrito = _context.CarritoCompra.FirstOrDefault(t => t.Codigo == 25345);
             carrito.Should().NotBeNull();
