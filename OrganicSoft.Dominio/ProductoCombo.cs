@@ -59,7 +59,7 @@ namespace OrganicSoft.Dominio
                 }
                 if (!validacion)
                 {
-                    return "No existe la Cantidad de productos suficientes para la venta";
+                    return "No existe la cantidad de productos suficientes para la venta";
                 }
 
             }

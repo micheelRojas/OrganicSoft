@@ -27,7 +27,7 @@ namespace OrganicSoft.Dominio
             {
                 return $"La cantidad pedida debe ser mayor a cero";
             }
-            return $"No hay suficietes productos de {Nombre} para realizar la operacion"; 
+            return $"No hay suficientes productos de {Nombre} para realizar la operación"; 
         }
     }
 }
