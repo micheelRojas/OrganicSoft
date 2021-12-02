@@ -263,10 +263,9 @@ namespace OrganicSoft.WebApi.Angular.Test
             var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
             var httpClient = _factory.CreateClient();
             var responseHttp = await httpClient.PutAsync("api/CarritoCompra/add", content);
-            responseHttp.StatusCode.Should().Be(HttpStatusCode.OK);
+            responseHttp.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             var respuesta = await responseHttp.Content.ReadAsStringAsync();
-            var respuesta3 = respuesta.Substring(12, 20);
-            respuesta3.Should().Be("el carrito no existe");
+            respuesta.Should().Be("el carrito no existe");
             //var context = _factory.CreateContext();
             var carrito = _context.CarritoCompra.FirstOrDefault(t => t.Codigo == 25345);
             carrito.Should().NotBeNull();

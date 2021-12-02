@@ -23,7 +23,7 @@ namespace OrganicSoft.Aplicacion.CarritoDeCompra
         }
         public CrearCarritoResponse Handle(CrearCarritoCommand command)
         {
-            CarritoCompra carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.Id || carrito.Codigo == command.Id);
+            CarritoCompra carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.Id || carrito.Codigo == command.Id || carrito.Codigo ==command.Codigo);
             if (carritoCompra == null)
             {
                 CarritoCompra carritoCompraNuevo = new CarritoCompra(command.Codigo, command.CedulaCliente);
