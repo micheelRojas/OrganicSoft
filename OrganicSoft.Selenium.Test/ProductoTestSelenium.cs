@@ -11,7 +11,7 @@ namespace OrganicSoft.Selenium.Test
         //string angularUrl = "http://localhost:4200/";
         string coreUrl = "https://localhost:5001/";
 
-       // [SetUp]
+        //[SetUp]
         public void Setup()
         {
             driver = GetDriver();
@@ -74,7 +74,68 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
+        //[Test]
+        public void RegistrarCarritoCompra()
+        {
+            driver.Navigate().GoToUrl(coreUrl);
+            NavegarEnMenu(driver, "crear-carrito");
+            System.Threading.Thread.Sleep(1000);
+            LlenardeRegistroCrearCarrito(driver);
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "¡Exitoso!");
+        }
+        //[Test]
+        public void RegistrarCarritoCompraError()
+        {
+            driver.Navigate().GoToUrl(coreUrl);
+            NavegarEnMenu(driver, "crear-carrito");
+            System.Threading.Thread.Sleep(1000);
+            LlenardeRegistroCrearCarrito(driver);
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
+        }
 
+        //[Test]
+        public void LlenarCarritodeCompraCorrecto()
+        {
+            driver.Navigate().GoToUrl(coreUrl);
+            NavegarEnMenu(driver, "opcion-carrito");
+            System.Threading.Thread.Sleep(2000);
+            LLenarCarrito(driver, "1");
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "¡Exitoso!");
+        }
+        //[Test]
+        public void LlenarCarritodeCompraError()
+        {
+            driver.Navigate().GoToUrl(coreUrl);
+            NavegarEnMenu(driver, "opcion-carrito");
+            System.Threading.Thread.Sleep(2000);
+            LLenarCarrito(driver, "0");
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
+        }
+
+       // [Test]
+        public void FinalizarCompra()
+        {
+            driver.Navigate().GoToUrl(coreUrl);
+            NavegarEnMenu(driver, "opcion-carrito");
+            System.Threading.Thread.Sleep(3000);
+            FinalizarCompraCarrito(driver);
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "¡Exitoso!");
+        }
+        //[Test]
+        public void FinalizarCompraError()
+        {
+            driver.Navigate().GoToUrl(coreUrl);
+            NavegarEnMenu(driver, "opcion-carrito");
+            System.Threading.Thread.Sleep(3000);
+            FinalizarCompraCarrito(driver);
+            System.Threading.Thread.Sleep(1000);
+            Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
+        }
         /// Configura el driver para Chrome
         private IWebDriver GetDriver()
         {
@@ -143,6 +204,46 @@ namespace OrganicSoft.Selenium.Test
             driver.FindElement(By.Id("boton-confirmar")).Click();
             System.Threading.Thread.Sleep(100);
         }
+
+        private static void LlenardeRegistroCrearCarrito(IWebDriver driver)
+        {
+            //mirar como mandar un codigo difertente cada ves que eejectuta
+            System.Threading.Thread.Sleep(100);
+            driver.FindElement(By.Id("codigo")).SendKeys("125");
+            driver.FindElement(By.Id("cedulaCliente")).SendKeys("125538");
+            System.Threading.Thread.Sleep(100);
+            driver.FindElement(By.Id("boton-guardar-carrito")).Click();
+            System.Threading.Thread.Sleep(100);
+        }
+        private static void LLenarCarrito(IWebDriver driver, string cantidad)
+        {
+            //mirar como mandar un codigo difertente cada ves que eejectuta
+            System.Threading.Thread.Sleep(100);
+            driver.FindElement(By.Id("llenar-carrito")).Click();
+            System.Threading.Thread.Sleep(500);
+            driver.FindElement(By.Id("lo-quiero")).Click();
+            System.Threading.Thread.Sleep(100);
+            driver.FindElement(By.Id("cantidad-registar")).SendKeys(cantidad);
+            System.Threading.Thread.Sleep(100);
+            driver.FindElement(By.Id("boton-confirmar")).Click();
+            System.Threading.Thread.Sleep(100);
+
+           
+        }
+        private static void FinalizarCompraCarrito(IWebDriver driver)
+        {
+            //mirar como mandar un codigo difertente cada ves que eejectuta
+            System.Threading.Thread.Sleep(100);
+            driver.FindElement(By.Id("finalizar")).Click();
+            driver.FindElement(By.Id("cantidad-registar")).SendKeys("129");
+            System.Threading.Thread.Sleep(100);
+            driver.FindElement(By.Id("boton-confirmar")).Click();
+            System.Threading.Thread.Sleep(100);
+
+
+        }
+        
+
 
     }
 }
