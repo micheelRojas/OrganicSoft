@@ -51,6 +51,9 @@ import { FacturaComponent } from './factura/factura.component';
     CarritoCompraComponent,
     ListCarritoCompraComponent,
     PedidoComponent,
+    ContedidoCarritoComponent,
+    ModalCodigoComponent,
+    ListPedidoComponent
     
   ],
   imports: [
@@ -70,6 +73,9 @@ import { FacturaComponent } from './factura/factura.component';
       { path: 'productos-venta/:id', component: ProductoVentaComponent },
       { path: 'datos-carrito', component: ModalDatosCarritoComponent },
       { path: 'lista-carritos', component: CarritoCompraComponent },
+      { path: 'contenido-carrito/:id', component: ContedidoCarritoComponent },
+      { path: 'lista-pedidos', component: PedidoComponent },
+      
     ]),
     MensajesModule,
     BrowserAnimationsModule,

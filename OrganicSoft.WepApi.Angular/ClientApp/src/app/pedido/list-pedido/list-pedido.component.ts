@@ -49,6 +49,7 @@ export class ListPedidoComponent implements OnInit {
 
   confirmar(pedido: IPedidoView) {
     this.pedido = pedido;
+    this.openDialog();
     
   }
 
@@ -62,11 +63,9 @@ export class ListPedidoComponent implements OnInit {
         pedido: {
           codigoPedido: this.pedido.codigoPedido,
           id: this.pedido.id,
-          carrito: {
-            id: this.pedido.carritoId,
-            codigo: 0,
-            cedulaCliente: "0"
-          }
+          estado: this.pedido.estado,
+          carritoId: this.pedido.carritoId
+         
         },
         codigo: Number(result),
         id: 0

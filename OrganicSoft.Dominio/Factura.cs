@@ -38,7 +38,7 @@ namespace OrganicSoft.Dominio
                 {
                     foreach (Producto producto in productos)
                     {
-                        if (productoVenta.CodigoProducto.Equals(producto.CodigoProducto))
+                        if (productoVenta.CodigoProducto.Equals(producto.Id))
                         {
                             TotalPagar = TotalPagar + (producto.PrecioConDescuento * productoVenta.CantidadVenta);
                             producto.DisminuirCantidadProductoStock(productoVenta.CantidadVenta);

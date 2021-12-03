@@ -43,7 +43,7 @@ namespace OrganicSoft.Aplicacion.Facturas
                     Factura facturaNueva = new Factura(
                         command.Codigo, DateTime.Now, carrito.CedulaCliente, pedido, productos, productoVentas
                         );
-
+             
                     _facturaRepository.Add(facturaNueva);
                     _unitOfWork.Commit();
                     return new GenerarFacturaResponse($"Se creó con exito la factura.");

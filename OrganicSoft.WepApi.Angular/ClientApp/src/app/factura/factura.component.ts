@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IPedido } from '../pedido/pedido.component';
+import { IPedido, IPedidoView } from '../pedido/pedido.component';
 
 @Component({
   selector: 'app-factura',
@@ -17,7 +17,7 @@ export class FacturaComponent implements OnInit {
 export interface IFactura {
   id: number,
   codigo: number,
-  pedido: IPedido
+  pedido: IPedidoView
 }
 
 export interface IFacturaView {
