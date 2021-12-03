@@ -119,6 +119,7 @@ namespace OrganicSoft.Selenium.Test
        [Test]
         public void FinalizarCompra()
         {
+            System.Threading.Thread.Sleep(3000);
             driver.Navigate().GoToUrl(coreUrl);
             NavegarEnMenu(driver, "opcion-carrito");
             System.Threading.Thread.Sleep(3000);
@@ -166,7 +167,7 @@ namespace OrganicSoft.Selenium.Test
         {
             //mirar como mandar un codigo difertente cada ves que eejectuta
            
-            driver.FindElement(By.Id("codigoProducto")).SendKeys("1234578");
+            driver.FindElement(By.Id("codigoProducto")).SendKeys("123");
             driver.FindElement(By.Id("nombre")).SendKeys("Jabón Banana");
             driver.FindElement(By.Id("descripcion")).SendKeys("Hidrata y Humecta");
             driver.FindElement(By.Id("precio")).SendKeys("10000");
@@ -209,7 +210,7 @@ namespace OrganicSoft.Selenium.Test
         {
             //mirar como mandar un codigo difertente cada ves que eejectuta
             System.Threading.Thread.Sleep(100);
-            driver.FindElement(By.Id("codigo")).SendKeys("125");
+            driver.FindElement(By.Id("codigo")).SendKeys("123");
             driver.FindElement(By.Id("cedulaCliente")).SendKeys("125538");
             System.Threading.Thread.Sleep(100);
             driver.FindElement(By.Id("boton-guardar-carrito")).Click();
@@ -235,6 +236,8 @@ namespace OrganicSoft.Selenium.Test
             //mirar como mandar un codigo difertente cada ves que eejectuta
             System.Threading.Thread.Sleep(100);
             driver.FindElement(By.Id("ver")).Click();
+            System.Threading.Thread.Sleep(1000);
+            driver.FindElement(By.Id("finalizar")).Click();
             System.Threading.Thread.Sleep(1000);
             driver.FindElement(By.Id("codigo-registar")).SendKeys("129");
             System.Threading.Thread.Sleep(100);
