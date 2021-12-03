@@ -188,7 +188,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             responseHttp4.StatusCode.Should().Be(HttpStatusCode.OK);
             var respuesta4 = await responseHttp4.Content.ReadAsStringAsync();
         }
-        private async Task<CrearCarritoCommand> CrearCarritoAsync(int codigoCarrito)
+        private async Task<CrearCarritoCommand> CrearCarrito(int codigoCarrito)
         {
             var request2 = new CrearCarritoCommand()
             {
@@ -213,7 +213,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             await CrearProducto(21235);
 
             //Creación del carrito
-            var request2 = await CrearCarritoAsync(2534);
+            var request2 = await CrearCarrito(2534);
 
             ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 21235, cantidadVenta: 2);
             var request = new AgregarAlCarritoCommand()
@@ -240,19 +240,7 @@ namespace OrganicSoft.WebApi.Angular.Test
         {
 
             //Creación del carrito
-            var request2 = new CrearCarritoCommand()
-            {
-
-                Codigo = 25345,
-                CedulaCliente = "1002543452"
-            };
-
-            var jsonObject2 = JsonConvert.SerializeObject(request2);
-            var content2 = new StringContent(jsonObject2, Encoding.UTF8, "application/json");
-            var httpClient2 = _factory.CreateClient();
-            var responseHttp2 = await httpClient2.PostAsync("api/CarritoCompra", content2);
-            responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
-            var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
+            await CrearCarrito(25345);
 
             ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 212, cantidadVenta: 2);
             var request = new AgregarAlCarritoCommand()
