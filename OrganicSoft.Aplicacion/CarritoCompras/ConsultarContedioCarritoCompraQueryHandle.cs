@@ -19,7 +19,8 @@ namespace OrganicSoft.Aplicacion.CarritoCompras
         {
             List<ProductoVenta> productoVentas = _productoVentaRepository.GetAll().Where(t => t.CarritoCompraId== id).ToList();
             List<Producto> productos = _productoRepository.GetAll().ToList();
-            return new ConsultarContedidoCarritoQueryResponse(ViewContenido.LLenar(productos,productoVentas));
+            ViewContenido viewContenido = new ViewContenido();
+            return new ConsultarContedidoCarritoQueryResponse(viewContenido.LLenar(productos,productoVentas));
         }
     }
 
@@ -40,10 +41,12 @@ namespace OrganicSoft.Aplicacion.CarritoCompras
         public int Cantidad { get; set; }
         public double PrecioUnitario { get; set; }
         public double Total { get; set; }
-        public static List<ViewContenido>  LLenar(List<Producto> productos, List<ProductoVenta> productoVentas)
+
+        List<ViewContenido> contenidos = new List<ViewContenido>();
+        public List<ViewContenido>  LLenar(List<Producto> productos, List<ProductoVenta> productoVentas)
         {
            
-            List<ViewContenido> contenidos = new List<ViewContenido>();
+            
             ViewContenido contenido = new ViewContenido();
             foreach (ProductoVenta productoVenta in productoVentas)
             {
