@@ -19,3 +19,10 @@ export interface IPedido {
   codigoPedido: number,
   carrito: ICarritoCompra
 }
+
+export interface IPedidoView {
+  id: number,
+  codigoPedido: number,
+  estado: String,
+  carritoId: number
+}

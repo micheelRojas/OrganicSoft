@@ -33,7 +33,7 @@
    </li>
    -->
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a id="consultar-productos"class="nav-link text-dark" [routerLink]="['/lista-productos']">Productos</a>
+            <a id="consultar-productos" class="nav-link text-dark" [routerLink]="['/lista-productos']">Productos</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a id="opcion-registrar-simple" class="nav-link text-dark" [routerLink]="['/registrar-producto']">Registrar Producto</a>
@@ -46,6 +46,9 @@
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <button id="crear-carrito" mat-icon-button color="warn" (click)="crear()"><mat-icon>Crear Carrito</mat-icon></button>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a id="opcion-pedido" class="nav-link text-dark" [routerLink]="['/lista-pedidos']">Pedidos</a>
           </li>
         </ul>
       </div>

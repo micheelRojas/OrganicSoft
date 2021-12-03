@@ -27,6 +27,8 @@ import { ModalDatosCarritoComponent } from './carrito-compra/modal-datos-carrito
 import { CarritoCompraComponent } from './carrito-compra/carrito-compra.component';
 import { ListCarritoCompraComponent } from './carrito-compra/list-carrito-compra/list-carrito-compra.component';
 import { PedidoComponent } from './pedido/pedido.component';
+import { ListPedidoComponent } from './pedido/list-pedido/list-pedido.component';
+import { FacturaComponent } from './factura/factura.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { PedidoComponent } from './pedido/pedido.component';
     CarritoCompraComponent,
     ListCarritoCompraComponent,
     PedidoComponent,
+    ListPedidoComponent,
+    FacturaComponent,
     
   ],
   imports: [
@@ -66,6 +70,7 @@ import { PedidoComponent } from './pedido/pedido.component';
       { path: 'productos-venta/:id', component: ProductoVentaComponent },
       { path: 'datos-carrito', component: ModalDatosCarritoComponent },
       { path: 'lista-carritos', component: CarritoCompraComponent },
+      { path: 'lista-pedidos', component: PedidoComponent },
     ]),
     MensajesModule,
     BrowserAnimationsModule,

@@ -502,7 +502,6 @@ namespace OrganicSoft.WebApi.Angular.Test
             var request6 = new GenerarFacturaCommand()
             {
                 Codigo = 98754,
-                CedulaCliente = "1435638274",
                 Pedido = request5
             };
 
@@ -577,7 +576,6 @@ namespace OrganicSoft.WebApi.Angular.Test
             var request6 = new GenerarFacturaCommand()
             {
                 Codigo = 98754,
-                CedulaCliente = "1435638274",
                 Pedido = new CrearPedidoCommand(1111, 1111, new CrearCarritoCommand(111,111,"100"))
             };
 

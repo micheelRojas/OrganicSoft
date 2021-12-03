@@ -36,11 +36,12 @@ namespace OrganicSoft.Aplicacion.Facturas
                 Pedido pedido = _pedidoRepository.FindFirstOrDefault(t => t.Id == command.Pedido.CodigoPedido || t.CodigoPedido == command.Pedido.CodigoPedido);
                 if (pedido != null)
                 {
+                    var carrito = _carritoRepository.FindFirstOrDefault(t => t.Id == pedido.CarritoId);
                     List<ProductoVenta> productoVentas = _productoVentaRepository.GetAll().Where(t => t.CarritoCompraId == pedido.CarritoId).ToList();
                     List<Producto> productos = _productoRepository.GetAll().ToList();
                     pedido.ConfirmarPedido();
                     Factura facturaNueva = new Factura(
-                        command.Codigo, DateTime.Now, command.CedulaCliente, pedido, productos, productoVentas
+                        command.Codigo, DateTime.Now, carrito.CedulaCliente, pedido, productos, productoVentas
                         );
 
                     _facturaRepository.Add(facturaNueva);
@@ -65,18 +66,16 @@ namespace OrganicSoft.Aplicacion.Facturas
         {
         }
 
-        public GenerarFacturaCommand(int id, int codigo, string cedulaCliente, CrearPedidoCommand
+        public GenerarFacturaCommand(int id, int codigo, CrearPedidoCommand
             pedido)
         {
             Id = id;
             Codigo = codigo;
-            CedulaCliente = cedulaCliente;
             Pedido = pedido;
         }
 
         public int Id { get; set; }
         public int Codigo { get;  set; }
-        public String CedulaCliente { get;  set; }
         public CrearPedidoCommand Pedido { get;  set; }
 
 

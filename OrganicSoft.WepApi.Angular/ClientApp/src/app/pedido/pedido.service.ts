@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IPedido } from './pedido.component';
+import { IPedido, IPedidoView } from './pedido.component';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +12,8 @@ export class PedidoService {
 
   CreatePedido(pedido: IPedido): Observable<IPedido> {
     return this.http.post<IPedido>(this.apiURL, pedido);
+  }
+  GetPedidos(): Observable<IPedidoView[]> {
+    return this.http.get<IPedidoView[]>(this.apiURL);
   }
 }
