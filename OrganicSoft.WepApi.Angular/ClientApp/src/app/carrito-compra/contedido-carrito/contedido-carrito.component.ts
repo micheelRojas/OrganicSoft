@@ -17,6 +17,7 @@ export class ContedidoCarritoComponent implements OnInit {
 
   viewContenido!: IViewContenido[];
   pedido!: IPedido;
+  contenidos!: IViewContenido[];
   displayedColumns: string[] = [
     'id',
     'nombre',
@@ -47,7 +48,9 @@ export class ContedidoCarritoComponent implements OnInit {
       }
       this.id = parseInt(params["id"]);
     })
-    this.ConsultarContenidoCarrito(this.id);
+     this.ConsultarContenidoCarrito(this.id);
+   
+   
   }
 
   ConsultarContenidoCarrito(idt: number) {
