@@ -19,6 +19,7 @@ namespace OrganicSoft.Aplicacion.Facturas
             var facturas = _facturaRepository.GetAll().Select(t => new FacturaViewModel
             {
                 Id = t.Id,
+                Codigo = t.Codigo,
                 FechaCreacion = t.FechaCreacion,
                 CedulaCliente = t.CedulaCliente,
                 TotalPagar = t.TotalPagar,
@@ -39,6 +40,7 @@ namespace OrganicSoft.Aplicacion.Facturas
     public class FacturaViewModel
     {
         public int Id { get; set; }
+        public int Codigo { get; set; }
         public DateTime FechaCreacion { get; set; }
         public string CedulaCliente { get; set; }
         public double TotalPagar { get; set; }
