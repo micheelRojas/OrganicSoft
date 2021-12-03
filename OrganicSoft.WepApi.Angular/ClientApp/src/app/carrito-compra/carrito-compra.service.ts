@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IAggCarritoCompra, ICarritoCompra } from './carrito-compra.component';
+import { IAggCarritoCompra, ICarritoCompra, IViewContenido } from './carrito-compra.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,9 @@ export class CarritoCompraService {
   }
   GetCarritos(): Observable<ICarritoCompra[]> {
     return this.http.get<ICarritoCompra[]>(this.apiURL);
+  }
+  GetContenidoCarritos(id: number): Observable<IViewContenido[]> {
+    return this.http.get<IViewContenido[]>(this.apiURL + '/contenido/' + id);
   }
 
 }

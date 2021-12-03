@@ -27,6 +27,8 @@ import { ModalDatosCarritoComponent } from './carrito-compra/modal-datos-carrito
 import { CarritoCompraComponent } from './carrito-compra/carrito-compra.component';
 import { ListCarritoCompraComponent } from './carrito-compra/list-carrito-compra/list-carrito-compra.component';
 import { PedidoComponent } from './pedido/pedido.component';
+import { ContedidoCarritoComponent } from './carrito-compra/contedido-carrito/contedido-carrito.component';
+import { ModalCodigoComponent } from './carrito-compra/modal-codigo/modal-codigo.component';
 import { ListPedidoComponent } from './pedido/list-pedido/list-pedido.component';
 import { FacturaComponent } from './factura/factura.component';
 
@@ -49,8 +51,6 @@ import { FacturaComponent } from './factura/factura.component';
     CarritoCompraComponent,
     ListCarritoCompraComponent,
     PedidoComponent,
-    ListPedidoComponent,
-    FacturaComponent,
     
   ],
   imports: [
@@ -70,7 +70,6 @@ import { FacturaComponent } from './factura/factura.component';
       { path: 'productos-venta/:id', component: ProductoVentaComponent },
       { path: 'datos-carrito', component: ModalDatosCarritoComponent },
       { path: 'lista-carritos', component: CarritoCompraComponent },
-      { path: 'lista-pedidos', component: PedidoComponent },
     ]),
     MensajesModule,
     BrowserAnimationsModule,
@@ -80,7 +79,7 @@ import { FacturaComponent } from './factura/factura.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ModalProductoComponent],
+  entryComponents: [ModalProductoComponent, ModalCodigoComponent],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

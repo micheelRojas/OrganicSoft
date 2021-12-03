@@ -46,41 +46,4 @@ export class ListCarritoCompraComponent implements OnInit {
       .subscribe(carritos => this.dataSource.data = carritos,
         error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
   }
-
-  finalizar(carrito: ICarritoCompra) {
-    this.carrito = carrito;
-    this.openDialog();
-  }
-
-  openDialog(): void {
-    const dialogRefe = this.dialog.open(ModalProductoComponent, {
-      width: '250px'
-    });
-   
-    dialogRefe.afterClosed().subscribe(result => {
-      this.pedido = {
-        carrito: {
-          id: this.carrito.id,
-          cedulaCliente: this.carrito.cedulaCliente,
-          codigo: this.carrito.codigo
-        },
-        codigoPedido: Number(result),
-        id: 0
-
-      };
-
-      console.table(this.pedido);
-      if (this.pedido.codigoPedido > 0) {
-        this.pedidoService.CreatePedido(this.pedido)
-          .subscribe(producto => this.exitoso(),
-            error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
-      }
-
-      console.log(result);
-    });
-  }
-  exitoso(): void {
-    this.mensaje.mensajeAlertaCorrecto('¡Exitoso!', 'Pedido registrado correctamente');
-  }
-
 }

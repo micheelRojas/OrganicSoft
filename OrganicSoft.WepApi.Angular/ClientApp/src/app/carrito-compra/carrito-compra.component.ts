@@ -28,4 +28,11 @@ export interface IProductoVenta {
   codigoProducto: number,
   cantidadVenta:number
 }
+export interface IViewContenido {
+  id: number,
+  nombre: string,
+  cantidad: number,
+  precioUnitario: number,
+  total: number
+}
 

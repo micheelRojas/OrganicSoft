@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Ingrese un  codigo para realizar el pedido</mat-label>
+    <input id="cantidad-registar" type="number" matInput [(ngModel)]="numero">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button id="boton-confirmar" mat-button [mat-dialog-close]="numero" cdkFocusInitial>Confirmar</button>
+</div>
