@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalCodigoComponent } from '../../carrito-compra/modal-codigo/modal-codigo.component';
 import { FacturaServiceService } from '../../factura/factura-service.service';
 import { IFactura, IFacturaView } from '../../factura/factura.component';
 import { MensajesModule } from '../../mensajes/mensajes.module';
@@ -54,7 +55,7 @@ export class ListPedidoComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRefe = this.dialog.open(ModalProductoComponent, {
+    const dialogRefe = this.dialog.open(ModalCodigoComponent, {
       width: '250px'
     });
 

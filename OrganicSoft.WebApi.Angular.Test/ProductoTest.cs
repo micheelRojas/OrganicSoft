@@ -334,7 +334,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             var content5 = new StringContent(jsonObject5, Encoding.UTF8, "application/json");
             var httpClient5 = _factory.CreateClient();
             var responseHttp5 = await httpClient5.PostAsync("api/Pedido", content5);
-            responseHttp5.StatusCode.Should().Be(HttpStatusCode.OK);
+            responseHttp5.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             var respuesta5 = await responseHttp5.Content.ReadAsStringAsync();
 
             var request6 = new CrearPedidoCommand()
@@ -353,7 +353,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             respuesta6.Should().Be("No se encontró un carrito de compras para el pedido");
             //var context = _factory.CreateContext();
             var pedido3421 = _context.Pedido.FirstOrDefault(t => t.CodigoPedido == 3245);
-            pedido3421.Should().NotBeNull();
+            pedido3421.Should().BeNull();
         }
 
         [Fact]

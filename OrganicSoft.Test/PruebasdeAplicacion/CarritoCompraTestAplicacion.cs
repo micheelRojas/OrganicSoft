@@ -46,7 +46,8 @@ namespace OrganicSoft.Test.PruebasdeAplicacion
             _crearPedidoService = new CrearPedidoCommandHandle(
                 new UnitOfWork(_context),
                 new PedidoRepository(_context),
-                new CarritoCompraRepository(_context));
+                new CarritoCompraRepository(_context),
+                new ProductoVentaRepository(_context));
         }
         [Test]
         public void PuedoAgregarProductosAlCarritoAplicacion()

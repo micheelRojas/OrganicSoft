@@ -11,14 +11,14 @@ namespace OrganicSoft.Selenium.Test
         //string angularUrl = "http://localhost:4200/";
         string coreUrl = "https://localhost:5001/";
 
-        //[SetUp]
+        [SetUp]
         public void Setup()
         {
             driver = GetDriver();
             driver.Manage().Window.Maximize();
         }
 
-        //[Test]
+        [Test]
         public void RegistroProductosSimples()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -27,7 +27,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreNotEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
-        //[Test]
+        [Test]
         public void RegistroProductosSimplesError()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -36,7 +36,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
-        //[Test]
+        [Test]
         public void RegistroProductosCombo()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -45,7 +45,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreNotEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
-        //[Test]
+        [Test]
         public void RegistroProductosComboError()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -54,7 +54,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
-        //[Test]
+        [Test]
         public void RegistroEntradaProducto()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -64,7 +64,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Exitoso!");
         }
-       // [Test]
+       [Test]
         public void RegistroEntradaProductoError()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -74,7 +74,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
-        //[Test]
+        [Test]
         public void RegistrarCarritoCompra()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -84,7 +84,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "¡Exitoso!");
         }
-        //[Test]
+        [Test]
         public void RegistrarCarritoCompraError()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -95,7 +95,7 @@ namespace OrganicSoft.Selenium.Test
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
 
-        //[Test]
+        [Test]
         public void LlenarCarritodeCompraCorrecto()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -105,7 +105,7 @@ namespace OrganicSoft.Selenium.Test
             System.Threading.Thread.Sleep(1000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "¡Exitoso!");
         }
-        //[Test]
+        [Test]
         public void LlenarCarritodeCompraError()
         {
             driver.Navigate().GoToUrl(coreUrl);
@@ -116,24 +116,24 @@ namespace OrganicSoft.Selenium.Test
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
 
-       // [Test]
+       [Test]
         public void FinalizarCompra()
         {
             driver.Navigate().GoToUrl(coreUrl);
             NavegarEnMenu(driver, "opcion-carrito");
             System.Threading.Thread.Sleep(3000);
             FinalizarCompraCarrito(driver);
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(3000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "¡Exitoso!");
         }
-        //[Test]
+        [Test]
         public void FinalizarCompraError()
         {
             driver.Navigate().GoToUrl(coreUrl);
             NavegarEnMenu(driver, "opcion-carrito");
             System.Threading.Thread.Sleep(3000);
             FinalizarCompraCarrito(driver);
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(3000);
             Assert.AreEqual(driver.FindElement(By.Id("swal2-title")).Text, "Error");
         }
         /// Configura el driver para Chrome
@@ -142,7 +142,7 @@ namespace OrganicSoft.Selenium.Test
             var user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36";
             ChromeOptions options = new ChromeOptions();
             //Descomenta esta linea para usar el mode HeadLess de Chrome
-            //options.AddArgument("--headless");
+            options.AddArgument("--headless");
             options.AddArgument("--disable-gpu");
             options.AddArgument($"user_agent={user_agent}");
             options.AddArgument("--ignore-certificate-errors");
@@ -234,8 +234,9 @@ namespace OrganicSoft.Selenium.Test
         {
             //mirar como mandar un codigo difertente cada ves que eejectuta
             System.Threading.Thread.Sleep(100);
-            driver.FindElement(By.Id("finalizar")).Click();
-            driver.FindElement(By.Id("cantidad-registar")).SendKeys("129");
+            driver.FindElement(By.Id("ver")).Click();
+            System.Threading.Thread.Sleep(1000);
+            driver.FindElement(By.Id("codigo-registar")).SendKeys("129");
             System.Threading.Thread.Sleep(100);
             driver.FindElement(By.Id("boton-confirmar")).Click();
             System.Threading.Thread.Sleep(100);

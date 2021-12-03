@@ -14,7 +14,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
     public class CustomWebApplicationFactory<TStartup>
     : WebApplicationFactory<TStartup> where TStartup : class
     {
-        private readonly string ConnectionString = @"Data Source=DESKTOP-FFMH835\SQLEXPRESS; Initial Catalog=OrganisoftProduction; Integrated Security=True; MultipleActiveResultSets=True";
+        private readonly string ConnectionString = @"Data Source=DESKTOP-KGSO6BJ\SQLEXPRESS; Initial Catalog=OrganisoftProduction; Integrated Security=True; MultipleActiveResultSets=True";
 
         public OrganicSoftContext _context { get; private set; }
         /* Cadena conexión prueba local: Data Source=DESKTOP-FFMH835\SQLEXPRESS; Initial Catalog=OrganisoftProduction; Integrated Security=True; MultipleActiveResultSets=True
@@ -26,7 +26,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
         public CustomWebApplicationFactory()
         {
             _context = CreateContext();
-            _context.Database.SetCommandTimeout(new TimeSpan(0, 3, 0));
+            _context.Database.SetCommandTimeout(new TimeSpan(0, 1, 0));
             var time = _context.Database.GetCommandTimeout();
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
@@ -67,7 +67,7 @@ namespace OrganicSoft.WebApi.Angular.Test.Base
 
                 services.AddDbContext<OrganicSoftContext>(options =>
                 {
-                    options.UseSqlServer(@"Data Source=DESKTOP-FFMH835\SQLEXPRESS; Initial Catalog=OrganisoftProduction; Integrated Security=True; MultipleActiveResultSets=True");
+                    options.UseSqlServer(@"Data Source=DESKTOP-KGSO6BJ\SQLEXPRESS; Initial Catalog=OrganisoftProduction; Integrated Security=True; MultipleActiveResultSets=True");
                 });
                 #endregion
 
