@@ -419,40 +419,10 @@ namespace OrganicSoft.WebApi.Angular.Test
         public async Task NoPuedeGenerarFacturaCorrecta()
         {
             //Creación de un producto para carrito
-            var request4 = new CrearProductosCommand()
-            {
-                Id = 0,
-                CodigoProducto = 312356778,
-                Nombre = "Jabón de cuerpo",
-                Descripcion = "Jabón para el cuerpo",
-                Precio = 10000,
-                Categoria = "Jabones",
-                Presentacion = "Pequeño",
-                MinimoStock = 2,
-                Costo = 12000
-            };
-
-            var jsonObject4 = JsonConvert.SerializeObject(request4);
-            var content4 = new StringContent(jsonObject4, Encoding.UTF8, "application/json");
-            var httpClient4 = _factory.CreateClient();
-            var responseHttp4 = await httpClient4.PostAsync("api/Producto", content4);
-            responseHttp4.StatusCode.Should().Be(HttpStatusCode.OK);
-            var respuesta4 = await responseHttp4.Content.ReadAsStringAsync();
+            await CrearProducto(312356778);
 
             //Creación del carrito
-            var request2 = new CrearCarritoCommand()
-            {
-
-                Codigo = 25646,
-                CedulaCliente = "1002543452"
-            };
-
-            var jsonObject2 = JsonConvert.SerializeObject(request2);
-            var content2 = new StringContent(jsonObject2, Encoding.UTF8, "application/json");
-            var httpClient2 = _factory.CreateClient();
-            var responseHttp2 = await httpClient2.PostAsync("api/CarritoCompra", content2);
-            responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
-            var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
+            var request2 = await CrearCarrito(25646);
 
             ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 212356787, cantidadVenta: 2);
             var request = new AgregarAlCarritoCommand()
@@ -482,11 +452,7 @@ namespace OrganicSoft.WebApi.Angular.Test
             var responseHttp6 = await httpClient6.PostAsync("api/Factura", content6);
             responseHttp6.StatusCode.Should().Be(HttpStatusCode.BadRequest);
             var respuesta7 = await responseHttp6.Content.ReadAsStringAsync();
-            //var respuesta8 = respuesta7.Substring(12, 28);
             respuesta7.Should().Be("No hay pedido por confirmar");
-            //var context = _factory.CreateContext();
-            //var factura = _context.Factura.FirstOrDefault(t => t.Codigo == 98754);
-            //factura.Should().NotBeNull();
         }
     }
 }
