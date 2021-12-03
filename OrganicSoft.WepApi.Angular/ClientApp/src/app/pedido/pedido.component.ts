@@ -16,6 +16,6 @@ export class PedidoComponent implements OnInit {
 }
 export interface IPedido {
   id: number,
-  codigo: number,
+  codigoPedido: number,
   carrito: ICarritoCompra
 }

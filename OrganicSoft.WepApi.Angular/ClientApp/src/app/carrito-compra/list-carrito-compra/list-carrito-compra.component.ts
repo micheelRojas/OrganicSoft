@@ -64,13 +64,13 @@ export class ListCarritoCompraComponent implements OnInit {
           cedulaCliente: this.carrito.cedulaCliente,
           codigo: this.carrito.codigo
         },
-        codigo: Number(result),
+        codigoPedido: Number(result),
         id: 0
 
       };
 
       console.table(this.pedido);
-      if (this.pedido.codigo > 0) {
+      if (this.pedido.codigoPedido > 0) {
         this.pedidoService.CreatePedido(this.pedido)
           .subscribe(producto => this.exitoso(),
             error => this.mensaje.mensajeAlertaError('Error', error.error.toString()));
