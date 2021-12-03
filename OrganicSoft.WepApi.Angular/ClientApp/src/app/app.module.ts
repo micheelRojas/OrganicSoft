@@ -31,6 +31,7 @@ import { ContedidoCarritoComponent } from './carrito-compra/contedido-carrito/co
 import { ModalCodigoComponent } from './carrito-compra/modal-codigo/modal-codigo.component';
 import { ListPedidoComponent } from './pedido/list-pedido/list-pedido.component';
 import { FacturaComponent } from './factura/factura.component';
+import { ListFacturaComponent } from './factura/list-factura/list-factura.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,9 @@ import { FacturaComponent } from './factura/factura.component';
     PedidoComponent,
     ContedidoCarritoComponent,
     ModalCodigoComponent,
-    ListPedidoComponent
+    ListPedidoComponent,
+    ListFacturaComponent,
+    FacturaComponent
     
   ],
   imports: [
@@ -75,6 +78,7 @@ import { FacturaComponent } from './factura/factura.component';
       { path: 'lista-carritos', component: CarritoCompraComponent },
       { path: 'contenido-carrito/:id', component: ContedidoCarritoComponent },
       { path: 'lista-pedidos', component: PedidoComponent },
+      { path: 'lista-facturas', component: FacturaComponent },
       
     ]),
     MensajesModule,
