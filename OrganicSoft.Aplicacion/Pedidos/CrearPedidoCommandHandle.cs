@@ -25,7 +25,7 @@ namespace OrganicSoft.Aplicacion.Pedidos
             Pedido pedido = _pedidoRepository.FindFirstOrDefault(t => t.Id == command.Id || t.CodigoPedido == command.Id);
             if (pedido == null)
             {
-                var carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.Carrito.Codigo || carrito.Codigo == command.Carrito.Codigo);
+                var carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.Carrito.Codigo || carrito.Codigo == command.Carrito.Codigo || carrito.Id==command.Carrito.Id);
                 if (carritoCompra != null)
                 {
                     Pedido pedidoNuevo = new Pedido();

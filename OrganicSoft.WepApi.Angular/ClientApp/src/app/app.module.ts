@@ -28,6 +28,7 @@ import { CarritoCompraComponent } from './carrito-compra/carrito-compra.componen
 import { ListCarritoCompraComponent } from './carrito-compra/list-carrito-compra/list-carrito-compra.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { ContedidoCarritoComponent } from './carrito-compra/contedido-carrito/contedido-carrito.component';
+import { ModalCodigoComponent } from './carrito-compra/modal-codigo/modal-codigo.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ContedidoCarritoComponent } from './carrito-compra/contedido-carrito/co
     ListCarritoCompraComponent,
     PedidoComponent,
     ContedidoCarritoComponent,
+    ModalCodigoComponent,
     
   ],
   imports: [
@@ -79,7 +81,7 @@ import { ContedidoCarritoComponent } from './carrito-compra/contedido-carrito/co
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ModalProductoComponent],
+  entryComponents: [ModalProductoComponent, ModalCodigoComponent],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
