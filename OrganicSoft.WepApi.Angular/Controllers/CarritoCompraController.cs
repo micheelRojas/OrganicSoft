@@ -28,14 +28,16 @@ namespace OrganicSoft.WepApi.Angular.Controllers
 
         private readonly ICarritoCompraRepository _carritoCompraRepository;
         private readonly IProductoRepository _productoRepository;
+        private readonly IProductoVentaRepository _productoVentaRepository;
         private readonly OrganicSoftContext _context;
 
-        public CarritoCompraController(IUnitOfWork unitOfWork, IProductoRepository productoRepository, ICarritoCompraRepository carritoCompraRepository, OrganicSoftContext context)
+        public CarritoCompraController(IUnitOfWork unitOfWork, IProductoRepository productoRepository, ICarritoCompraRepository carritoCompraRepository, OrganicSoftContext context,IProductoVentaRepository productoVentaRepository)
         {
             _context = context;
             _unitOfWork = unitOfWork;
             _carritoCompraRepository = carritoCompraRepository;
             _productoRepository = productoRepository;
+            _productoVentaRepository = productoVentaRepository;
 
         }
         [HttpGet]
@@ -102,6 +104,13 @@ namespace OrganicSoft.WepApi.Angular.Controllers
             }
             return BadRequest(response.Mensaje);
 
+        }
+        [HttpGet("contenido/{id}")]
+        public ActionResult<List<ViewContenido>> GetContenidoCarritos([FromRoute] int id)
+        {
+            var result = new ConsultarContedioCarritoCompraQueryHandle(_productoVentaRepository,_productoRepository).Handle(id);
+
+            return Ok(result.Productos);
         }
 
     }
