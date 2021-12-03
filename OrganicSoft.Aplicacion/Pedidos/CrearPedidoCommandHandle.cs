@@ -14,11 +14,13 @@ namespace OrganicSoft.Aplicacion.Pedidos
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPedidoRepository _pedidoRepository;
         private readonly ICarritoCompraRepository _carritoCompraRepository;
-        public CrearPedidoCommandHandle(IUnitOfWork unitOfWork, IPedidoRepository pedidoRepository, ICarritoCompraRepository carritoCompraRepository)
+        private readonly IProductoVentaRepository _productoVentaRepository;
+        public CrearPedidoCommandHandle(IUnitOfWork unitOfWork, IPedidoRepository pedidoRepository, ICarritoCompraRepository carritoCompraRepository, IProductoVentaRepository productoVentaRepository)
         {
             _unitOfWork = unitOfWork;
             _pedidoRepository = pedidoRepository;
             _carritoCompraRepository = carritoCompraRepository;
+            _productoVentaRepository = productoVentaRepository;
         }
         public CrearPedidoResponse Handle(CrearPedidoCommand command)
         {
@@ -28,6 +30,8 @@ namespace OrganicSoft.Aplicacion.Pedidos
                 var carritoCompra = _carritoCompraRepository.FindFirstOrDefault(carrito => carrito.Id == command.Carrito.Codigo || carrito.Codigo == command.Carrito.Codigo || carrito.Id==command.Carrito.Id);
                 if (carritoCompra != null)
                 {
+                    ProductoVenta productos = _productoVentaRepository.FindFirstOrDefault(t => t.CarritoCompraId == carritoCompra.Id);
+                    if (productos== null) { return new CrearPedidoResponse("Error el carrito no tiene productos"); }
                     Pedido pedidoNuevo = new Pedido();
                     pedidoNuevo.GenerarPedido(command.CodigoPedido, carritoCompra);
                     _pedidoRepository.Add(pedidoNuevo);
