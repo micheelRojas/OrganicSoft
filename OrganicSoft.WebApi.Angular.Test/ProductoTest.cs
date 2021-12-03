@@ -166,14 +166,12 @@ namespace OrganicSoft.WebApi.Angular.Test
             respuesta.Should().Be("Se creó con exito el carrito de compras.");
         }
 
-        [Fact]
-        public async Task PuedeAgregarACarritoCompraCorrecto()
+        private async Task CrearProducto(int codigoProducto)
         {
-            //Creación de un producto para carrito
             var request4 = new CrearProductosCommand()
             {
                 Id = 0,
-                CodigoProducto = 21235,
+                CodigoProducto = codigoProducto,
                 Nombre = "Jabón de cuerpo",
                 Descripcion = "Jabón para el cuerpo",
                 Precio = 10000,
@@ -189,12 +187,13 @@ namespace OrganicSoft.WebApi.Angular.Test
             var responseHttp4 = await httpClient4.PostAsync("api/Producto", content4);
             responseHttp4.StatusCode.Should().Be(HttpStatusCode.OK);
             var respuesta4 = await responseHttp4.Content.ReadAsStringAsync();
-
-            //Creación del carrito
+        }
+        private async Task<CrearCarritoCommand> CrearCarritoAsync(int codigoCarrito)
+        {
             var request2 = new CrearCarritoCommand()
             {
 
-                Codigo = 2534,
+                Codigo = codigoCarrito,
                 CedulaCliente = "1002543452"
             };
 
@@ -204,6 +203,17 @@ namespace OrganicSoft.WebApi.Angular.Test
             var responseHttp2 = await httpClient2.PostAsync("api/CarritoCompra", content2);
             responseHttp2.StatusCode.Should().Be(HttpStatusCode.OK);
             var respuesta2 = await responseHttp2.Content.ReadAsStringAsync();
+
+            return request2;
+        }
+        [Fact]
+        public async Task PuedeAgregarACarritoCompraCorrecto()
+        {
+            //Creación de un producto para carrito
+            await CrearProducto(21235);
+
+            //Creación del carrito
+            var request2 = await CrearCarritoAsync(2534);
 
             ProductoVentaCommad productoVenta = new ProductoVentaCommad(codigoProducto: 21235, cantidadVenta: 2);
             var request = new AgregarAlCarritoCommand()
