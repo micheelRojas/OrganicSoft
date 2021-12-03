@@ -47,7 +47,7 @@ namespace OrganicSoft.WebApi.Angular.Test
                 Presentacion = "Pequeño",
                 MinimoStock = 2,
                 Costo = 12000
-        };
+            };
 
             var jsonObject = JsonConvert.SerializeObject(request);
             var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
@@ -57,7 +57,6 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 30);
             respuesta.Should().Be("Se creó con éxito el producto.");
-            //var context = _factory.CreateContext();
             var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
             producto3421.Should().NotBeNull();
         }
@@ -80,7 +79,6 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 37);
             respuesta.Should().Be("La cantidad de Jabón de cuerpo es: 40");
-            //var context = _factory.CreateContext();
             var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
             producto3421.Should().NotBeNull();
         }
@@ -102,7 +100,6 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 21);
             respuesta.Should().Be("el producto no existe");
-            //var context = _factory.CreateContext();
             var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 4231);
             producto3421.Should().BeNull();
         }
@@ -124,7 +121,6 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 37);
             respuesta.Should().Be("La cantidad de Jabón de cuerpo es: 20");
-            //var context = _factory.CreateContext();
             var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 2123);
             producto3421.Should().NotBeNull();
         }
@@ -146,7 +142,6 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 21);
             respuesta.Should().Be("el producto no existe");
-            //var context = _factory.CreateContext();
             var producto3421 = _context.Producto.FirstOrDefault(t => t.CodigoProducto == 3241);
             producto3421.Should().BeNull();
         }
@@ -169,9 +164,6 @@ namespace OrganicSoft.WebApi.Angular.Test
             var respuesta2 = await responseHttp.Content.ReadAsStringAsync();
             var respuesta = respuesta2.Substring(12, 40);
             respuesta.Should().Be("Se creó con exito el carrito de compras.");
-            //var context = _factory.CreateContext();
-            //var carrito = context.CarritoCompra.FirstOrDefault(t => t.Codigo == 1324);
-            //carrito.Should().NotBeNull();
         }
 
         [Fact]
